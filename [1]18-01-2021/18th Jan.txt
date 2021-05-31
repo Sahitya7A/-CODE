@@ -1,0 +1,344 @@
+Program-1
+
+Bob has given a word which consists of numbers(0-9) and alphabets(a-z,A-Z)
+now he wants to add only numbers from the word. Pls help him to do so. 
+
+
+Sample Test Case - 1
+
+input = a2b3c4d5
+output = 14
+
+Explanation - 
+In the above test case we have 2,3,4,5 are the numbers so the addition of this numbers is 14 
+
+Sample Test Case - 2
+
+input = a10b20c30
+output = 60
+
+Explanation - 
+In the above test case we have 10,20,30. So the addition of this numbers is 60
+
+Sample Test Case-3
+
+input = k100
+output = 100
+
+Explanation -
+In the above test case we have 100 only. so the output is 100
+
+Sample Test Case - 4
+
+input = abc
+output = 0
+
+Explanation -
+Since no numbers print 0 
+
+
+
+
+import java.util.*;
+class Test
+{ 
+	public static void printSum(String str) 
+	{ 
+		StringBuilder  num = new StringBuilder(); 
+		int sum = 0; 
+		for(int i = 0; i < str.length(); i++) 
+		{ 
+			char ch = str.charAt(i); 
+			if(Character.isLetter(ch))
+			{
+				if(num.length()!=0){
+				sum += Integer.parseInt(num.toString()); 
+				num = new StringBuilder(); 
+				}
+			}
+		if (Character.isDigit(ch)) 
+				num.append(ch); 
+		} 
+		if(num.length()!=0)
+		System.out.println(sum + Integer.parseInt(num.toString())); 
+		else
+		System.out.println(sum);
+	} 
+	public static void main (String[] args) 	{ 
+		Scanner sc = new Scanner(System.in);
+		String str = sc.next();
+		printSum(str);
+	} 
+}
+//Second Approach
+import java.util.*;
+class Pro1
+{
+    public static int Find_sum(String s)
+    {
+        StringBuilder sb = new StringBuilder();
+        int sum=0;
+        for(int i=0;i<s.length();i++)
+        {
+            if(Character.isDigit(s.charAt(i)))
+            {
+                sb.append(s.charAt(i));
+            }
+            else
+            {
+                if(sb.length()!=0)
+                {
+                    sum+=Integer.parseInt(sb.toString());
+                    sb=new StringBuilder();
+                }
+            }
+        }sum+=Integer.parseInt(sb.toString());
+        return sum;
+    };
+    public static void main(String[] args)
+    {
+        Scanner sc = new Scanner(System.in);
+        String str=sc.next();
+        System.out.println(Find_sum(str));
+    };
+};
+
+back end test cases 
+
+case = 1
+input = a100b1c200
+output = 301
+
+case = 2
+input = a7000
+output = 7000
+
+case = 3
+input = 800
+output = 800
+
+case = 4
+input = a1b0c0d1
+output = 2
+
+case = 5
+input = a000bccc1ddd99
+output = 100
+
+
+
+
+
+
+Program2        
+
+
+Suraj and Tom are two best friends. 
+
+Both of them have given two Strings S1 and S2 
+Suraj has given String S1 and Tom has given String S2
+Suraj is always bothered about Tom Strings and checks if's  his string follows sSequence of Tom strings or not 
+
+Help Suraj to solve his problem 
+
+A sSequence of  string is a new string which is formed from the original string by removing some (can be none) of the characters without
+disturbing the relative positions of the remaining characters. 
+
+
+Sample Test Case1
+
+input = abc
+ahbgdc
+output = true
+
+
+Sample Test Case2
+input = aik
+appkllli
+output = false
+
+Explanation - aik is not a subsequnece of appkllli 
+
+
+Sample Test Case3
+
+input = axc 
+ahbgdc
+output = false
+
+ 
+
+
+
+
+Both strings consists only of lowercase characters.
+
+
+back end test cases
+case = 1
+input = aa
+aaaa
+output = true
+
+case = 2
+input = ahga
+ahgijk
+output = false
+
+
+
+case = 4
+input = aaaa
+abababbujkiol
+output = false
+
+
+case = 5
+input = aa
+hkkaklala
+output = true
+
+case = 3
+input = ahgb
+ajkhawertgt
+output = false
+
+
+
+import java.util.*;
+class Test
+{
+
+static boolean isSubSequence(String s, String t) {
+
+	if (s.length() == 0)
+        return true;    
+    int i = 0;
+    int j = 0;
+    while (i < s.length() && j < t.length()) 
+	{
+
+		if (t.charAt(j) == s.charAt(i)) 
+            i++;        
+        j++;
+    }
+          if(i==s.length())
+		    return true;
+		  else
+		     return false;
+}
+public static void main(String [] args) 
+{
+Scanner sc = new Scanner(System.in);
+String s = sc.next();
+String t=sc.next();
+System.out.println(isSubSequence(s,t));
+}
+}
+
+
+
+
+
+Program3
+
+Ramu has given some set of positive numbers and a value 'K'. 
+
+He has given a task to check if there exists a subset in the given set where the sum of the number of the subset is equal to the value 'K'
+
+print yes if exists else no
+
+The first line of input consists of size of the integers values followed by a value 'K'
+
+Sample Test Case1
+
+input = 3 34 4 12 5 2
+9
+output = yes
+
+There is a subset (4, 5) with sum 9.
+
+
+Sample Test Case2
+
+input = 3 23 4 5 12
+55
+output = no
+
+
+There is no subset that add up to 55.
+
+
+back end test cases
+case = 1
+input =25 5 14 2 3 8              
+10
+output =yes 
+
+
+case = 2
+input =8 2 1 2 3 8
+20
+output = yes
+
+case = 3
+input =1 1 1 1 1              
+6
+output = no
+ 
+
+case = 4
+input =8 9 12 89 76 34 23 98 923
+1061
+output = yes
+
+case = 5
+input =12 34 98 23 45 87 29 54 87 59 23 91 234 129 987 345
+1160
+output = yes
+
+
+
+
+import java.util.*;
+class Test{
+ 
+    static boolean isSubsetSum(int set[],int n, int sum)
+    {
+        boolean subset[][] = new boolean[sum + 1][n + 1];
+ 
+        for (int i = 0; i <= n; i++)
+            subset[0][i] = true;
+ 
+        for (int i = 1; i <= sum; i++)
+            subset[i][0] = false;
+ 
+        for (int i = 1; i <= sum; i++) {
+            for (int j = 1; j <= n; j++) {
+                subset[i][j] = subset[i][j - 1];
+                if (i >= set[j - 1])
+                    subset[i][j] = subset[i][j] || subset[i - set[j - 1]][j - 1];
+            }
+        }
+ 
+
+        return subset[sum][n];
+    }
+ 
+    public static void main(String args[])
+    {
+		Scanner sc =new Scanner(System.in);
+		String line = sc.nextLine();
+		int k=sc.nextInt();
+		String arr[]=line.split(" ");
+		int n=arr.length;
+		int a[]=new int[n];
+		for(int i=0;i<n;i++)
+			a[i]=Integer.parseInt(arr[i]);
+
+        if (isSubsetSum(a, n, k) == true)
+            System.out.println("yes");
+        else
+            System.out.println("no");
+    }
+}
