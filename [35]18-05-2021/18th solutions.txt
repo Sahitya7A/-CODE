@@ -1,0 +1,115 @@
+/*ONE*/
+import java.util.*;
+
+public class Factorization {
+    public int smallestFactorization(int n) {
+        // Case 1: If number is smaller than 10
+        if (n < 10) return n;
+        
+        // Case 2: Start with 9 and try every possible digit
+        List<Integer> res = new ArrayList<>();
+        for (int i = 9; i > 1; i--) {
+            // If current digit divides n, then store all
+            // occurrences of current digit in res
+            while (n % i == 0) {
+                n = n / i;
+                res.add(i);
+            }
+        }
+
+        // If n could not be broken in form of digits
+        if (n != 1) return 0;
+
+        // Get the result from the array in reverse order
+        long result = 0;
+        for (int i = res.size() - 1; i >= 0; i--) {
+            result = result * 10 + res.get(i);
+            if (result > Integer.MAX_VALUE) return 0;
+        }
+        
+        return (int)result;
+    }
+	
+	public static void main(String args[])
+	{
+		Scanner sc = new Scanner(System.in);
+		int s=sc.nextInt();
+		System.out.println(new Factorization().smallestFactorization(s));
+	}
+}
+
+/*TWO*/
+
+import java.util.*;
+
+class OpenLock {
+    public int openLock(String[] deadends, String target) {
+        Set<String> begin = new HashSet<>();
+        Set<String> end = new HashSet<>();
+        Set<String> deads = new HashSet<>(Arrays.asList(deadends));
+        begin.add("0000");
+        end.add(target);
+        int level = 0;
+        while(!begin.isEmpty() && !end.isEmpty()) {
+            Set<String> temp = new HashSet<>();
+            for(String s : begin) {
+                if(end.contains(s)) return level;
+                if(deads.contains(s)) continue;
+                deads.add(s);
+                StringBuilder sb = new StringBuilder(s);
+                for(int i = 0; i < 4; i ++) {
+                    char c = sb.charAt(i);
+                    String s1 = sb.substring(0, i) + (c == '9' ? 0 : c - '0' + 1) + sb.substring(i + 1);
+                    String s2 = sb.substring(0, i) + (c == '0' ? 9 : c - '0' - 1) + sb.substring(i + 1);
+                    if(!deads.contains(s1))
+                        temp.add(s1);
+                    if(!deads.contains(s2))
+                        temp.add(s2);
+                }
+            }
+            level ++;
+            begin = end;
+            end = temp;
+        }
+        return -1;
+    }
+	
+	public static void main(String arg[]) 
+	{ 
+		Scanner sc=new Scanner(System.in);
+		String[] deadends=sc.nextLine().split(" ");
+		String target=sc.nextLine();
+				
+		System.out.print(new OpenLock().openLock(deadends,target)); 
+	} 
+}
+/*
+Program 2 test cases
+
+case =1
+input =0302 0202 0203 2323 3003
+0303
+output =8
+
+case =2
+input =6656 6676 6766 6566 5666 7666
+6666
+output =16
+
+case =3
+input =6656 6676 6766 6566 5666 7666 6665 6667
+6666
+output =-1
+
+case =4
+input =1234 2345 3456 4567 5678 6789 0123
+4554
+output =18
+
+Kohinoor diamond is locked in box . has lock as 4 digit pattern from numbers 0-9 as of suitcase
+should'nt reach traps find minimum times adjust the belt to get lock opend.
+
+** Adjust Belt i.e either 0 can be changed to 1 or 9 at once but not both.
+inital state is 0000
+given are list of traps and the key 
+*/
