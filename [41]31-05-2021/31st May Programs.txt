@@ -1,0 +1,184 @@
+Program-1
+
+Ramu is given two words(a,b) of same size 
+
+he has to select an index and  break the word at the same index for both the words 
+
+breaking a into two words : a1 and a2 where a = a1 + a2 , 
+and breaking b into two words: b1 and b2 where b = b1 + b2 . 
+
+Check if a1 + b2 or b1 + a2 forms a palindrome.
+
+When you break a word s into s1 and s2 , either s1 or s2 is allowed to be empty. 
+
+For example, if s ="abc" , then "" + "abc" , "a" + "bc" , "ab" + "c" , and "abc" + "" are valid breaks.
+
+Return true if it is possible to form a palindrome word, otherwise return false .
+
+Notice that x + y denotes the concatenation of words x and y .
+
+
+Input: a = "x", b = "y"
+Output: true
+
+Explaination: If either a or b are palindromes the answer is true since you can break in the following way:
+
+a = "", a = "x"
+b = "", b = "y"
+Then, a + b = "" + "y" = "y", which is a palindrome.
+
+
+
+Input: a = "abdef", b = "fecab"
+Output: true
+
+
+
+Input: a = "ulacfd", b = "jizalu"
+Output: true
+Explaination: break them at index 3:
+
+
+a1 = "ula", a2 = "cfd"
+b1 = "jiz", b2 = "alu"
+Then, a1 + b2 = "ula" + "alu" = "ulaalu", which is a palindrome.
+
+
+
+
+
+import java.util.*;
+
+class SplitStrings {
+    boolean isPalindrome(String s, int i, int j) {
+        while (i < j && s.charAt(i) == s.charAt(j)) {
+            ++i;
+            --j;
+        }
+        return i >= j;
+    }
+    boolean check(String a, String b) {
+        int i = 0, j = a.length() - 1;
+        while (i < j && a.charAt(i) == b.charAt(j)) {
+            ++i;
+            --j;
+        }
+        return isPalindrome(a, i, j) || isPalindrome(b, i, j);
+    }    
+    public boolean checkPalindromeFormation(String a, String b) {
+        return check(a, b) || check(b, a);
+    }
+	
+	public static void main(String args[])
+	{
+		Scanner sc= new Scanner(System.in);
+		String s1=sc.next();
+		String s2=sc.next();
+		System.out.println(new SplitStrings().checkPalindromeFormation(s1,s2));
+	}
+}
+
+
+
+
+back end test cases 
+
+case = 1
+input = xbdef
+xecab
+output = false
+
+case = 2
+input = hello
+tlleo
+output = false
+
+case = 3
+input = abcdefghijkl
+fedcbalkjihg
+output = false
+
+case = 4
+input = abcdefghijkl
+fghijeeedcba
+output = true
+
+
+
+
+
+program-2
+
+Ramu is given a string and asked to find sum of load of all of its substrings.
+
+
+The load of a string is the difference in frequencies between the most frequent and least frequent characters.
+For example, the load of "abaacc" is 3 - 1 = 2 .
+
+
+Input: s = "aabcb"
+Output: 5
+Explanation: The substrings with non-zero loads are ["aab","aabc","aabcb","abcb","bcb"], each with load equal to 1.
+
+
+Example 2:
+Input: s = "aabcbaa"
+Output: 17
+
+
+If no load exists print 0
+
+
+
+
+import java.util.*;
+
+class BeautySum {
+    public int beautySum(String s) {
+        int result = 0;
+        int[] frequencies = new int[26];
+        for(int i=0;i<s.length();i++) {
+            frequencies[s.charAt(i)-'a']++;
+            result += helper(frequencies);
+        }
+        if(s.length()>1) result += beautySum(s.substring(1));
+        return result;
+    }
+    private int helper(int[] frequencies) {
+        int max =0, min =Integer.MAX_VALUE;
+        for(int i=0;i<26;i++) {
+            max = Math.max(max, frequencies[i]);
+            if(frequencies[i]!=0) min = Math.min(min, frequencies[i]);
+        }
+        return max - min;
+    }
+	
+		
+	public static void main(String args[])
+	{
+		Scanner sc= new Scanner(System.in);
+		String s=sc.next();
+		System.out.println(new BeautySum().beautySum(s));
+	}
+}
+
+
+back end test cases
+
+case = 1
+input = aabbcddeffgghhiikkll
+output = 153
+
+case = 2
+input = abcdef
+output = 0
+
+
+case = 3
+input = aabbccddeeffgghhii
+output = 100
+
+case = 4
+input = aab
+output = 1
+
