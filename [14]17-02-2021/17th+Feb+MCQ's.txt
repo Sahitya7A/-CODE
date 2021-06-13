@@ -1,0 +1,287 @@
+
+1) what is the output of the following code 
+
+#include<stdio.h> 
+int main() 
+{ 
+   int n; 
+   for(n = 7; n!=0; n--) 
+     printf("n = %d", n--); 
+      return 0; 
+}
+
+
+A) Compilation fails
+B) Segementation fault
+C) Prints n=7 n= 6 ..... n= 0
+D) None of these
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ans- D
+
+2) what is the output of the following code 
+
+#include <stdio.h>
+#if A == 10
+    #define B 5
+#else
+    #define B 50
+#endif
+ 
+int main()
+{
+    printf("%d", B);
+    return 0;
+}
+
+A) 5
+B) 50
+C) 10
+D) Compilation fails
+
+
+
+
+
+
+
+
+
+Ans-B
+
+3)
+
+#include <stdio.h> 
+#define square(x) x+x 
+int main() 
+{ 
+  int x; 
+  x = 36/square(6); 
+  printf("%d", x); 
+  return 0; 
+} 
+
+
+A) 3
+B) 15
+C) 12
+D) compilation fails
+
+
+
+
+
+Ans-C
+
+4) what is the output of the following code 
+int main() 
+{ 
+    int i; 
+    int arr[4] = {10}; 
+    for (i = 0; i < 4; i++) 
+        printf("%d ", arr[i]); 
+    return 0; 
+} 
+
+(A) 10 followed by three garbage values
+(B) 10 0 0 0
+(C) 10 10 10 10 
+(D) four garbage values
+
+
+
+
+
+Answer: (B)
+
+5)  #include <stdio.h>
+
+int * sum(int *a,int *b)
+{
+     return *a+*b;
+}
+
+int main()
+{
+      printf(" %d ", sum(10,20));
+	  return 0;
+}
+
+A) 30
+B) Compilation fails
+C) Garbage value
+D) Segmentation fault
+
+
+
+
+
+Ans-D
+
+
+6)   Which class does not override the equals() and hashCode() methods, inheriting them directly from class Object?
+A. 	java.lang.String
+B. 	java.lang.Double
+C. 	java.lang.StringBuffer
+D. 	java.lang.Character
+
+
+
+
+
+
+Ans - C
+
+7)
+
+class Bar { } 
+class Test 
+{  
+    Bar doBar() 
+    {
+        Bar b = new Bar(); /* Line 6 */
+        return b; /* Line 7 */
+    } 
+    public static void main (String args[]) 
+    { 
+        Test t = new Test();  /* Line 11 */
+        Bar newBar = t.doBar();  /* Line 12 */
+        System.out.println("newBar"); 
+        newBar = new Bar(); /* Line 14 */
+        System.out.println("finishing"); /* Line 15 */
+    } 
+}
+
+At what point is the Bar object, created on line 6, eligible for garbage collection?
+
+A. 	after line 12
+B. 	after line 14
+C. 	after line 7, when doBar() completes
+D. 	after line 15, when main() completes
+
+Option B
+
+Explanation:
+
+Option B is correct. All references to the Bar object created on line 6 are destroyed 
+when a new reference to a new Bar object is assigned to the variable newBar on line 14. 
+Therefore the Bar object, created on line 6, is eligible for garbage collection after line 14.
+
+Option A is wrong. This actually protects the object from garbage collection.
+
+Option C is wrong. Because the reference in the doBar() method is returned on line 7 and is 
+stored in newBar on line 12. This preserver the object created on line 6.
+
+Option D is wrong. Not applicable because the object is eligible for garbage collection after line 14.
+
+8) What is the output of the following java code 
+
+class Base extends Exception {} 
+class Derived extends Base  {} 
+  
+public class Main { 
+  public static void main(String args[]) { 
+   // some other stuff 
+   try { 
+       // Some monitored code 
+       throw new Derived(); 
+    } 
+    catch(Base b)     {  
+       System.out.println("Caught base class exception");  
+    } 
+    catch(Derived d)  {  
+       System.out.println("Caught derived class exception");  
+    } 
+  } 
+}  
+
+(A) Caught base class exception
+(B) Caught derived class exception
+(C) Compiler Error because derived is not throwable
+(D) Compiler Error because base class exception is caught before derived class
+
+
+
+
+
+
+
+
+Answer: (D)
+
+9)
+public class Test { 
+    public static void main(String[] args) 
+    { 
+        System.out.println('a' + 'a' + 'a'); 
+    } 
+} 
+
+A) Compilation fails
+B) aaa
+C) 'a''a''a'
+D) None of these
+
+
+
+
+
+Ans- D
+prints 291
+
+10)
+public class Demo{ 
+    public static void main(String[] arr){ 
+        Integer n1 = 10; 
+        Integer n2 = 10; 
+        Integer n3 = 50; 
+        Integer n4 = 50; 
+          
+        if(n1==n2){ 
+            System.out.println("n1 == n2"); 
+        } 
+        else{ 
+            System.out.println("n1 != n2"); 
+        } 
+        if(n3 == n4){ 
+            System.out.println("n3 == n4"); 
+        } 
+        else{ 
+            System.out.println("n3 != n4"); 
+        } 
+    } 
+} 
+
+a) n1 == n2
+	n3 == n4
+b) n1 == n2
+	n3 != n4
+c) n1 != n2
+	n3 == n4
+d) n1 != n2
+	n3 != n4
+e) None of these
+
+
+
+
+
+Answer: a
+

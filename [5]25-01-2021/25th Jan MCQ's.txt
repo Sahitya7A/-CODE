@@ -1,0 +1,244 @@
+1)
+
+Suppose that in a C program snippet, followings statements are used.
+
+i) sizeof(int); 
+ii) sizeof(int*); 
+iii) sizeof(int**); 
+
+Assuming size of pointer is 4 bytes and size of int is also 4 bytes, pick the most correct answer from the given options.
+
+(A) Only i) would compile successfully and it would return size as 4.
+(B) i), ii) and iii) would compile successfully and size of each would be same i.e. 4
+(C) i), ii) and iii) would compile successfully but the size of each would be different and would be decided at run time.
+(D) ii) and iii) would result in compile error but i) would compile and result in size as 4.
+
+
+Answer: (B)
+
+Explanation: Size of all pointer types is same.
+
+And whether it is a ‘pointer to char’ or ‘pointer to int’ or ‘pointer to pointer to int’, the size always remain same.
+
+
+
+2)
+In the context of the following printf() in C, pick the best statement.
+
+i) printf("%d",8); 
+ii) printf("%d",090); 
+iii) printf("%d",00200); 
+iv) printf("%d",0007000); 
+
+(A) Only i) would compile. And it will print 8.
+(B) Both i) and ii) would compile. i) will print 8 while ii) will print 90
+(C) All i), ii), iii) and iv) would compile successfully and they will print 8, 90, 200 & 7000 respectively.
+(D) Only i), iii) and iv) would compile successfully. They will print 8, 128 and 3584 respectively.
+
+
+Answer: (D)
+
+
+
+3)
+
+A typical "switch" body looks as follows:
+
+switch (controlling_expression) 
+{ 
+  case label1: 
+    /*label1 statements*/
+    break; 
+  case label2: 
+    /*label1 statements*/
+    break; 
+  default: 
+    /*Default statements*/
+} 
+
+Which of the following statement is not correct statement?
+(A) "switch" body may not have any "case" label at all and it would still compile.
+(B) "switch" body may not have the "default" label and it would still compile.
+(C) "switch" body may contain more than one "case" labels where the label value of these "case" is same and it would still compile. 
+      If "switch" controlling expression results in this "case" label value, the "case" which is placed first would be executed.
+(D) "switch" body may not have any "break" statement and it would still compile.
+(E) "switch" body can have the "default" label at first i.e. before all the other "case" labels. It would still compile.
+
+
+Answer: (C)
+
+Explanation: In "switch" body, two "case" can’t result in same value. Though having only "case" or only "default" is okay. In fact, "switch" body can be empty also.
+
+
+
+
+4)
+
+Choose the best statement with respect to following three program snippets in C Language
+
+/*Program Snippet 1 with for loop*/
+for (i = 0; i < 10; i++) 
+{ 
+   /*statement1*/
+   continue; 
+   /*statement2*/
+} 
+  
+/*Program Snippet 2 with while loop*/
+i = 0; 
+while (i < 10) 
+{ 
+   /*statement1*/
+   continue; 
+   /*statement2*/
+   i++; 
+} 
+  
+/*Program Snippet 3 with do-while loop*/
+i = 0; 
+do
+{ 
+   /*statement1*/
+   continue; 
+   /*statement2*/
+   i++; 
+}while (i < 10); 
+
+(A) All the loops are equivalent i.e. any of the three can be chosen and they all will perform exactly same.
+(B) continue can’t be used with all the three loops in C.
+(C) After hitting the continue; statement in all the loops, the next expression to be executed would be controlling expression (i.e. i < 10) in all the 3 loops.
+(D) None of the above is correct.
+
+
+Answer: (D)
+
+
+
+5) output of the following  in  C 
+#include <stdio.h> 
+int main() 
+{ 
+   const int x; 
+   x = 10; 
+   printf("%d", x); 
+   return 0; 
+} 
+
+(A) Compiler Error
+(B) 10
+(C) 0
+(D) Runtime Error
+
+
+Answer: (A)
+
+
+6) Which of the following is aggregate function in SQL?
+(A) Avg
+(B) Select
+(C) Ordered by
+(D) distinct
+
+
+Answer: (A)
+
+
+7)What does below SQL statement describe?
+
+SELECT CustomerName, Address + ‘, ‘ + City + ‘, ‘ + Country AS Address
+ FROM Customers;
+
+    (A) Alias named Address column will be created and under this Address, City and Country will be printed as combined statement.
+    (B) Alias named Address will be created for Country columns
+    (C) Alias named Address column will be created and under this all CustomerName, address, city and country will be printed as combined statement
+    (D) All of these are wrong 
+
+
+Answer: A
+
+
+
+
+8)
+1. package pkgA;
+2. public class Foo {
+3. int a = 5;
+4. protected int b = 6;
+5. public int c = 7;
+6. }
+
+3. package pkgB;
+4. import pkgA.*;
+5. public class Baz {
+6. public static void main(String[] args) {
+7. Foo f = new Foo();
+8. System.out.print(" " + f.a);
+9. System.out.print(" " + f.b);
+10. System.out.print(" " + f.c);
+11. }
+12. }
+
+What is the result? (Choose all that apply.)
+A. 5 6 7
+B. 5 followed by an exception
+C. Compilation fails with an error on line 7
+D. Compilation fails with an error on line 8
+E. Compilation fails with an error on line 9
+F. Compilation fails with an error on line 10
+
+Answer:
+D and E are correct. 
+Variable a has default access, so it cannot be accessed from outside the package. 
+Variable b has protected access in pkgA.
+A, B, C, and F are incorrect based on the above information.
+
+
+
+
+9)
+Suppose that we have numbers between 1 and 1000 in a binary search tree and we want to search for the number 365. 
+
+Which of the following sequences could not be the sequence of nodes examined ?
+(A) 4, 254, 403, 400, 332, 346, 399, 365
+(B) 926, 222, 913, 246, 900, 260, 364, 365
+(C) 927, 204,913, 242, 914, 247, 365
+(D) 4, 401, 389, 221, 268, 384, 383, 280, 365
+
+
+Answer: (C)
+
+
+
+10)Given:
+public abstract interface Frobnicate { public void twiddle(String s); }
+
+Which is a correct class? (Choose all that apply.)
+
+A. public abstract class Frob implements Frobnicate {
+public abstract void twiddle(String s) { }
+}
+
+B. public abstract class Frob implements Frobnicate { }
+
+C. public class Frob extends Frobnicate {
+public void twiddle(Integer i) { }
+}
+
+D. public class Frob implements Frobnicate {
+public void twiddle(Integer i) { }
+}
+
+E. public class Frob implements Frobnicate {
+public void twiddle(String i) { }
+public void twiddle(Integer s) { }
+}
+
+Answer:
+B is correct, an abstract class need not implement any or all of an interface’s methods.
+E is correct, the class implements the interface method and additionally overloads the
+twiddle() method.
+
+A is incorrect because abstract methods have no body. 
+C is incorrect because classes implement interfaces they don’t extend them. 
+D is incorrect because overloading a method is not implementing it.
+

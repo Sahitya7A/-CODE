@@ -1,0 +1,340 @@
+1) The pre-order and post order traversal of a Binary Tree generates the same output. The tree can have maximum
+
+(A) Three nodes 		
+(B) Two nodes
+(C) One node
+(D) Any number of nodes
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ans:C
+
+
+
+2)
+Given:
+class Clidder {
+private final void flipper() { System.out.println("Clidder"); }
+}
+public class Clidlet extends Clidder {
+public final void flipper() { System.out.println("Clidlet"); }
+public static void main(String [] args) {
+new Clidlet().flipper();
+} }
+What is the result?
+A. Clidlet
+B. Clidder
+C. Clidder
+Clidlet
+D. Clidlet
+Clidder
+E. Compilation fails
+
+
+
+
+
+
+
+
+
+
+
+
+Answer:
+A is correct. Although a final method cannot be overridden, in this case, the method
+is private, and therefore hidden. The effect is that a new, accessible, method flipper is
+created. Therefore, no polymorphism occurs in this example, the method invoked is simply
+that of the child class, and no error occurs.
+
+3)
+
+Given:
+3. public class Tenor extends Singer {
+4. public static String sing() { return "fa"; }
+5. public static void main(String[] args) {
+6. Tenor t = new Tenor();
+7. Singer s = new Tenor();
+8. System.out.println(t.sing() + " " + s.sing());
+9. }
+10. }
+11. class Singer { public static String sing() { return "la"; } }
+
+What is the result?
+A. fa fa
+B. fa la
+C. la la
+D. Compilation fails
+E. An exception is thrown at runtime
+
+
+
+
+
+
+Answer:
+B is correct. The code is correct, but polymorphism doesn’t apply to static methods.
+
+4)
+
+Given:
+
+3. class Alpha {
+4. static String s = " ";
+5. protected Alpha() { s += "alpha "; }
+6. }
+7. class SubAlpha extends Alpha {
+8. private SubAlpha() { s += "sub "; }
+9. }
+10. public class SubSubAlpha extends Alpha {
+11. private SubSubAlpha() { s += "subsub "; }
+12. public static void main(String[] args) {
+13. new SubSubAlpha();
+14. System.out.println(s);
+15. }
+16. }
+
+What is the result?
+A. subsub
+B. sub subsub
+C. alpha subsub
+D. alpha sub subsub
+E. Compilation fails
+F. An exception is thrown at runtime
+
+
+
+
+Answer:
+
+C is correct. Watch out, SubSubAlpha extends Alpha! Since the code doesn’t attempt
+to make a SubAlpha, the private constructor in SubAlpha is okay.
+
+5) Given:
+
+3. class Building {
+4. Building() { System.out.print("b "); }
+5. Building(String name) {
+6. this(); System.out.print("bn " + name);
+7. }
+8. }
+9. public class House extends Building {
+10. House() { System.out.print("h "); }
+11. House(String name) {
+12. this(); System.out.print("hn " + name);
+13. }
+14. public static void main(String[] args) { new House("x "); }
+15. }
+
+What is the result?
+
+A. h hn x
+B. hn x h
+C. b h hn x
+D. b hn x h
+E. bn x h hn x
+F. b bn x h hn x
+G. bn x b h hn x
+H. Compilation fails
+
+
+
+
+
+
+
+
+
+Answer:
+C is correct. Remember that constructors call their superclass constructors, which execute first, 
+and that constructors can be overloaded.
+
+6)
+
+The following postfix expression with single digit operands is evaluated using a stack:
+
+              8 2 3 ^ / 2 3 * + 5 1 * - 
+
+Note that ^ is the exponentiation operator. 
+
+The top two elements of the stack after the first * is evaluated are:
+
+(A) 6, 1
+(B) 5, 7
+(C) 3, 2
+(D) 1, 5
+
+
+
+
+
+Answer: (A)
+
+
+7)Convert the following infix to postfix  expression
+
+a+b*(c^d-e)^(f+g*h)-i
+
+
+(A) abcd^ef-gh*^+*i+-
+(B) abcd^e-fgh*+^*+i-
+(C) abc^de-fgh+*^*+i-
+(D) abcd-e^fgh+**^+i-
+
+
+
+
+
+Ans- B
+
+a+b*c+d
+
+// abc*+d+
+
+1. Scan the infix expression from left to right. 
+2. If the scanned character is an operand, output it. 
+3. Else, 
+      1 If the precedence of the scanned operator is greater than the precedence of the operator in the stack(or the stack is empty           or the stack contains a ‘(‘ ), push it. 
+      2 Else, Pop all the operators from the stack which are greater than or equal to in precedence than that of the scanned operator. After doing that Push the scanned operator to the stack. (If you encounter parenthesis while popping then stop there and push the scanned operator in the stack.) 
+4. If the scanned character is an ‘(‘, push it to the stack. 
+5. If the scanned character is an ‘)’, pop the stack and and output it until a ‘(‘ is encountered, and discard both the parenthesis. 
+6. Repeat steps 2-6 until infix expression is scanned. 
+7. Print the output 
+8. Pop and output from the stack until it is not empty.
+
+
+
+8)
+
+
+Given an Prefix convert to Postfix 
+
+Prefix :  *+AB-CD
+
+A) AB-CD+*
+B) AB*CD-+
+C) AB+CD*-
+D) AB+CD-*
+
+
+
+
+
+Ans- D
+
+Explanation : Prefix to Infix :  (A+B) * (C-D)
+                   Infix to Postfix :  AB+CD-*
+
+
+Algorithm for Prefix to Postfix:
+
+    Read the Prefix expression in reverse order (from right to left)
+    If the symbol is an operand, then push it onto the Stack
+    If the symbol is an operator, then pop two operands from the Stack
+    Create a string by concatenating the two operands and the operator after them.
+    string = operand1 + operand2 + operator
+    And push the resultant string back to Stack
+    Repeat the above steps until end of Prefix expression.
+
+
+9) To evaluate an expression without any embedded function calls:
+
+(A) One stack is enough
+(B) Two stacks are needed
+(C) As many stacks as the height of the expression tree are needed
+(D) A Turing machine is needed in the general case
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Answer: (A)
+
+Explanation:
+Any expression can be converted into Postfix or Prefix form.
+
+Prefix and postfix evaluation can be done using a single stack.
+
+For example : Expression ’10 2 8 * + 3 -‘ is given.
+PUSH 10 in the stack.
+PUSH 2 in the stack.
+PUSH 8 in the stack.
+When operator ‘*’ occurs, POP 2 and 8 from the stack.
+PUSH 2 * 8 = 16 in the stack.
+When operator ‘+’ occurs, POP 16 and 10 from the stack.
+PUSH 10 + 16 = 26 in the stack.
+PUSH 3 in the stack.
+When operator ‘-‘ occurs, POP 26 and 3 from the stack.
+PUSH 26 – 3 = 23 in the stack.
+So, 23 is the answer obtained using single stack.
+
+ 
+Thus, option (A) is correct.
+
+
+10)class test {  
+  public static void main(String [] args) 
+  { 
+		int i=10;
+		Integer j=20;           //line A
+		if(i==j)                       // line B
+			System.out.print("equal");
+		else
+			System.out.print("not equal");   
+  }
+}
+
+
+A) compilation fails at line A onlye
+B) equal
+C) not equal
+D) compilation fails at line B only
+E) compilation fails at Both line A and line B
+
+
+
+
+
+
+
+
+
+Ans- C

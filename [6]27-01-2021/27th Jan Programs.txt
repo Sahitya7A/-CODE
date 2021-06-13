@@ -1,0 +1,393 @@
+/*
+program1
+The online shopping portal is giving a buy-2 get-1 free discount.
+There are various categories of goods and the offer is valid on a group of items if they belong to the same category.
+All items in the same category are priced equal.
+So, If you buy 3 items of category A, you pay only for 2 items. 
+But if you buy 2 items of category A and 1 of category B, you pay for all 3 items. 
+Given the categories for various items in your shopping cart and the price for each category, 
+calculate the total price that you will have to pay.
+
+Input
+Each test case will contain two lines. 
+First line will be a string comprising of only alphabets (only upper case)
+Each character represents a category in the shop. 
+Next line will contain a space separated list of 26 integers where 1st integer is price for category A, 
+2nd integer is price for category B and 26th integer is price for category Z.
+Output
+For each test case, print on a single line the price that the customer will have to pay.
+
+
+input
+ABAAABBCDEZDF
+1 2 3 3 2 1 4 7 9 10 11 13 12 1 1 4 5 6 7 8 9 10 2 11 14 15
+output
+34
+
+Explanation :-
+A B C D E F G H I J  K  L  M  N O P Q R S T U V  W X  Y  Z
+1 2 3 3 2 1 4 7 9 10 11 13 12 1 1 4 5 6 7 8 9 10 2 11 14 15
+
+in the above input we have the frequency count of category as follows
+
+      I * P  =  Amount
+A-4 - 3 * 1  =   3
+B-3 - 2 * 2  =   4
+C-1 - 1 * 3  =   3
+D-2 - 2 * 3  =   6
+E-1 - 1 * 2  =   2
+F-1 - 1 * 1  =   1
+Z-1 - 1 * 15 =  15
+       Total  =  34
+
+if we buy two items we get one item free, so in 4 items of Category-A we have to bill only for 3 items 
+for Category B we have to bill only for 2 items. 
+
+In the above frequency I represents the Number of Items for each Category and P represent the cost  
+if we sum all of them we get the total price to be paid by the customer.
+
+
+input
+ZABCDBCADZZZRRRTTURTUTRASDERF
+17 5 3 3 2 1 4 7 19 10 1 3 2 1 1 4 5 6 7 8 9 1 2 1 4 12
+output
+168
+
+Explanation :-
+A  B C D E F G H I  J  K L M N O P Q R S T U V W X Y Z
+17 5 3 3 2 1 4 7 19 10 1 3 2 1 1 4 5 6 7 8 9 1 2 1 4 12
+
+in the above input we have the frequency count of category as follows
+      C *  P    AMOUNT
+Z-4 - 3 * 12  =  36
+A-3 - 2 * 17  =  34
+B-2 - 2 *  5  =  10
+C-2 - 2 *  3  =   6
+D-3 - 2 *  3  =   6
+R-6 - 4 *  6  =  24
+T-4 - 3 *  8  =  24
+U-2 - 2 *  9  =  18
+S-1 - 1 *  7  =   7
+E-1 - 1 *  2  =   2 
+F-1 - 1 *  1  =   1
+       TOTAL  = 168
+
+
+
+*/
+
+
+ import java.util.*;
+     class Test{
+         public static void main(String args[]){
+             Scanner sc=new Scanner(System.in);
+             String str=sc.next();
+             int arr[]=new int[26];
+             int n=26;
+             char c='A';
+             int count=0;
+            int l=0;
+            for(int i=0;i<n;i++)
+                arr[i]=sc.nextInt();
+            
+            int arr1[]=new int[n];
+
+            for(int j=c;j<='Z';j++){
+                for(int i=0;i<str.length();i++){
+                if(str.charAt(i)==j)
+                    count++;
+                
+                }
+                arr1[l]=count;
+                count=0;
+                c++;
+                l++;
+            }
+            int sum=0;
+            
+           for(int i=0;i<n;i++){
+                if(arr1[i]>2){
+                    int a=arr1[i]/3;
+                    sum=sum+(arr[i]*(arr1[i]-a));
+                }
+                else if(arr1[i]>=0&&arr1[i]<=2)
+                    sum=sum+(arr[i]*arr1[i]);
+                
+                }
+            System.out.println(sum);
+            }
+    }
+
+back end test cases
+
+
+case=1
+input=
+ABCDEFGHIJKLMNOPQRSTUVWXYZ
+1 2 3 4 5 6 7 8 19 10 1 3 2 1 1 4 5 6 7 8 9 1 2 1 4 12
+output=
+132
+
+case=2
+input=
+AAACZDDEDDAD
+4 3 2 9 8 7 2 1 1 1 1 1 1 1 8 7 67 45 34 23 12 12 34 2 98 76
+output=134
+
+case=3
+input=
+HZWEHWEEZZH
+8 7 5 3 4 2 1 8 9 99 2 3 9 1 8 2 3 7 4 6 56 23 87 123 32 45 
+output=
+288
+
+case=4
+input=
+SSSSSSST
+1 2 3 4 5 6 7 8 9 8 7 6 5 4 3 2 1 0 2 3 4 5 6 7 8 9
+output=
+13
+
+case = 5
+input =
+ZABCDBCADZZZRRRTTURTUTRASDERF
+17 5 3 3 2 1 4 7 19 10 1 3 2 1 1 4 5 6 7 8 9 1 2 1 4 12
+output =
+168
+
+
+
+
+
+Program-2
+ 
+write a program to read a line of words and return all the words vertically in the same order in which they appear  in line
+ 
+ Words are returned as a list of strings, complete with spaces when is necessary. (Trailing spaces are not allowed).
+
+ Each word would be put on only one column and that in one column there will be only one word.
+ Print the string in Double Quotes like "HAY", "ORO"
+The line contains only upper case English letters.
+Assume that there is only one space between 2 words.
+
+
+ Sample Test Case-1
+ 
+input = HOW ARE YOU
+output = 
+"HAY"
+"ORO"
+"WEU"
+
+ Explanation: Each word is printed vertically. 
+  HAY
+  ORO
+  WEU
+ 
+
+ Sample Test Case-2
+input  =TO BE OR NOT TO BE
+output = 
+TBONTB
+OEROOE
+       T
+
+ Explanation
+  If the above words are writeen vertially we have the following words 
+ TBONTB
+ OEROOE
+        T
+ 
+ 
+Sample Test Case-3
+input =HELLO TO YOU
+output = 
+"HTY"
+"EOO"
+"L U"
+"L"
+"O"
+
+Sample Test Case-4
+input =ABC DEFG HIK
+output =
+"ADH"
+"BEI"
+"CFK"
+" G"
+
+Sample Test Case-5
+input = TOM LIKE CODER
+output =
+"TLC"
+"OIO"
+"MKD"
+" EE"
+"  R"
+
+ */
+ 
+
+ 
+ 
+ import java.util.*;
+ class Test
+ {
+     public static void printStringVertical(String []w)
+     {
+         int max=0;
+         for(int i=0;i<w.length;i++)
+         {
+             if(w[i].length()>max)
+             max=w[i].length();
+         }
+         StringBuilder []out = new StringBuilder[max];
+         for(int i=0;i<max;i++)
+         {
+             out[i] = new StringBuilder();
+             for(int j=0;j<w.length;j++)
+             if(i+1>w[j].length())
+                    out[i].append(' ');
+             else
+                out[i].append(w[j].charAt(i));
+        }
+         for(int i=0;i<max;i++)
+          	 System.out.println("\""+out[i].toString().replaceAll("\\s+$", "")+"\"");
+    }
+	 public static void main (String[] args)
+     {
+         Scanner sc = new Scanner(System.in);
+         String in = sc.nextLine();
+         String []w = in.split(" ");
+         printStringVertical(w);
+     }
+     
+ }
+
+back end test cases
+
+case = 1
+input =HELLO
+output = 
+"H"
+"E"
+"L"
+"L"
+"O"
+
+case = 2
+input = I A G
+output = 
+"IAG"
+
+case = 3
+input =HELLO I AM GOOD CODER
+output =
+"HIAGC"
+"E MOO"
+"L  OD"
+"L  DE"
+"O   R"
+
+case = 4
+input =TEST CASES ARE FINE
+output =
+"TCAF"
+"EARI"
+"SSEN"
+"TE E"
+" S"
+
+case = 5
+input =A B C D E A B C D E
+output =
+"AA"
+"BB"
+"CC"
+"DD"
+"EE"
+
+
+
+
+Program-3
+
+Given a string s , a k duplicate removal consists of choosing k adjacent and equal letters from s and
+removing them causing the left and the right side of the deleted substring to concatenate together.
+
+We repeatedly make k duplicate removals on s until we no longer can.
+
+Return the final string after all such duplicate removals have been made.
+
+It is guaranteed that the answer is unique.
+
+Example 1:
+Input: s = "abcd", k = 2
+Output: "abcd"
+
+Explanation: There's nothing to delete.
+
+Example 2:
+Input: s = "deeedbbcccbdaa", k = 3
+Output: "aa"
+
+Explanation:
+First delete "eee" and "ccc", get "ddbbbdaa"
+Then delete "bbb", get "dddaa"
+Finally delete "ddd", get "aa"
+
+Example 3:
+Input: s = "pbbcggttciiippooaais", k = 2
+Output: "ps"
+
+
+
+
+import java.util.*;
+
+class Test {
+    public String removeDuplicates(String s, int k) {
+        int i = 0, n = s.length(), count[] = new int[n];
+        char[] stack = s.toCharArray();
+        for (int j = 0; j < n; ++j, ++i) {
+            stack[i] = stack[j];
+            count[i] = i > 0 && stack[i - 1] == stack[j] ? count[i - 1] + 1 : 1;
+            if (count[i] == k) i -= k;
+        }
+        return new String(stack, 0, i);
+    }
+	
+	public static void main(String args[])
+	{
+		Scanner sc=new Scanner(System.in);
+		String s=sc.next();
+		int n=sc.nextInt();
+		System.out.println(new Test().removeDuplicates(s,n));		
+	}
+}
+back end test cases
+
+case = 1
+input = abbbaac
+3
+output = c
+
+case = 2
+input = abcd
+2
+output = abcd
+
+case = 3
+input = aaabbbccc
+2
+output = abc
+
+case = 4
+input = abbbabbbaddda
+3
+output = a
+
+case = 5
+input = aabbccdd
+3
+output = aabbccdd

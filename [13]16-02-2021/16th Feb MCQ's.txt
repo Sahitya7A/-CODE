@@ -1,0 +1,269 @@
+
+1) What is the output of the following code 
+
+#include <stdio.h>
+ 
+int main()
+{
+    int a[5];
+     
+    // here the base address of array 'a'  is 1000 and assume the size of integer is 32 bit
+    a++;
+    printf("%u", a);
+    return 0;
+}
+
+(A) 1002
+(B) 1004
+(C) 1020
+(D) lvalue required
+
+
+Ans-  (D)
+
+
+
+2)  Pick the best statement for the following program snippet:
+#include <stdio.h> 
+  
+int main() 
+{ 
+ int var;  /*Suppose address of var is 2000 */
+  
+ void *ptr = &var; 
+ *ptr = 5; 
+ printf("var=%d and *ptr=%d",var,*ptr); 
+               
+ return 0; 
+} 
+
+(A) It will print “var=5 and *ptr=2000”
+(B) It will print “var=5 and *ptr=5”
+(C) It will print “var=5 and *ptr=XYZ” where XYZ is some random address
+(D) Compile error
+
+
+Answer: (D)
+
+Explanation: 
+
+Key point in the above snippet is dereferencing of void pointer. 
+It should be noted that dereferencing of void pointer isn’t allowed because void is an incomplete data type. 
+The correct way to assign value of 5 would be first to typecast void pointer and then use it. 
+So instead of *ptr, one should use *(int *)ptr. 
+Correct answer is d.
+
+
+
+
+3)
+
+Pick the best statement for the below program:
+
+#include<stdio.h>
+  
+int size = 4; 
+int arr[size]; 
+  
+int main() 
+{ 
+ if(arr[0]) 
+  printf("Initialized to ZERO"); 
+ else
+  printf("Not initialized to ZERO"); 
+  
+ return 0; 
+} 
+
+(A) No compile error and it’ll print “Initialized to ZERO”.
+(B) No compile error and it’ll print “Not initialized to ZERO”.
+(C) Compile error because size of arr has been defined using variable outside any function.
+(D) No compile error and it’ll print either “Initialized to ZERO” or “Not initialized to ZERO” depending on what value is present at arr[0] at a particular run of the program.
+
+
+Answer: (C)
+
+Explanation: 
+
+An array whose size is specified as variable can’t be defined out any function. 
+It can be defined only inside a function. 
+So putting arr[size] outside main() would result in compile error. 
+Answer is C.
+
+
+
+
+4)
+
+Pick the best statement for the below program:
+
+#include<stdio.h>
+   
+void fun(int n) 
+{ 
+   int idx; 
+   int arr1[n] = {0}; 
+   int arr2[n]; 
+   
+   for (idx=0; idx<n; idx++) 
+       arr2[idx] = 0;     
+} 
+   
+int main() 
+{ 
+   fun(4); 
+   return 0; 
+} 
+
+(A) Definition of both arr1 and arr2 is incorrect because variable is used to specify the size of array. That’s why compile error.
+(B) Apart from definition of arr1 arr2, initialization of arr1 is also incorrect. arr1 can’t be initialized due to its size being specified as variable. That’s why compile error.
+(C) Initialization of arr1 is incorrect. arr1 can’t be initialized due to its size being specified as variable. That’s why compile error.
+(D) No compile error. The program would define and initializes both arrays to ZERO.
+
+
+Answer: (C)
+
+Explanation: 
+
+There’s no issue with definition of arr1 and arr2.
+In definition of these arrays, the mention of array size using variable is ok as per C standard but these types of arrays can’t be initialized at the time of definition. 
+That’s why initialization of arr1 is incorrect. 
+But initialization of arr2 is done correctly. Right answer is C.
+
+
+
+
+5)The seven elements  X, Y, Z, M, N, P and T are pushed onto a stack in reverse order, i.e., starting from T
+The stack is popped four times and each element is inserted into a queue.
+Three elements are deleted from the queue and pushed back onto the stack. Now, one element is popped from the stack. 
+The popped item is ________.
+
+(A) X
+(B) Y
+(C) Z
+(D) N
+
+
+Answer: (C)
+
+
+
+6)Which are true? (Choose all that apply.)
+
+A. The notifyAll() method must be called from a synchronized context
+B. To call wait(), an object must own the lock on the thread
+C. The notify() method is defined in class java.lang.Thread
+D. When a thread is waiting as a result of wait(), it releases its lock
+E. The notify() method causes a thread to immediately release its lock
+F. The difference between notify() and notifyAll() is that notifyAll() notifies all waiting threads, regardless of the object they're waiting on
+
+Answer:
+
+A is correct because notifyAll() (and wait() and notify()) must be called from within a synchronized context. D is a correct statement.
+B is incorrect because to call wait(), the thread must own the lock on the object that wait() is being invoked on, not the other way around. 
+C is wrong because notify() is defined in java.lang.Object. 
+E is wrong because notify() will not cause a thread to release its locks.  The thread can only release its locks by exiting the synchronized code. 
+F is wrong because notifyAll() notifies all the threads waiting on a particular locked object, not all threads waiting on any object. 
+
+
+
+7)
+
+
+#include<stdio.h> 
+#include<stdlib.h> 
+   
+void f(int *a) 
+{ 
+    a = (int*)malloc(sizeof(int)); 
+} 
+   
+int main() 
+{ 
+    int *p; 
+    f(p); 
+    *p = 5; 
+    printf("%d\n",*p); 
+    return(0); 
+} 
+
+(A) Segmentation fault
+(B) Works and prints 5
+(C) Compilation fails
+(D) Works and prints Garbage 
+
+Answer: (B)
+
+
+
+8)
+class Test {  
+    public static void main(String[] args) {  
+      for(int i = 0; 0; i++)  
+      {  
+          System.out.println("Hello");  
+          break;  
+      }  
+    }  
+}  
+
+(A) Hello
+(B) Empty Output
+(C) Compiler error
+(D) Runtime error
+
+
+Answer: (C)
+
+
+9)
+
+Assume you have a class that holds two private variables: a and b. 
+Which of the following pairs can prevent concurrent access problems in that class? (Choose all that apply.)
+
+A. public int read(){return a+b;}
+public void set(int a, int b){this.a=a;this.b=b;}
+
+B. public synchronized int read(){return a+b;}
+public synchronized void set(int a, int b){this.a=a;this.b=b;}
+
+C. public int read(){synchronized(a){return a+b;}}
+public void set(int a, int b){synchronized(a){this.a=a;this.b=b;}}
+
+D. public int read(){synchronized(a){return a+b;}}
+public void set(int a, int b){synchronized(b){this.a=a;this.b=b;}}
+
+E. public synchronized(this) int read(){return a+b;}
+public synchronized(this) void set(int a, int b){this.a=a;this.b=b;}
+
+F. public int read(){synchronized(this){return a+b;}}
+public void set(int a, int b){synchronized(this){this.a=a;this.b=b;}}
+
+Answer:
+B and F are correct. 
+
+By marking the methods as synchronized, the threads will get the lock of the this object before proceeding. 
+Only one thread will be setting or reading at any given moment, thereby assuring that read() always returns the addition of a valid pair.
+A is incorrect because it is not synchronized; therefore, there is no guarantee that the values added by the read() method belong to the same pair. 
+C and D are incorrect; only objects can be used to synchronize on. 
+E fails —it is not possible to select other objects (even this) to synchronize on when declaring a method as synchronized. 
+
+
+
+10)
+public class A { 
+    public static void main(String[] args) 
+    { 
+        if (true || true )  // Line A 
+            break;              // Line B
+    } 
+} 
+
+
+
+a) Compilation Error at Line A only
+b) Compilation Error at Line B only
+c)  Compilation Error at Line A and Line B only
+d) No compilation error at all 
+
+Answer: b) 

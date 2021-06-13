@@ -1,0 +1,293 @@
+1) Pick the best statement for the following program snippet:
+#include <stdio.h> 
+  
+int main() 
+{ 
+ int var;  /*Suppose address of var is 2000 */
+  
+ void *ptr = &var; 
+ *ptr = 5; 
+ printf("var=%d and *ptr=%d",var,*ptr); 
+               
+ return 0; 
+} 
+
+(A) It will print “var=5 and *ptr=2000”
+(B) It will print “var=5 and *ptr=5”
+(C) It will print “var=5 and *ptr=XYZ” where XYZ is some random address
+(D) Compile error
+
+
+Answer: (D)
+
+Explanation: 
+
+Key point in the above snippet is dereferencing of void pointer. 
+It should be noted that dereferencing of void pointer isn’t allowed because void is an incomplete data type. 
+The correct way to assign value of 5 would be first to typecast void pointer and then use it. 
+So instead of *ptr, one should use *(int *)ptr. 
+Correct answer is d.
+
+
+
+
+2)
+
+Pick the best statement for the below program:
+
+#include<stdio.h>
+  
+int size = 4; 
+int arr[size]; 
+  
+int main() 
+{ 
+ if(arr[0]) 
+  printf("Initialized to ZERO"); 
+ else
+  printf("Not initialized to ZERO"); 
+  
+ return 0; 
+} 
+
+(A) No compile error and it’ll print “Initialized to ZERO”.
+(B) No compile error and it’ll print “Not initialized to ZERO”.
+(C) Compile error because size of arr has been defined using variable outside any function.
+(D) No compile error and it’ll print either “Initialized to ZERO” or “Not initialized to ZERO” depending on what value is present at arr[0] at a particular run of the program.
+
+
+Answer: (C)
+
+Explanation: 
+
+An array whose size is specified as variable can’t be defined out any function. 
+It can be defined only inside a function. 
+So putting arr[size] outside main() would result in compile error. 
+Answer is C.
+
+
+
+
+3)
+
+Pick the best statement for the below program:
+
+#include<stdio.h>
+   
+void fun(int n) 
+{ 
+   int idx; 
+   int arr1[n] = {0}; 
+   int arr2[n]; 
+   
+   for (idx=0; idx<n; idx++) 
+       arr2[idx] = 0;     
+} 
+   
+int main() 
+{ 
+   fun(4); 
+   return 0; 
+} 
+
+(A) Definition of both arr1 and arr2 is incorrect because variable is used to specify the size of array. That’s why compile error.
+(B) Apart from definition of arr1 arr2, initialization of arr1 is also incorrect. arr1 can’t be initialized due to its size being specified as variable. That’s why compile error.
+(C) Initialization of arr1 is incorrect. arr1 can’t be initialized due to its size being specified as variable. That’s why compile error.
+(D) No compile error. The program would define and initializes both arrays to ZERO.
+
+
+Answer: (C)
+
+Explanation: 
+
+There’s no issue with definition of arr1 and arr2.
+In definition of these arrays, the mention of array size using variable is ok as per C standard but these types of arrays can’t be initialized at the time of definition. 
+That’s why initialization of arr1 is incorrect. 
+But initialization of arr2 is done correctly. Right answer is C.
+
+
+
+
+4)
+
+Output of following program under the assumption that numbers are stored in 2’s complement form.
+
+#include<stdio.h> 
+int main() 
+{ 
+   printf("%c\n", ~('C' * -1)); 
+   return 0; 
+} 
+
+(A) B
+(B) A
+(C) Compiler Error
+(D) C
+
+
+Answer: (A)
+
+Explanation: executed without any error or warning messages and the output for the above code is
+‘B’
+The above program processes as below
+Step 1:
+First (‘C’ *-1) is processed
+ASCII value of ‘C’ is 67 and it is multiplied with -1 as
+67 * (-1) = -67
+Step 2:
+The binary representation of -67 is 10111101
+The bitwise negation of 10111101 becomes (01000010 ) 2 = (66) 10
+Step 3:
+66 is the ASCII value of ‘B’
+So ~(‘C’*-1) = 66 and so the output of the above the program is B
+
+
+
+5)
+
+The seven elements A, B, C, D, E, F and G are pushed onto a stack in reverse order, i.e., starting from G. 
+The stack is popped five times and each element is inserted into a queue.
+Two elements are deleted from the queue and pushed back onto the stack. Now, one element is popped from the stack. 
+The popped item is ________.
+
+(A) A
+(B) B
+(C) F
+(D) G
+
+
+Answer: (B)
+
+
+
+6)
+
+While inserting the elements 71, 65, 84, 69, 67, 83 in an empty binary search tree (BST) in the sequence shown, the element in the lowest level is
+
+(A) 65
+(B) 67
+(C) 69
+(D) 83
+
+
+Answer: (B)
+
+
+
+7)
+
+Given:
+
+1. public class TestObj {
+2. public static void main(String[] args) {
+3. Object o = new Object() {
+4. public boolean equals(Object obj) {
+5. return true;
+6. }
+7. }
+8. System.out.println(o.equals("Fred"));
+9. }
+10. }
+
+What is the result?
+
+A. An exception occurs at runtime
+B. true
+C. fred
+D. Compilation fails because of an error on line 3
+E. Compilation fails because of an error on line 4
+F. Compilation fails because of an error on line 8
+G. Compilation fails because of an error on a line other than 3, 4, or 8
+
+
+Answer:
+G. This code would be legal if line 7 ended with a semicolon. Remember that line 3 is a
+statement that doesn't end until line 7, and a statement needs a closing semicolon!
+
+A, B, C, D, E, and F are incorrect based on the program logic described above. 
+If the semicolon were added at line 7, then answer B would be correct—
+the program would print true, the return from the equals() method overridden by the anonymous subclass of Object.
+
+
+
+8)
+
+Given:
+1. public class HorseTest {
+2. public static void main(String[] args) {
+3. class Horse {
+4. public String name;
+5. public Horse(String s) {
+6. name = s;
+7. }
+8. }
+9. Object obj = new Horse("Zippo");
+10. System.out.println(obj.name);
+11. }
+12. }
+
+
+What is the result?
+
+A. An exception occurs at runtime at line 10
+B. Zippo
+C. Compilation fails because of an error on line 3
+D. Compilation fails because of an error on line 9
+E. Compilation fails because of an error on line 10
+
+Answer : E.
+
+If you use a reference variable of type Object, you can access only those members defined in class Object.
+
+
+
+
+9)
+
+Given:
+3. class MyThread extends Thread {
+4. public static void main(String [] args) {
+5. MyThread t = new MyThread();
+6. Thread x = new Thread(t);
+7. x.start();
+8. }
+9. public void run() {
+10. for(int i=0;i<3;++i) {
+11. System.out.print(i + "..");
+12. } } }
+
+
+What is the result of this code?
+A. Compilation fails
+B. 1..2..3..
+C. 0..1..2..3..
+D. 0..1..2..
+E. An exception occurs at runtime
+
+Answer:
+
+D is correct. The thread MyThread will start and loop three times (from 0 to 2).
+
+A is incorrect because the Thread class implements the Runnable interface; 
+therefore, in line 5, Thread can take an object of type Thread as an argument in the constructor (this is NOT recommended). 
+B and C are incorrect because the variable i in the for loop starts with a value of 0 and ends with a value of 2. 
+E is incorrect based on the above.
+
+
+10)
+
+
+Which of the following sorting algorithms in its typical implementation gives best performance when applied on an array 
+which is sorted or almost sorted (maximum 1 or two elements are misplaced).
+
+
+(A) Quick Sort
+(B) Heap Sort
+(C) Merge Sort
+(D) Insertion Sort
+
+
+Answer: (D)
+
+Explanation: Insertion sort takes linear time when input array is sorted or almost sorted (maximum 1 or 2 elements are misplaced).
+

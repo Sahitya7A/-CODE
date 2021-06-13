@@ -1,0 +1,51 @@
+Leela wants to win every time. 
+She will be given a pair of Integers(a,b), Which are Positive Prime numbers. 
+
+A prime number is an integer greater than 1 that has no positive divisors 
+other than 1 and itself.
+
+-Their absolute difference is exactly equal to  2     [|b-a|=2].
+
+She will be given a range of integers (i,j) Both Inclusive 
+Help Leela find such pairs which are in the range(i,j)
+
+Note that pairs (a,b) and (b,a) are considered to be the same pair.
+
+Print 0 if no such pairs exists
+
+Sample Test Case
+input = 3 13
+output = 3
+
+Explanation1:
+There are three pairs of twins: (3,5),(5,7) and (11,13).
+
+Ramesh is given a task to find the 
+number of valid brackets for a given length 'n'
+
+input = 2
+output = 1 
+
+Explanation 
+There is only possible valid brackets of length 2, "[]"
+
+input = 4
+output = 2 
+
+Explanation 
+Possible valid brakets of length 4 are "[[]]" and "[][]" 
+
+input = 6
+output = 5
+
+Explanation 
+Possible valid brackets are [[[]]], [][[]], [][][], [[]][] and [[][]]
+
+
+input = 1
+output = 0
+
+Explanation 
+Possible valid expressions with legth 1 is 0.
+
+If input(n<0) print 0

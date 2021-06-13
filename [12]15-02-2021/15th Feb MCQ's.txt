@@ -1,0 +1,330 @@
+1) How many compiler errors are in the following code?
+1: public class RopeSwing {
+2: private static final String leftRope;
+3: private static final String rightRope;
+4: private static final String bench;
+5: private static final String name = "name";
+6: static {
+7: leftRope = "left";
+8: rightRope = "right";
+9: }
+10: static {
+11: name = "name";
+12: rightRope = "right";
+13: }
+14: public static void main(String[] args) {
+15: bench = "bench";
+16: }
+17: }
+Select one:
+
+a. 4
+b. 0
+c. 1
+d. 2
+e. 3
+
+
+
+
+
+
+
+
+
+
+Explanation:
+---------------
+static final variables must be set exactly once, and it must be in the declaration
+line or in a static initialization block. Line 4 doesn’t compile because bench is not set
+in either of these locations. Line 15 doesn’t compile because final variables are not
+allowed to be set after that point. Line 11 doesn’t compile because name is set twice:
+once in the declaration and again in the static block. Line 12 doesn’t compile because
+rightRope is set twice as well. Both are in static initialization blocks.
+
+Ans-a
+
+2) Which of the following can replace line 2 to make this code compile? (Choose all that apply)
+
+1: import java.util.*;
+2: // INSERT CODE HERE
+3: public class Imports {
+4: public void method(ArrayList<String> list) {
+5: sort(list);
+6: }
+7: }
+
+Select one:
+a. import static java.util.Collections.sort(ArrayList<String>);
+b. static import java.util.Collections.sort(ArrayList<String>);
+c. static import java.util.Collections.*;
+d. import static java.util.Collections.*;
+e. import static java.util.Collections;
+f. static import java.util.Collections;
+
+
+
+
+
+
+
+Explanation:
+---------------
+The two valid ways to do this are import static java.util.Collections.*; and
+import static java.util.Collections.sort;. Option A is incorrect because you
+can only do a static import on static members. Classes such as Collections require
+a regular import. Option C is nonsense as method parameters have no business in
+an import. Options D, E, and F try to trick you into reversing the syntax of import
+static.
+
+
+Ans-d
+
+
+3)What is the result of the following program?
+1: public class Squares {
+2: public static long square(int x) {
+3: long y = x * (long) x;
+4: x = -1;
+5: return y;
+6: }
+7: public static void main(String[] args) {
+8: int value = 9;
+9: long result = square(value);
+10: System.out.println(value);
+11: } }
+
+Select one:
+
+a. Compiler error on a different line.
+b. -1
+c. 81
+d. 9 
+
+
+
+
+
+Explanation:
+---------------
+Since Java is pass-by-value and the variable on line 8 never gets reassigned, it stays
+as 9. In the method square, x starts as 9. y becomes 81 and then x gets set to –1. Lin e 9
+does set result to 81. However, we are printing out value and that is still 9.
+e. Compiler error on line 9.
+
+Ans-d
+
+4)
+
+Which of the following compile? (Choose all that apply)
+
+Select one or more:
+
+a. public void moreA(int... nums) {}
+b. public void moreB(String values, int... nums) {}
+c. public void moreC(int... nums, String values) {}
+d. public void moreD(String... values, int... nums) {}
+e. public void moreE(String[] values, ...int nums) {}
+f. public void moreF(String... values, int[] nums) {}
+g. public void moreG(String[] values, int[] nums) {}
+
+
+
+
+
+
+
+Options A and B are correct because the single vararg parameter is the last parameter declared. 
+Option G is correct because it doesn’t use any vararg parameters at all. 
+Options C and F are incorrect because the vararg parameter is not last. 
+Option D is incorrect because two vararg parameters are not allowed in the same method.
+Option E is incorrect because the ... for a vararg must be after the type, not before i t.
+
+
+
+
+
+Ans-a,b,g
+
+5)Given the following method, which of the method calls return 2? (Choose all that apply)
+
+public int howMany(boolean b, boolean... b2) {
+return b2.length;
+}
+Select one or more:
+a. howMany(true, new boolean[2]);
+b. howMany(true, true, true);
+c. howMany(true);
+d. howMany(true, {true});
+e. howMany();
+f. howMany(true, true);
+g. howMany(true, {true, true});
+
+
+
+
+
+
+
+Ans-a,b
+
+Option D passes the initial parameter plus two more to turn into a vararg array of size 2. 
+Option G passes the initial parameter plus an array of size 2. 
+Option A does not compile because it does not pass the initial parameter. 
+Options E and F do not compile because they do not declare an array properly. 
+It should be new boolean[] {true}. 
+Option B creates a vararg array of size 0 and option C creates a vararg arra y of size 1.
+
+6)
+
+What is the output of the following code?
+1: package rope;
+2: public class Rope {
+3: public static int LENGTH = 5;
+4: static {
+5: LENGTH = 10;
+6: }
+7: public static void swing() {
+8: System.out.print("swing ");
+9: }
+10: }
+
+
+1: import rope.*;
+2: import static rope.Rope.*;
+3: public class Chimp {
+4: public static void main(String[] args) {
+5: Rope.swing();
+6: new Rope().swing();
+7: System.out.println(LENGTH);
+8: }
+9: }
+
+
+
+Select one or more:
+a. Compiler error on line 6 of Chimp.
+b. Compiler error on line 7 of Chimp.
+c. swing swing 10
+d. swing swing 5
+e. Compiler error on line 2 of Chimp.
+
+
+
+
+
+Ans-c
+
+Rope runs line 3, setting LENGTH to 5, then immediately after runs the static initializer,which sets it to 10. 
+Line 5 calls the static method normally and prints swing.
+Line 6 also calls the static method. Java allows calling a static method through an instance variable. 
+Line 7 uses the static import on line 2 to reference LENGTH.
+
+7) What will be the output of the following C code?
+
+#include <stdio.h>
+void main()
+{
+    int x = 1, y = 0, z = 5;
+    int a = x && y || z++;
+    printf("%d", z);
+}
+
+a) 6
+b) 5
+c) 0
+d) Varies
+
+
+
+
+
+
+
+Ans-a
+
+8)
+#include‹stdio.h› 
+int main() 
+{ 
+    struct site 
+    { 
+        char name[] = "Hello"; 
+        int no_of_pages = 200; 
+    }; 
+    struct site *ptr; 
+    printf("%d",ptr->no_of_pages); 
+    printf("%s",ptr->name);  
+    return 0; 
+} 
+
+
+A) 200Hello
+B) Compilation error
+C) Segmentation fault
+D) 200GarbageValue
+
+
+
+
+
+
+
+Ans-B
+
+9)
+#include <stdio.h> 
+#define Zemoso 100 
+int main() 
+{ 
+#define Zemoso 100 
+    printf("%d", Zemoso); 
+    return (0); 
+} 
+
+A. 100
+B. compile error
+C. No output
+D. abnormal termination
+
+
+
+
+
+
+
+
+
+Ans-A
+
+10)
+
+
+#include <stdio.h> 
+int main() 
+{ 
+    for (5; 2; 2) 
+        printf("Hello\n"); 
+    return 0; 
+} 
+
+
+
+a) compilation error
+b) Hello
+c) infinite loop
+d) none of the above
+
+
+
+
+
+
+
+
+
+
+ans: c
+
+
+

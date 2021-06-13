@@ -1,0 +1,269 @@
+1) What is the output of the following java code 
+
+package pet;
+
+public class Puppy {
+public static int wag = 5; // Line A
+public void Puppy(int wag) { // Line B
+this.wag = wag;
+}
+
+public static void main(String[] tail) {
+System.out.print(new Puppy(2).wag); // Line C
+}
+}
+
+
+A) 2
+B) It does not compile because of line Line A
+C) It does not compile because of line Line B
+D) It does not compile because of line Line C
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ans-D
+
+2)  What is the output of the following java code ?
+
+package transport;
+
+class Ship {
+	protected int weight = 3;
+	private int height = 5;
+	public int getWeight() { return weight; }
+	public int getHeight() { return height; }
+}
+
+public class Rocket extends Ship {
+	public int weight = 2;
+	public int height = 4;
+	public void printDetails() {
+		System.out.print(super.getWeight()+","+super.height);
+	}
+
+	public static final void main(String[] fuel) {
+		new Rocket().printDetails();
+	}
+}
+
+A) 2,5
+B) 3,4
+C) 3,5
+D) Compilation fails
+
+
+
+
+
+
+
+
+Ans-D
+
+3) what is the output of the following code 
+
+class Base
+{ 
+    public Integer getLength() 
+    {
+        return new Integer(4); 
+    } 
+} 
+
+public class Derived  extends Base
+{ 
+    public Long getLength() 
+    {
+        return new Long(5); 
+    } 
+
+    public static void main(String[] args) 
+    { 
+        Base sooper = new Base(); 
+        Derived sub = new Derived(); 
+      System.out.println(sooper.getLength().toString() + "," + sub.getLength().toString() ); 
+    } 
+}
+
+
+A. 4, 4
+B. 4, 5
+C. 5, 4
+D. Compilation fails.
+
+
+
+
+
+Ans - D
+
+4) Which two are true? (Choose two.)
+
+A. A finalizer may NOT be invoked explicitly.
+B. The finalize method declared in class Object takes no action.
+C. super.finalize() is called implicitly by any overriding finalize method.
+D. The finalize method for a given object will be called no more than once by the garbage collector.
+E. The order in which finalize will be called on two objects is based on the order in which the two objects became finalizable.
+
+
+
+
+
+
+
+
+Ans- B, D
+
+5)
+
+    SELECT emp_name  
+    FROM department  
+    WHERE dept_name LIKE ' _____ Computer Science';  
+
+In the above-given Query, which of the following can be placed in the Query's blank portion to 
+select the "dept_name" that also contains  Computer Science as its ending string?
+
+A) &
+B) _
+C) %
+D) $
+
+
+
+
+
+Ans-C
+
+6) _________ produces the relation that has attributes of R1 and R2
+
+A) Cartesian product
+B) Difference
+C) Intersection
+D) Product
+
+
+
+
+
+Ans-A
+
+7) 
+#include<stdio.h>
+int main() 
+{ 
+    unsigned char counter = 0; 
+    for (counter = 0; counter < 255; counter++); { 
+        printf("%d ", counter); 
+    } 
+    return 0; 
+} 
+
+
+
+A) Prints 0 to 255 Infinite times
+B) Prints 0 to 254
+C) compilation fails
+D) None of these
+
+
+
+
+
+Ans-D
+Prints 255 
+
+8)
+#include<stdio.h>
+int main() 
+{ 
+    int count; 
+    for (count = 0; count < 10; ++count) { 
+        printf("*"); 
+        if (count > 5) 
+            continue; 
+        printf("%d", count); 
+    } 
+    return 0; 
+} 
+
+A) *0*1*2*3*4*6*7*8*9*
+B) *0*1*2*3*4*5****
+C) *0*1*2*3*4*6*7*8*9
+D) *0*1*2*3*4*5*6*7*8*9*
+
+
+
+
+
+Ans-B
+
+9)
+
+#include<stdio.h> 
+  
+void display(int s, ...) 
+{ 
+    printf("%d ", s); 
+} 
+  
+int main() 
+{ 
+    display(2, 4, 6, 8); 
+    display(3, 6, 9); 
+    return 0; 
+} 
+
+(A) 2 3
+(B) Compiler Error
+(C) 4 3
+(D) 3 2
+
+
+
+
+
+
+Ans - A
+
+10) 
+#include <stdio.h> 
+int main(void) 
+{ 
+    int val = 'dd'; 
+    printf("%d",val); 
+    return 0; 
+} 
+
+
+A) 100100
+B) 200
+C) 25700
+D) Compilation fails
+
+
+Ans-C
+
+100 is ASCII value of character ‘d’.
+
+Let us consider below line
+
+int val = 'dd' 
+
+(%d, a) prints 25700 as output
+01100100 01100100 (Binary of 100 100)
+Assuming int is of 2 bytes, starting byte is occupied by first character ‘d’ and second byte by second character ‘d’.
+Therefore overall binary involves 0110010001100100 i.e 2^14 + 2^13 + 2^10 + 2^6 + 2^5 + 2^2 = 25700.
+

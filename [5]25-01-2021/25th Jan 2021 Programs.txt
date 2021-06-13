@@ -1,0 +1,350 @@
+Program-1
+
+write a program to read a postive input 'n' from the user and print the following pattern 
+
+Assume the input 'n' will always be a postive integer 
+
+input = 5
+output = 
+A*1
+B*C*3*2
+D*E*F*6*5*4
+G*H*I*J*10*9*8*7
+K*L*M*N*O*15*14*13*12*11
+ 
+Note - If in the above pattern if the alphabet exceed 'Z' then start print again from 'A'
+
+
+
+
+
+
+ import java.util.*;
+ class Test{
+     public static void main (String[] args) {
+         Scanner sc=new Scanner(System.in);
+         int n=sc.nextInt();
+         char c=65;
+         int l=1;
+         int t=1;
+         for(int i=1;i<=n;i++){
+             for(int j=0;j<i;j++){
+                 if(c==91)
+                 c=65;
+                 System.out.print(c+"*");
+                 c++;
+             }
+             if(i==1)
+                 System.out.print(l);
+             else{
+                 l=l+i;
+                 t=l;
+                 for(int k=0;k<i;k++){
+                     if(k==i-1)
+                     System.out.print(l);
+                     else
+                     System.out.print(l+"*");
+                     l--;
+                 }
+             }
+             l=t;
+             System.out.println();
+         }
+     }
+ }
+
+
+back end test cases
+
+ case = 1
+input = 5
+output =
+A*1
+B*C*3*2
+D*E*F*6*5*4
+G*H*I*J*10*9*8*7
+K*L*M*N*O*15*14*13*12*11
+
+case = 2
+input = 6
+output =
+A*1
+B*C*3*2
+D*E*F*6*5*4
+G*H*I*J*10*9*8*7
+K*L*M*N*O*15*14*13*12*11
+P*Q*R*S*T*U*21*20*19*18*17*16
+
+case = 3
+input = 7
+output =
+A*1
+B*C*3*2
+D*E*F*6*5*4
+G*H*I*J*10*9*8*7
+K*L*M*N*O*15*14*13*12*11
+P*Q*R*S*T*U*21*20*19*18*17*16
+V*W*X*Y*Z*A*B*28*27*26*25*24*23*22
+
+case = 4
+input = 1
+output =
+A*1
+
+case = 5
+input = 12
+output =
+A*1
+B*C*3*2
+D*E*F*6*5*4
+G*H*I*J*10*9*8*7
+K*L*M*N*O*15*14*13*12*11
+P*Q*R*S*T*U*21*20*19*18*17*16
+V*W*X*Y*Z*A*B*28*27*26*25*24*23*22
+C*D*E*F*G*H*I*J*36*35*34*33*32*31*30*29
+K*L*M*N*O*P*Q*R*S*45*44*43*42*41*40*39*38*37
+T*U*V*W*X*Y*Z*A*B*C*55*54*53*52*51*50*49*48*47*46
+D*E*F*G*H*I*J*K*L*M*N*66*65*64*63*62*61*60*59*58*57*56
+O*P*Q*R*S*T*U*V*W*X*Y*Z*78*77*76*75*74*73*72*71*70*69*68*67
+
+
+case = 6
+input = 15
+output = 
+A*1
+B*C*3*2
+D*E*F*6*5*4
+G*H*I*J*10*9*8*7
+K*L*M*N*O*15*14*13*12*11
+P*Q*R*S*T*U*21*20*19*18*17*16
+V*W*X*Y*Z*A*B*28*27*26*25*24*23*22
+C*D*E*F*G*H*I*J*36*35*34*33*32*31*30*29
+K*L*M*N*O*P*Q*R*S*45*44*43*42*41*40*39*38*37
+T*U*V*W*X*Y*Z*A*B*C*55*54*53*52*51*50*49*48*47*46
+D*E*F*G*H*I*J*K*L*M*N*66*65*64*63*62*61*60*59*58*57*56
+O*P*Q*R*S*T*U*V*W*X*Y*Z*78*77*76*75*74*73*72*71*70*69*68*67
+A*B*C*D*E*F*G*H*I*J*K*L*M*91*90*89*88*87*86*85*84*83*82*81*80*79
+N*O*P*Q*R*S*T*U*V*W*X*Y*Z*A*105*104*103*102*101*100*99*98*97*96*95*94*93*92
+B*C*D*E*F*G*H*I*J*K*L*M*N*O*P*120*119*118*117*116*115*114*113*112*111*110*109*108*107*106
+
+
+
+
+
+Program-2
+
+Write a java program to read a word as input and returns another string as output, 
+such that , a vowel in the input string will be de denoted by upper case letter ‘V’ and a 
+consonant in the input string will be denoted by upper case letter ‘C’. 
+
+Note - The output will contain a word containing alternating sequence of ‘C’ and ‘V’.
+It is not permissible to have two or more consecutive V or C in Sequence.
+Assume the Input String will contain only lower and upper case alphabets 
+
+input = hello 
+output = CVCV
+
+Explanation - When we convert the above  "hello" we have CVCCV 
+but for the output It is not permissible to have two or more consecutive V or C in Sequence.
+so CVCCV changes to CVCV 
+
+
+Sample Test Cases 
+
+input = aeibo
+output = VCV
+
+input = Whereabouts
+output = CVCVCVC
+             
+input = aeiou
+output = V
+
+input = BCDEFGIIKL
+output = CVCVC
+
+input = aeiOUabCdEfg
+output = VCVC
+
+
+*/
+
+          class Test{
+        public static void main(String args[]){
+            	Scanner sc = new Scanner(System.in);
+            String s=sc.next();
+            printCV(s);
+        }
+        static void printCV(String s){
+            String st="";
+            if(isVowel(s.charAt(0)))
+                st=st+"V";
+            else
+                st=st+"C";
+            for(int i=1;i<s.length();i++){
+                s=s.toLowerCase();
+                if(isVowel(s.charAt(i))){
+                   if(st.charAt(st.length()-1)=='C')
+                        st=st+'V';
+                }
+                else{
+                if(isVowel(s.charAt(i))==false){
+                    if(st.charAt(st.length()-1)=='V')
+                        st=st+'C';
+			
+                    }
+                }
+            }
+            System.out.println(st);
+        }
+        static boolean isVowel(char c){
+            if(c=='a'||c=='e'||c=='i'||c=='o'||c=='u')
+                return true;
+            else
+                return false;
+        }
+   }
+
+case = 1
+input = liril
+output = CVCVC
+
+case = 2
+input = apple
+output = VCV 
+
+case = 3
+input = BCDEFGIIKL
+output = CVCVC
+
+case = 4
+input =aeiOUabCdEfg
+output = VCVC
+
+
+case = 5
+input = AEiouB
+output = VC
+
+case = 6
+input = BCDE
+output = CV
+
+
+
+Program-3
+
+
+/*
+You are given a list of N integers List[], list contains both +ve and -ve integers.
+Your task is to findout, the Highest Product possible,
+Where the product is the product of all the elements of contiguous sublist sList[],
+and sub list should conatin atleast 1 integer.
+
+Input Format:
+-------------
+Line-1: An integer N.
+Line-2: N space separated integers, List[].
+
+Output Format:
+--------------
+Print an integer output, the highest product.
+
+Sample Input-1:
+---------------
+4
+2 3 -2 4
+
+Sample Output-1:
+----------------
+6
+
+Explanation:
+------------
+Product of contiguous sub list [2,3].
+
+
+Sample Input-2:
+---------------
+3
+-2 0 -3
+
+Sample Output-2:
+----------------
+0
+
+Explanation:
+------------
+Product of sub list [0], where [-2,-3] is not a contiguous sublist
+
+back end test cases
+case =1
+input =4
+2 3 -2 4
+output =6
+
+case =2
+input =3
+-2 0 -3
+output =0
+
+case =3
+input =5
+-4 2 -3 4 -5
+output =120
+
+case =4
+input =15
+-6 -15 20 -2 9 -11 7 -15 -3 14 -18 2 -15 -9 12
+output =1773739072
+
+case =5
+input =15
+4 3 7 -1 0 -9 5 3 -7 8 -6 1 -3 3 -9
+output =408240
+
+case =6
+input =10
+-1 -2 4 5 0 -3 -2 -4 6 3
+output =144
+
+
+
+*/
+
+import java.util.*;
+
+class MaxProduct {
+    public int maxProduct(int[] nums) {
+        if (nums.length == 0) 
+			return 0;
+        int max_so_far = nums[0];
+        int min_so_far = nums[0];
+        int result = max_so_far;
+
+        for (int i = 1; i < nums.length; i++) {
+            int curr = nums[i];
+            int temp_max = Math.max(curr, Math.max(max_so_far * curr, min_so_far * curr));
+            min_so_far = Math.min(curr, Math.min(max_so_far * curr, min_so_far * curr));
+
+            max_so_far = temp_max;
+            result = Math.max(max_so_far, result);
+        }
+        return result;
+    }
+	
+	public static void main(String args[])
+	{
+		Scanner sc=new Scanner(System.in);
+		int n=sc.nextInt();
+		int nums[]=new int[n];
+		for(int i=0;i<n;i++)
+			nums[i]=sc.nextInt();
+		System.out.println(new MaxProduct().maxProduct(nums));		
+	}
+}
+
+
+
+
+

@@ -1,0 +1,87 @@
+There are set of empty tanks. Initially all the tanks are empty.
+We have K taps numbered from 0 to K-1, arranged in a row from left to right.
+Initially all the taps are turned off.
+
+Our aim is to create a method to get a target tanks to be filled, such a way rollover the state of tap.
+
+State 1: tap is ON
+State 2: tap is OFF
+
+Rollover operation is as follow:
+
+Choose any tap (location i) of your current state.
+Flip each tap from index i to n-1.
+When any tap is rollover it means that if it is 0 it rollovers to 1 and if it is 1 it rollovers to 0.
+Return the minimum number of rollovers required to form target tanks to be filled.
+
+Input: target = "10111"
+Output: 3
+
+Explanation: Initial  "00000".
+
+Rollover from third tap:  "00000" -> "00111"
+
+Rollover from first tap:  "00111" -> "11000"
+
+Rollover from second tap:  "11000" -> "10111"
+
+We need at least 3 Rollover operations to form target.
+Sridhar brought his latest Apple iPhone 12 pro.
+He started his conversation with one of his friend on WhatsApp with list of words.
+Now it’s our aim to write a method to return what are the most common words in the list of words
+he used in sorted order based on occurrence from largest to smallest.
+
+If any of words he used are having same occurrence then consider the smallest character order comes first 
+Example 1:
+
+input = the day is sunny the the the sunny is is
+4
+output =the is sunny day
+
+Explanation: "the", "is", "sunny" and "day" are the four most frequent words,
+with the number of occurrence being 4, 3, 2 and 1 respectively.
+
+
+input = today is fine tomorrow is fine everyday is fine
+3
+output = fine is everyday
+
+
+input = i love c i love java i love cpp i love python i love programming
+5
+output = i love c cpp java
+
+
+Note:
+You may assume k is always valid, 1 ≤ k ≤ number of unique elements.
+Input words contain only lowercase letters.
+
+Ramu is very much intrested in playing with strings 
+some times he want to print all duplicate characters of the string and 
+some times he want to print the distinct characters of the string 
+
+Can you help him, solving the problem by the option selected by ramu
+
+if option  1 is choosen print distinct characters 
+if option  2 is choosen print duplicate characters.
+
+the order of characters printing in the output should be the order they occur in the string 
+
+if the string doen't contain duplicate characters and option choosen is 2 print -1 
+
+
+input = hello
+1
+output = helo
+
+input = datascience
+1
+output = datscien
+
+input = abcabd
+2
+output = ab
+
+input = abcd
+2
+output = -1

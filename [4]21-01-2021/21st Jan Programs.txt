@@ -1,0 +1,338 @@
+Program1
+
+ Given a group of word/words and number of rows 'n'. 
+ write it as shown in the test cases 
+
+
+Sample Test Case - 1
+input = THURSDAY
+2
+output = TUSAHRDY
+
+
+Explanation: Write the word in 2 rows
+
+T   U   S   A
+  H    R   D   Y
+
+
+the word formed is TUSAHRDY
+
+Sample Test Case - 2
+input = system
+3
+output = seytms
+
+Explanation: write the given word in 3 rows 
+s         e
+  y    t    m
+     s
+
+the word is seytms
+
+
+Sample Test Case-3
+input =this is good
+2
+ti sgohsi od
+
+t   i         s    g   o
+  h   s    i         o   d
+
+Explanation:
+
+ od (We have one space in row-1 and another space in row-2) 
+
+
+
+
+
+back end test cases 
+
+case = 1
+input = hello
+1
+output = hello
+
+case = 2
+input = system
+2
+output = sseytm
+
+case = 3
+input = abcdefghijklmnopqrstuvwxyz
+5
+output = aiqybhjprxzcgkoswdflntvemu
+
+case = 4
+input = hellowelcome
+5
+output = hcelolemlweo
+
+
+case = 5
+input =computer is powerful in reallife
+3
+output = cu pr rloptri oefli eliemeswunaf
+
+case = 6
+input =this is good
+3
+output =t ghsi odiso
+
+
+import java.util.*;
+class Test { 
+public  static void print(String str, int n) 
+	{ 
+      	StringBuilder[] a = new StringBuilder[n]; 
+         		for(int i=0;i<n;i++)
+					a[i]=new StringBuilder();
+
+		int r = 0; 
+		
+		boolean nextLine = true;
+		
+		for (int i = 0; i < str.length() ; i++) 
+		{ 
+			a[r].append(""+str.charAt(i));
+			
+			if (r == 0) 
+				nextLine = true; 
+			else if (r == n-1) 
+			 	nextLine = false; 
+			
+          if (nextLine) 
+               r++; 
+          else 
+               r--; 
+       } 
+			for (StringBuilder s : a)
+			System.out.print(s.toString()); 
+   } 
+
+	public static void main(String[] args) 
+	{ 
+		Scanner sc = new Scanner(System.in);
+		String str = sc.nextLine();
+		int n = sc.nextInt();
+		if (n != 1) 
+			print(str, n); 
+		else
+			System.out.print(str); 
+	} 
+} 
+
+
+
+
+Program-2
+
+Ramu has given a task to break his friends code 
+he will given all lower case alphabets  and code as the input 
+Ramu has to figure the text from the code and display the text 
+
+Input - The first line of input consists of lower case alphabets 
+and code 
+
+The first alphabet letter will given 01, second alphabet will be given 02, and so on 
+
+Output - Break the code and display the string 
+
+
+Sample Test Case - 1 
+input =abcdefghijklmnopqrstuvwxyz
+110525
+output = key
+
+
+Explantion - 
+From the above test case we have 'a' has '01', 'b' has '02', and finally 'z' has '26' 
+where each alphabet will be assigned a two digit number 
+and for the code 110525 the characters will be 11 as 'k', 05 as 'e' and 25 as 'y' 
+so the output is "key" 
+
+Sample Test Case - 2
+input =
+qpwoeirutyalskdjfhgzmxncbv
+131013090521
+output = system
+
+
+Explantion - From the above test case we have 'q' as '01' , 'p' as '02' and finally 'v' as '26'
+and for the code 131013090521 we have the following code 
+13-s
+10-y
+13-s
+09-t
+05-e
+21-m
+
+so the output is system
+
+
+*/
+
+import java.util.*;
+class Test {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+     String str = sc.next(); 
+      char sArr[] = str.toCharArray();
+      String code = sc.next();
+      StringBuilder text = new StringBuilder();
+      for (int i=0; i<code.length(); i = i+2) {
+        Integer num = Integer.parseInt(code.substring(i,i+2));
+        text.append(sArr[num-1]);
+	  }
+      System.out.println(text.toString());
+    }
+  }
+
+
+back end test case 
+
+case = 1
+input = abcdefghijklmnopqrstuvwxyz
+20051920
+output = test
+
+case = 2
+input = faxmswrpnqdbygcthuvkojizle
+02170308060416192402
+output = ahxpwmtvza
+
+case = 3
+input =zmxncbvalskdjfhgqwertpoiuy
+0822220919
+output = apple
+
+case = 4
+input = abcdefghijklmnopqrstuvwxyz
+26252423212019181716151413121110090807060504030201
+output = zyxwutsrqponmlkjihgfedcba
+
+case = 5
+input = qazxswedcvfrtgbnhyujmikolp
+090703102622
+output = cezvpi
+
+case = 6
+input = plokmijnuhbygvtfcrdxeszwaq
+11020519240307
+output = blmdwoj
+
+
+
+
+
+Program-3
+
+Ananth interested in creating the acronyms for any word.
+The definition of acronym is another word with a concatenation of its first letter,
+ the number of letters between the first and last letter, and its last letter. 
+ 
+ If a word has only two characters, then it is an acronym of itself.
+ 
+ Examples:
+	- Acronym of 'dog' is 'd1g'.
+	- Acronym of 'another' is 'a5r'.
+	- Acronym of 'ab' is 'ab'.
+
+You are given a list of vocabulary, and another list of words.
+Your task is to check is word with the vocabulary and
+return "true" if atleast one of the following rules satisfied:
+	1. acronym of the word should not match with any of the acronyms of vocabulary
+	2. if acronym of the word matches with any of the acronyms of vocabulary
+	'the word' and matching words in vocabulary should be same.
+Otherwise, return 'false'.
+
+Input Format:
+-------------
+Line-1: Space separated strings, vocabulary[] 
+Line-2: Space separated strings, words[] 
+
+Output Format:
+--------------
+Print N boolean values, where N = words.length. 
+
+
+Sample Input-1:
+---------------
+cool bell cool coir move more mike
+cool char move 
+
+Sample Output-1:
+----------------
+true false false
+
+
+
+case =1
+input =deer door cake card
+dear cart cane make
+output =false true false true
+
+case =2
+input =cool bell cool coir move more mike
+cool char move 
+output =true false false
+
+case =3
+input =deer door cake card cool bell cool coir move more mike
+cool char move dear cart cane make
+output =true false false false true false false
+
+case =4
+input =deer door cake card cool bell cool coir move more mike monk masi mari mure musc mact monk
+mark rock move more nike monk cool char move dear cart cane make
+output =false true false false true true true false false false true false false
+
+case =5
+input =avarice adaptor aviator admirer however hurdler hurrier
+axoneme avraice adaptor aviator howevee hurdler 
+output =false false false false true false
+
+case =6
+input =monk masi mark mure musc mact monk
+mark rock move more nike monk
+output =false true false false true false
+
+
+import java.util.*;
+
+public class ValidWordAbbr {
+	HashMap<String, String> map;
+	public ValidWordAbbr(String[] dictionary) {
+		map = new HashMap<String, String>();
+		for(String str:dictionary){
+			String key = getKey(str);
+			// If there is more than one string belong to the same key
+			// then the key will be invalid, we set the value to ""
+			if(map.containsKey(key) && !map.get(key).equals(str))
+				map.put(key, "");
+			else
+				map.put(key, str);
+		}
+	}
+
+	public boolean isUnique(String word) {
+		String key = getKey(word);
+		return !map.containsKey(key)||map.get(key).equals(word);
+	}
+
+	private String getKey(String str){
+		if(str.length()<=2) return str;
+		return str.charAt(0)+Integer.toString(str.length()-2)+str.charAt(str.length()-1);
+	}
+	
+	public static void main(String args[])
+	{
+		Scanner sc=new Scanner(System.in);
+		String dictionary[]=sc.nextLine().split(" ");
+		String words[]=sc.nextLine().split(" ");
+		ValidWordAbbr vwa=new ValidWordAbbr(dictionary);
+		for(String word:words)
+			System.out.print(vwa.isUnique(word)+" ");
+	}
+}
