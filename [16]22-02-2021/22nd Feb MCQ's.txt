@@ -1,0 +1,233 @@
+1) what is the output of the following C Code 
+#include<stdio.h>
+
+void main()
+{
+static int var=5;
+printf("%d",var--);
+if(var)
+main();
+}
+
+
+A) 5 5 5 5 5
+B) Prints 5 Infinite Times
+C) Compilation fails
+D) None of these
+E) 5 4 3 2 1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ans- E
+
+2) what is the output of the following code 
+
+#include<stdio.h>
+void main()
+{
+int x=10,y=20;
+x=((x>9) && y=30 ? printf("\n TRUE"):printf("\n FALSE"));
+printf("\n y = %d",y);
+}
+
+
+A)   FALSE
+        y=20
+B)	TRUE
+        y=30
+C)	Compilation Error
+D)	None of these
+
+
+
+
+
+Ans-C
+
+3) Code Reusability can be achieved through 
+
+A) Inheritance
+B) Polymorphism
+C) Encapsulation
+D) Abstraction
+
+
+
+
+
+
+Ans-A
+
+4)
+#include<stdio.h>
+void main(){
+int check=2;
+switch(check++){
+case 1: printf("D.W.Steyn");
+case 2: printf(" M.G.Johnson");
+case 3: printf(" Mohammad Asif");
+default: printf(" M.Muralidaran");
+     }
+}
+
+Choose all that apply:
+
+A)  M.G.Johnson
+B)  M.Muralidaran
+C)  M.G.Johnson Mohammad Asif M.Muralidaran
+D)  Compilation error  
+E)  None of the above
+
+
+
+
+
+
+
+
+Ans-C
+
+5)what is the output of the following code 
+
+#include<stdio.h>
+void main(){
+int movie=1;
+switch(movie<<2+movie){
+default:printf("3 Idiots");
+case 4: printf(" Ghajini");
+case 5: printf(" Krrish");
+case 8: printf(" Race");
+     } 
+}
+
+Choose all that apply:
+A) 3 Idiots GhajiniKrrish Race 	
+B) Race 	
+C) Krrish	
+D) GhajiniKrrish Race 	
+E) Compilation error
+
+
+
+
+
+
+
+
+Ans-B
+
+6) what is the output of the following java code 
+
+public class Main {
+public static void main(String[] args) {
+ long a=25L;
+ float b=25.0f;
+ if(a==b)
+     System.out.println(a+b);
+ else
+     System.out.println(b-a);      
+	}
+}
+
+A)	50.0
+B)	0.0
+C)	Run time error
+D)	Compiler error
+
+
+
+
+
+
+Ans-A
+
+7)
+
+public class Test {
+public static void main(String[] args) {
+	 int a=10;
+	 switch(a++){
+	case 10:
+		switch(a--){
+				 default:System.out.print("Exit");
+			 case 10:
+			 }
+		default:System.out.print(a);
+
+}
+}
+}
+
+
+A) 11
+B) 10
+C) Exit10
+D)Compiler error
+
+
+
+
+
+Ans-C
+
+8) With SQL, how do you select all the records from a table named "Persons" 
+where the value of the column "FirstName" is "Peter"?
+
+A)	SELECT * FROM Persons WHERE FirstName='Peter'
+B)	SELECT * FROM Persons WHERE FirstName<>'Peter'
+C)	SELECT [all] FROM Persons WHERE FirstName='Peter'
+D)	SELECT [all] FROM Persons WHERE FirstName LIKE 'Peter'
+
+
+
+
+
+Ans-A
+
+9) Which of the following statements is true for the following code snippet ? Assume ptr, head are appropriately declared and initialized 
+
+//free the nodes of a single linked list
+
+for(ptr =head;ptr!=NULL;ptr=ptr->next)
+ free(ptr);
+
+A)	This will free all the nodes of a single linked list
+B)	This will free the head node followed by undefined behavior
+C)	This will cause some memory leak but the program will run fine
+D)  This will free only first node of the linked list and terminate 
+
+
+
+
+
+
+Ans-B
+
+10)	A data structure where elements can be added or removed at either end but not in the middle
+
+A.	Linked lists
+B.	Stacks
+C.	Queues
+D.	Deque
+
+
+
+
+Ans : - D

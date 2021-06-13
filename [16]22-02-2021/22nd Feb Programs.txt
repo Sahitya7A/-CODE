@@ -1,0 +1,294 @@
+Program1
+
+
+Major Ajay Krishna and Prasad garu are working on a military operation at Himachal Pradesh. 
+
+They are given an operation to defuse the bomb, and they have time falling short.
+
+Their informer will provide them with a round-shape lock of length ‘L’, where L number of integers on the lock and a clue ‘C’.
+
+To defuse the bomb they have to restore the original state of the lock, by restoring every integer on lock. 
+
+All the integers must be restored in the same way based on the clue.
+
+
+Its your task to help Major Ajay Krishna, to restore the original code on the lock, to defuse the bomb.
+
+To restore the lock to its original state, you have to follow these instructions:
+	- If C > 0, restore every i-th  number with the sum of the next C integers.
+	- If C < 0, restore every i-th  number with the sum of the previous C integers.
+	- If C == 0, restore every i-th  number with 0.
+	
+As the lock is in round shape, the next element of lock[n-1] is lock[0], and the previous element of lock[0] is lock[n-1].
+
+
+Input Format:
+-------------
+Line-1: Two space separated integers L, C.
+Line-2: L space separated integers, integers on the Lock.
+
+Output Format:
+--------------
+Print the original state of the lock.
+
+
+Sample Input-1:
+---------------
+5 2
+2 5 9 4 7
+
+Sample Output-1:
+----------------
+14 13 11 9 7
+
+
+Sample Input-2:
+---------------
+5 0
+1 5 6 3 2
+
+Sample Output-2:
+----------------
+0 0 0 0 0
+
+
+back end test cases 
+
+case =1
+input =5 2
+2 5 9 4 7
+output =14 13 11 9 7
+
+case =2
+input =5 0
+1 5 6 3 2
+output = 0 0 0 0 0
+
+case =3
+input =4 -2
+2 4 9 3
+output =12 5 6 13
+
+case =4
+input =20 4
+23 25 24 18 6 12 12 31 23 11 33 35 25 27 16 29 23 14 26 16
+output =73 60 48 61 78 77 98 102 104 120 103 97 95 82 92 79 79 90 88 90
+
+
+
+import java.util.*;
+
+class Defuse {
+    public int[] decrypt(int[] code, int k) {
+        int[] res = new int[code.length];
+        if (k == 0) return res;
+        //Define the initial window and initial sum
+        int start = 1, end = k, sum = 0;
+        if (k < 0) {//If k < 0, the starting point will be end of the array.
+            k = -k;
+            start = code.length - k;
+            end = code.length - 1;
+        }
+        for (int i = start; i <= end; i++) sum += code[i];
+        //Scan through the code array as i moving to the right, update the window sum.
+        for (int i = 0; i < code.length; i++) {
+            res[i] = sum;
+            sum -= code[(start++) % code.length];
+            sum += code[(++end) % code.length];
+        }
+        return res;
+    }
+	
+	public static void main(String args[])
+	{
+		Scanner sc=new Scanner(System.in);
+		int n=sc.nextInt();
+		int k=sc.nextInt();
+		int code[]=new int[n];
+		for(int i=0;i<n;i++)
+			code[i]=sc.nextInt();
+		
+		System.out.println(Arrays.toString(new Defuse().decrypt(code, k)));
+	}
+}
+
+
+
+
+
+Program-2
+/*
+ * 
+ * 
+write a java program to return true if  the given array is monotone increasing array or monotone decreasing array.
+
+An array is monotone increasing array if for all i<=j ,a[i]<=a[j]
+An array is monotone decreasing array if for all i<=j ,a[i]>=a[j]
+
+return true if and only if the given array A is monotonic.
+
+Sample Input:
+1 2 2 3
+
+Sample Output:
+true
+
+Sample Input:
+1 3 2
+
+Sample Output:
+false
+
+ * 
+ */
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Arrays;
+
+public class MonotonicArray {
+
+	static boolean isMonotonic(int[] A) {
+		return increasing(A) || decreasing(A);
+	}
+
+	static boolean increasing(int[] A) {
+		for (int i = 0; i < A.length - 1; ++i)
+			if (A[i] > A[i + 1])
+				return false;
+		return true;
+	}
+
+	static boolean decreasing(int[] A) {
+		for (int i = 0; i < A.length - 1; ++i)
+			if (A[i] < A[i + 1])
+				return false;
+		return true;
+	}
+
+	public static void main(String args[]) throws IOException {
+
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+		String str = br.readLine();
+		String[] numbers = str.split(" ");
+		int[] givenArr = Arrays.asList(numbers).stream().mapToInt(Integer::parseInt).toArray();
+
+		if (isMonotonic(givenArr))
+			System.out.println("true");
+		else
+			System.out.println("false");
+	}
+}
+
+
+
+back end test cases
+case = 1
+input =1 2 2 4 5 1
+output = false
+
+case = 2
+input =8 8 7 7 6 5
+output = true
+
+case = 3
+input =1 2 3 4 5
+ouput = true
+
+case = 4
+input =87 85 84 82 81 99
+output = false
+
+
+case = 5
+input =9 8 7 6 -5 -4 -3 -2
+output = false
+
+
+
+
+Program-3
+
+ Given an array of strings, group anagrams together.
+
+Example:
+
+input = eat tea tan ate nat bat
+output =
+ate eat tea
+nat tan
+bat
+
+
+
+ 
+
+import java.io.*;
+import java.util.*;
+
+public class Test {
+
+	 public static List<List<String>> groupAnagrams(String[] strs) {
+	        if (strs.length == 0) return new ArrayList();
+	        Map<String, List> ans = new LinkedHashMap<String, List>();
+	        for (String s : strs) {
+	            char[] ca = s.toCharArray();
+	            Arrays.sort(ca);
+	            String key = String.valueOf(ca);
+	            if (!ans.containsKey(key)) ans.put(key, new ArrayList());
+	            ans.get(key).add(s);
+	        }
+	        return new ArrayList(ans.values());
+	    }
+	 
+	 public static void main(String args[] ) throws IOException {
+
+		    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+			String str = br.readLine();
+			String[] list = str.split(" ");
+			List<List<String>> listAnagrams = groupAnagrams(list);
+			for(List<String> listAnagram : listAnagrams)
+		    {
+		         if(listAnagram.size()>1)
+				{
+				      for(String s : listAnagram) 
+						  System.out.print(s+" ");
+				}
+				System.out.println();
+		    }
+
+	 } 
+}
+
+
+back end test cases
+
+case = 1
+input =ate eat tea a a a
+output = ate eat tea
+a a a 
+
+case = 2
+input =ate eat nice cine inec tea a hello a and dan a
+output = ate eat tea
+nice cine inec
+a a a
+and dan
+
+case = 3
+input =aa bb cc dd ee bb cc dd eee aaa
+output =bb bb
+cc cc
+dd dd
+
+case = 4
+input =hello ello olle time lelo elloh group
+output = 
+hello elloh
+ello olle lelo
+
+
+
+

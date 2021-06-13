@@ -1,0 +1,259 @@
+1) 
+
+Consider the pseudocode given below. 
+The function DoSomething() takes as argument a pointer to the root of an arbitrary tree represented by the leftMostChild-rightSibling representation. 
+
+Each node of the tree is of type treeNode.
+
+typedef struct treeNode* treeptr; 
+struct treeNode { 
+    treeptr leftMostChild, rightSibling; 
+}; 
+
+int DoSomething (treeptr tree) { 
+    int value = 0; 
+    if (tree != NULL) { 
+        if (tree->leftMostChild == NULL) 
+            value = 1; 
+        else
+            value = DoSomething(tree->leftMostChild); 
+        value = value + DoSomething(tree->rightSibling); 
+    } 
+    return(value); 
+} 
+
+When the pointer to the root of a tree is passed as the argument to DoSomething, the value returned by the function corresponds to the
+(A) number of internal nodes in the tree.
+(B) height of the tree.
+(C) number of nodes without a right sibling in the tree.
+(D) number of leaf nodes in the tree.
+
+
+
+
+
+
+
+Answer: (D)
+
+2) what is the output of the following program 
+
+#include <stdio.h> 
+int main() 
+{ 
+    int* p; 
+    *p = 50; 
+    printf("%d", *p); 
+    return 0; 
+} 
+
+
+a) compilation error
+b) Runtime error/segmentation fault
+c) 5
+d) linker error
+
+
+
+
+
+Ans- B
+
+3) In Java which of the following statements are true 
+
+A)Each thread gets its own stack
+B)Threads share the same stack
+C)Each process gets a stack
+D)All allocation happens on the heap, the stack is never used
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ans- A
+
+4) Which of these statements are correct ?
+
+1) Static variables, are initialized when class is loaded
+2) Static variables in a class are initialized before any object of that class can be created 
+3) Static variables in a class are initialized before any static method of the class runs
+4) Static variables are initialized every time an instance of a class is created
+5) static variables should always be marked final
+
+
+A) Statements 1,2 and 3 are correct
+B) Statements 2,3 and 4 are correct
+C) Statements 3,4 and 5 are correct
+D) All Statements are correct
+
+
+
+
+
+
+
+
+
+Ans- A 
+
+5)State the output of this code below when compiled and run without any arguments
+
+class myClass {
+public static void main(String [] args) 
+{
+System.out.println("Hello "+ args[0]);
+}
+}
+
+a) Hello.c
+b) Hello
+c) Hello world
+D) Runtime error
+
+
+
+
+
+Ans- D
+
+6) Which of the following statements are incorrect ?
+
+Select one of the answers below :
+
+A)public members of class can be accessed by any code in the program
+B)private members of class can only be accessed by other members of the class
+C)private members of class can be inherited by a sub class and become protected members in sub class 
+D)protected members of a class can be inherited by a sub class and become private members of the sub class 
+
+
+
+
+
+
+Ans- C
+
+7)class MyClass {
+public static void main(String [] args)
+{
+   int a=5;
+   int b=10;
+   first: {
+	second: {
+		third: {
+		if(a==b>>1)
+		    break second;
+		    }
+		   System.out.println(a);
+		   }
+		   System.out.println(b);
+		   }
+}
+}
+
+
+A)5 10
+B)10 5
+C)5
+D)10
+
+
+
+
+Ans-D
+
+8)
+class A
+{
+int i;
+public void display() {
+	System.out.println(i);
+	}
+}
+
+class B extends A {
+	int j;
+	public void display() {
+	System.out.println(j);
+	}
+}
+
+class MyClass {
+public static void main(String [] args ) {
+	B obj2 = new B();
+	obj2.i = 1;
+	obj2.j = 2;
+	A r;
+	r=obj2;
+	r.display();
+}
+}
+
+
+A)1
+B)2
+C)Runtime error
+D)Compilation error
+
+
+
+
+
+Ans- B
+
+9) which of the following java constructs help in achieving thread safety ?
+
+A)Process
+B)try/catch
+C)Thread
+D)Runnable
+E)synchronized
+F)none of these
+
+
+
+
+
+
+
+
+
+Ans- E
+
+10) 
+State the output of this program
+
+class Base {
+	public void method () {
+	System.out.println("Base");
+	}
+	}
+
+public class MyClass extends Base {
+	protected void method() {
+	   System.out.println("My Class");
+	}
+	public static void main(String [] args) 
+	{
+	MyClass obj = new MyClass();
+	obj.method();
+	}
+	}
+
+A)Base
+B)MyClass
+C)BaseMyClass
+D)Compilation error
+
+
+
+
+
+Ans-D

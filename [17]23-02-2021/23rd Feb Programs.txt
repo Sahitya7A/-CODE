@@ -1,0 +1,333 @@
+Program- 1
+
+Mr. Anand went for shopping mall and visited the gaming zone. 
+Later he found  an interesting game there called "XY-Reflection". 
+
+This game has a display board and when Anand choose a number N, the board display set of numbers from 1 to N, 
+and Anand need to find out the count of numbers,
+whose XY-Reflection is a valid and a different number too.
+
+XY-Reflection of any number is formed as follows:
+    - rotate the number 180degrees.
+    - the digits [0, 1, 6, 8, 9] are valid after 180 degree rotation
+      
+A number is said to be valid iff each digit of the rotated number is valid.
+and newly formed number should be diffrent too.
+
+Can you please help Mr. Anand to find the count of valid XY-Reflections.
+
+NOTE: The XY-Reflection number may be grater than the original number.
+
+Input Format:
+-------------
+An integer N, numbers from 1 to N will be displayed on board.
+
+Output Format:
+--------------
+Print an integer, count of valid XY-Reflections.
+
+
+Sample Input-1:
+---------------
+10
+
+Sample Output-1:
+----------------
+3
+
+Explanation:
+------------
+Valid XY-Reflections are as follows: 6-> 9, 9-> 6, 10->01
+
+
+
+Sample Input-2:
+---------------
+50
+
+Sample Output-2:
+----------------
+6
+
+Explanation:
+------------
+Valid XY-Reflections are as follows: 6-> 9, 9-> 6, 10->01, 16-> 61, 18-> 81, 19-> 91
+
+
+back end test cases
+case =1
+input =10
+output =3
+
+case =2
+input =50
+output =6
+
+case =3
+input =100
+output =19
+
+case =4
+input =1001
+output =107
+
+case =5
+input =12345
+output =830
+
+
+
+Program-1
+import java.util.*;
+
+class ConfusingNumber {
+// Solution-1 = > Confusing number = Total number - Strobogrammatic number
+/*
+    static char[][] pairs = {{'0', '0'}, {'1', '1'}, {'6', '9'}, {'8', '8'}, {'9', '6'}};
+    public int confusingNumber(int N) {
+        String num = Integer.toString(N);
+        int res = findTotal(num);
+        for (int len = 1; len <= num.length(); len++) {
+            char[] curr = new char[len];
+            res -= dfs(curr, num, 0, len - 1);
+        }
+        return res;
+    }
+    // count the # of numbers from "01689" that is less than N
+    private int findTotal(String s) {
+        if (s.length() == 0) return 1;
+        char first = s.charAt(0);
+        int res = count(first) * (int) (Math.pow(5, s.length() - 1));
+        if (first == '0' || first == '1' || first == '6' || first == '8' || first == '9') {
+            res += findTotal(s.substring(1));
+        }
+        return res;
+    }
+    // count the # of Strobogrammatic numbers
+    private int dfs(char[] curr, String num, int left, int right) {
+        int res = 0;
+        if (left > right) {
+            String s = new String(curr);
+            if (s.length() < num.length() || s.compareTo(num) <= 0) {
+                res += 1;
+            }
+        } else {
+            for (char[] p : pairs) {
+                curr[left] = p[0];
+                curr[right] = p[1];
+                if ((curr[0] == '0' && curr.length > 1) || (left == right && p[0] != p[1])) continue;
+                res += dfs(curr, num, left + 1, right - 1);
+            }
+        }
+        return res;
+    }
+    // a helper function that counts the # of chars in "01689" less than given 'c'
+    private int count(Character c) {
+        int res = 0;
+        for (char[] p : pairs) {
+            if (p[0] < c) res += 1;
+        }
+        return res;
+    }
+*/
+
+
+
+// Solution-2: 
+    int[] digits = new int[]{0, 1, 6, 8, 9};
+    int[] rotate = new int[]{0, 1, -1, -1, -1, -1, 9, -1, 8, 6};
+    public int confusingNumber(int N) {
+        int res = 0;
+        List<Integer> list = new ArrayList<>();
+        list.add(0);
+        boolean found = false;
+        while (!found) {
+            List<Integer> tmp = new ArrayList<>();
+            for (Integer n : list) {       
+                for (int i = 0; i < 5; i++) {
+                    int nn = n * 10 + digits[i];
+                    
+                    if (nn > N) {
+                        found = true;
+                        break;
+                    }
+                    if (nn != 0) {
+                        tmp.add(nn);
+                    }
+                    if (isConfusing(nn)) {
+                        res++;
+                    }
+                }
+                if (found) {
+                    break;
+                }
+            }
+            list = tmp;
+        }   
+        return res;
+    }   
+    private boolean isConfusing(int num) {
+        int tmp = num;
+        int rot = 0;
+        while (tmp > 0) {
+            int d = tmp % 10;
+            rot = rot * 10 + rotate[d];
+            tmp /= 10;
+        }
+        return rot != num;
+    }
+	public static void main(String[] args) { 
+		Scanner sc=new Scanner(System.in);
+		int n=sc.nextInt();
+		System.out.println(new ConfusingNumber().confusingNumber(n) ); 
+	}
+}
+
+
+
+
+
+
+Program-2
+
+
+Naveen is given a  group of numbers and he has to shift the group 'm' times.  
+
+in first operation group[i][j] moves to group[i][j+1]. 
+
+Element at group[i][j] moves to group[i][j + 1] .
+Element at group[i][n - 1] moves to group[i + 1][0] .
+Element at group[m - 1][n - 1] moves to group[0][0] .
+
+print the group of numbers after applying shift operation k times.
+
+Example 1:
+
+Input = 3 3
+1 2 3
+4 5 6
+7 8 9
+1
+output = 
+9 1 2
+3 4,5
+6 7 8
+
+1 2 3         9 1 2
+4 5 6  ---> 3 4 5
+7 8 9          6 7 8
+
+
+
+Example 2 
+
+  3    8     1      9           13	3	8	 1                  21    13     3   8             0  21 13 3              12 0 21 13
+ 19    7     2      5 ----->  9    19    7       2     ------->   1      9   19  7 ------->8 1 9 19   --------->3 8 1 9
+  4     6   11   10           5    4   6     11                        2       5     4   6              7 2 5 4                     19 7 2 5
+  12   0    21  13          10  12   0   21                      11   10  12   0                6 11 10 12              4 6 11 10
+
+Input = 4 4
+3 8 1 9
+19 7 2 5
+ 4 6 11 10
+ 12 0 21 13
+ 4
+ output =  
+ 12 0 21 13
+ 3 8 1 9
+ 19 7 2 5
+ 4 6 11 10
+
+
+import java.util.*;
+
+class ShiftGrid {
+    public int[][] shiftGrid(int[][] grid, int k) {
+        int rowCount = grid.length;                         // Number of rows in grid.
+        int colCount = grid[0].length;                      // Number of columns in grid.
+        int gridCount = rowCount * colCount;                // Number of cells (i.e. values) in grid.
+        k = k % gridCount;                                  // Limit k to max number of cells in grid.  Avoid negatives in next lines.
+        int kCol = (gridCount - k) % colCount;              // Column to start copying from.
+        int kRow = ((gridCount - k) % gridCount) / colCount;// Row to start copying from.
+        int[] innRow = grid[kRow];                          // Array for the row to start copying from.
+        int[][] result = new int[rowCount][colCount];       // Create result matrix, to hold shifted values.
+        for (int r = 0; r < rowCount; r++) {                // Loop through "to" rows.
+            int[] outRow = result[r];                       // Get row array to copy into, so only faster 1D reference in inner loop.
+            for (int c = 0; c < colCount; c++) {            // Loop through "to" columns.
+                outRow[c] = innRow[kCol];                   // Copy value from grid to result, shifting by copying.
+                if (++kCol >= colCount) {                   // Next "from" column.  If at end of row...
+                    kCol = 0;                               // Then start "from" columns at first column.
+                    if (++kRow >= rowCount)                 // When starting new column, next "from" row.  If at end of grid...
+                        kRow = 0;                           // Then start "from" rows at first row.
+                    innRow = grid[kRow];                    // Get row array to copy from, so only faster 1D reference when copying.
+                }
+            }
+        }
+        return result;                 // Return result matrix, converting it to a List<List<Integer>>.
+    }
+	
+	public static void main(String[] args) { 
+		Scanner sc=new Scanner(System.in);
+		int m=sc.nextInt();
+		int n=sc.nextInt();
+		int k=sc.nextInt();
+		int grid[][]=new int[m][n];
+		for(int i=0;i<m;i++)
+		for(int j=0;j<n;j++)
+			grid[i][j]=sc.nextInt();
+		int[][] result = new ShiftGrid().shiftGrid(grid,k);
+		for(int[] list: result){
+			for(int i:list)
+				System.out.print(i+" "); 
+			System.out.println( );
+		}	
+	}
+}
+
+
+back end test cases
+
+case = 1
+input = 3 3
+8 9 3
+2 3 4
+1 2 3
+3
+output = 
+1 2 3
+8 9 3
+2 3 4
+
+case = 2
+input = 3 3
+8 9 3
+2 3 4
+1 2 3
+4
+output = 
+4 1 2
+3 8 9
+3 2 3
+
+case = 3
+2 2
+1 2
+3 4
+3
+output =
+2 3
+4 1
+
+
+case = 4
+input = 4 4
+1 2 3 4
+8 9 7 6
+1 2 3 5
+8 7 6 5
+4
+output = 
+8 7 6 5
+1 2 3 4
+8 9 7 6
+1 2 3 5
