@@ -1,0 +1,353 @@
+Program-1
+
+Naresh is working on expression of words.
+If you give him an expression like, [p,q,r]s[t,u],
+Naresh will form the words like as follows : [pst, psu, qst,qsu, rst, rsu]
+Another example, [a,b]c[d,e] will be converted as: [acd, ace, bcd, bce].
+
+Naresh will be given an expression as a string EXP, like the above format.
+He needs to return all words that can be formed in like mentioned above, 
+Can you help Naresh to convert iven expression into a list of words, in lexicographical order.
+
+NOTE: 
+Expression consist of lowercase alphabets, comma, and square brackets only.
+
+Input Format:
+-------------
+A string EXP, expression.
+
+Output Format:
+--------------
+Print list of words, formed from the expression.
+
+
+Sample Input-1:
+---------------
+[b]c[e,g]k
+
+Sample Output-1:
+----------------
+[bcek, bcgk]
+
+
+Sample Input-2:
+---------------
+[a,b][c,d]
+
+Sample Output-2:
+----------------
+[ac, ad, bc, bd]
+
+
+Sample Input-3:
+---------------
+[xyz]a[b,c]
+
+Sample Output-3:
+----------------
+[xyzab, xyzac]
+
+
+back end test cases
+
+case =1
+input =[a,b,c,d]e[x,y,z]
+output =[aex, aey, aez, bex, bey, bez, cex, cey, cez, dex, dey, dez]
+
+case =2
+input =[ab,cd]x[y,z]
+output =[abxy, abxz, cdxy, cdxz]
+
+case =3
+input =abcd[x,y,z]f
+output =[abcdxf, abcdyf, abcdzf]
+
+case =4
+input =[abc][d,e]f[g,h,i]j
+output =[abcdfgj, abcdfhj, abcdfij, abcefgj, abcefhj, abcefij]
+
+
+
+import java.util.*;
+
+public class BraceExpression {
+	public static  String[] expand(String S) {
+		// TreeSet to sort
+        TreeSet<String> set = new TreeSet<>();
+        if (S.length() == 0) {
+            return new String[]{""}; 
+        } else if (S.length() == 1) {
+            return new String[]{S};
+        }
+        if (S.charAt(0) == '[') {
+            int i = 0; // keep track of content in the "{content}"
+            while (S.charAt(i) != ']') {
+                i++;
+            }
+            String sub = S.substring(1, i);
+            String[] subs = sub.split(",");
+            String[] strs = expand(S.substring(i + 1)); // dfs
+            for (int j = 0; j < subs.length; j++) {
+                for (String str : strs) {
+                    set.add(subs[j] + str);
+                }
+            }
+        } else {
+            String[] strs = expand(S.substring(1));
+            for (String str : strs) {
+                set.add(S.charAt(0) + str);
+            }
+        }
+        return set.toArray(new String[0]);
+    }
+
+	 public static void main(String args[] ) {
+			 Scanner sc = new Scanner(System.in);
+		     String str=sc.next();
+		     System.out.println(Arrays.deepToString(expand(str)));
+	}	
+}
+
+
+
+
+Program-2
+
+A device is secured with a digital lock, 
+The digital lock is made up of a 3*3 grid like below:
+| 1 | 2 | 3 |
+| 4 | 5 | 6 |
+| 7 | 8 | 9 |
+
+The lock is secured by creating pattern using the above grid.
+A valid pattern as formed as follows:
+
+Rules for a valid pattern:
+	- Each pattern must connect at least m keys and at most n keys.
+	- All the keys must be distinct.
+	- If the line connecting two consecutive keys in the pattern passes through 
+	  any other keys, the other keys must have already the part of the pattern. 
+	  No jumps through a key which is not part of the pattern is allowed.
+	- The order of keys used matters.
+ 
+You will be given two integers m and n, where 1 ≤ m ≤ n ≤ 9, 
+Your task is to count the total number of patterns of the device lock, 
+which consist of minimum of m keys and maximum n keys. 
+
+Examples of valid and invalid patterns:
+	Invalid move: 4 - 1 - 3 - 6
+	Line 1 - 3 passes through key 2 which had not been part of the pattern.
+
+	Invalid move: 4 - 1 - 9 - 2
+	Line 1 - 9 passes through key 5 which had not been part of the pattern.
+
+	Valid move: 2 - 4 - 1 - 3 - 6
+	Line 1 - 3 is valid because it passes through key 2, which had been part 
+	of the pattern
+
+	Valid move: 6 - 5 - 4 - 1 - 9 - 2
+	Line 1 - 9 is valid because it passes through key 5, which had been part 
+	of the pattern
+
+Input Format:
+-------------
+Two space separated integers M and N.
+
+Output Format:
+--------------
+Print an integer, number of valid patterns formed using the grid.
+
+
+Sample Input-1:
+---------------
+1 1
+
+Sample Output-1:
+----------------
+9
+
+
+Sample Input-2:
+---------------
+1 2
+
+Sample Output-2:
+----------------
+65
+
+
+back end test cases
+case =1
+input =1 1
+output =9
+
+case =2
+input =1 2
+output =65
+
+case =3
+input =1 3
+output =385
+
+case =4
+input =2 5
+output =9152
+
+
+
+import java.util.*;
+
+class UnlockPatterns{
+    private int[][] jumps;
+    private boolean[] visited;
+    
+    public int numberOfPatterns(int m, int n) {
+        jumps = new int[10][10];
+        jumps[1][3] = jumps[3][1] = 2;
+        jumps[4][6] = jumps[6][4] = 5;
+        jumps[7][9] = jumps[9][7] = 8;
+        jumps[1][7] = jumps[7][1] = 4;
+        jumps[2][8] = jumps[8][2] = 5;
+        jumps[3][9] = jumps[9][3] = 6;
+        jumps[1][9] = jumps[9][1] = jumps[3][7] = jumps[7][3] = 5;
+        visited = new boolean[10];
+        int count = 0;
+        count += DFS(1, 1, 0, m, n) * 4; // 1, 3, 7, 9 are symmetrical
+        count += DFS(2, 1, 0, m, n) * 4; // 2, 4, 6, 8 are symmetrical
+        count += DFS(5, 1, 0, m, n);
+        return count;
+    }
+
+    private int DFS(int num, int len, int count, int m, int n) {
+        if (len >= m) count++; // only count if moves are larger than m
+        len++;
+        if (len > n) return count;
+        visited[num] = true;
+        for (int next = 1; next <= 9; next++) {
+            int jump = jumps[num][next];
+            if (!visited[next] && (jump == 0 || visited[jump])) {
+                count = DFS(next, len, count, m, n);
+            }
+        }
+        visited[num] = false; // backtracking
+        return count;
+    }
+	public static void main(String args[] ) {
+		Scanner sc = new Scanner(System.in);
+		int m=sc.nextInt();
+		int n=sc.nextInt();
+		UnlockPatterns up=new UnlockPatterns();
+		System.out.println(up.numberOfPatterns(m,n));
+	}
+}
+
+
+
+
+
+program-3
+
+
+Consider a pair of integers, (a,b). The following operations can be performed 
+on (a,b) in any order, zero or more times:
+	- (a,b) -> ( a+b, b )
+	- (a,b) -> ( a, a+b )
+
+For example, starting with (1,1), perform the operation (1, 1+1) to get (1,2), 
+perform the operation (1+2, 2) to get (3,2), and perform the operation (5,2). 
+Alternatively the first operation could be (1+1, 1) to get (2,1) and so on.
+
+Your task is to build a function must return a string that denotes whether or not 
+you can convert (a,b) to (c,d) by performain zero or more the operations specified above. 
+
+If it is possible, return true, otherwise false.
+
+NOTE: 
+1<= a,b,c,d <= 1000
+
+Input Format:
+-------------
+Line-1: Two space separated integers, a,b
+Line-2: Two space separated integers, c,d
+
+Output Format:
+--------------
+Return a boolean value.
+
+
+Sample Input-1:
+---------------
+1 2
+5 4
+
+Sample Output-1:
+----------------
+true
+
+
+Sample Input-2:
+---------------
+2 3
+10 7
+
+Sample Output-2:
+----------------
+false
+
+
+
+back end test cases
+case =1
+input =1 2
+5 4
+output =true
+
+case =2
+input =2 3
+10 7
+output =false
+
+case =3
+input =2 3
+9 7
+output =true
+
+case =4
+input =2 10
+26 12
+output =true
+
+
+
+
+
+
+import java.util.*;
+
+class IsReachable {
+	
+	static boolean isReachable(int sx, int sy, int dx, int dy)
+	{
+		// base case
+		if (sx > dx || sy > dy)
+			return false;
+	
+		// current point is equal to destination
+		if (sx == dx && sy == dy)
+			return true;
+	
+		// check for other 2 possibilities
+		return (isReachable(sx + sy, sy, dx, dy) ||
+				isReachable(sx, sy + sx, dx, dy));
+	}
+	
+	public static void main(String arg[])
+	{
+		Scanner sc=new Scanner(System.in);
+		int a = sc.nextInt();
+		int b = sc.nextInt();
+		int c = sc.nextInt();
+		int d = sc.nextInt();
+		System.out.println(isReachable( a, b, c, d));
+	}
+}
