@@ -1,0 +1,285 @@
+PROGRAM-1
+Mounika is creating the binary strings using P 1's and Q 0's.
+A binary string contains only 0's and 1's.
+She has given a list of binary strings binStr[] to be formed.
+
+Her task is to find, the maximum number of binary strings can be formed, 
+with given P 1's and Q 0's only. She cannot use any more 1's or 0's.
+
+Input Format:
+-------------
+Line-1 -> A single line of space separated binary strings, binStr[].
+Line-2 -> Two integers P and Q, P number of 1's and Q number of 0's
+
+
+Output Format:
+--------------
+Print an integer as output, maximum number of binary strings can be formed.
+
+
+Sample Input-1:
+---------------
+10 0001 111001 1 0
+3 5
+
+Sample Output-1:
+----------------
+4
+
+Explanation:
+------------
+She can form 4 strings by the using of 3 1's and 5 0's
+strings are 10, 0001, 1, 0.
+
+
+Sample Input-2:
+---------------
+10 1 0
+1 1
+
+Sample Output-2:
+----------------
+2
+
+Explanation:
+------------
+She can form 2 strings by the using of 1 1's and 1 0's
+strings are 1, 0.
+
+
+import java.util.*;
+// Java program for the above approach
+class A1{}
+class GFG{
+
+// 3D dp table to store the state value
+static int [][][]dp = new int[100][100][100];
+
+// Function that count the combination
+// of 0's and 1's from the given list
+// of String
+static int countString(int m, int n,
+				String []arr, int i)
+{
+	// Base Case if count of 0's or 1's
+	// becomes negative
+	if (m < 0 || n < 0) {
+		return Integer.MIN_VALUE;
+	}
+
+	// If index reaches out of bound
+	if (i >= arr.length) {
+		return 0;
+	}
+
+	// Return the prestored result
+	if (dp[m][n][i] != -1) {
+		return dp[m][n][i];
+	}
+
+	// Intialise count of 0's and 1's
+	// to 0 for the current state
+	int zero = 0, one = 0;
+
+	// Calculate the number of 1's and
+	// 0's in current String
+	for (char c : arr[i].toCharArray()) {
+		if (c == '0') {
+			zero++;
+		}
+		else {
+			one++;
+		}
+	}
+
+	// Include the current String and
+	// recurr for the next iteration
+	int x = 1 + countString(m - zero,
+							n - one,
+							arr, i + 1);
+
+	// Exclude the current String and
+	// recurr for the next iteration
+	int y = countString(m, n, arr, i + 1);
+
+	// Update the maximum of the above
+	// two states to the current dp state
+	return dp[m][n][i] = Math.max(x, y);
+}
+
+// Driver Code
+public static void main(String[] args)
+{
+Scanner sc =new Scanner(System.in);
+	String []arr =sc.nextLine().split(" ");// { "10", "0001", "1","111001", "0" };
+
+	// N 0's and M 1's
+	int N = sc.nextInt();
+int M = sc.nextInt();
+
+	// Intialise dp array to -1
+	for(int i = 0;i<100;i++){
+		for(int j = 0;j<100;j++){
+			for(int l=0;l<100;l++)
+			dp[i][j][l]=-1;
+		}
+	}
+
+	// Function call
+	System.out.print(countString(M, N, arr, 0));
+}
+}
+
+// This code is contributed by 29AjayKumar
+
+
+You are playing a shooting game.
+There are N bottles hanging to a rod, i-th bottle numbered bottle[i].
+
+If you shoot i-th bottle, you will get bottle[i-1]*bottle[i]*bottle[i+1] points.
+The more points you score, the more rewards you can win.
+
+Your task is to score the maximum points by shooting all the ballons wisely.
+
+Note: After you shoot bottle at i-th index, bottles at i-1 and i+1 positions
+become adjacent. if there is no existing 'i-1' or 'i+1' positions for selected bottle.
+you can assume that bottle[i-1] = bottle[i+1] = 1.
+
+Input Format:
+-------------
+N space separated integers bottles[].
+
+Output Format:
+--------------
+Print an integer, maximum points you can get.
+
+
+Sample Input:
+---------------
+3 1 5 8
+
+Sample Output:
+----------------
+167
+
+Explanation:
+------------
+Given bottles = [3, 1, 5, 8] 
+position 	points
+--------------------
+1				3*1*5
+5				3*5*8
+3				1*3*8
+8				1*8*1
+--------------------
+Total = 167
+
+
+case =1
+input =10 0001 111001 1 0
+3 5
+output =4
+
+case =2
+input =10 100 1000 10000 100000 1000000 11 10 101 10010 101001 1001001
+                           4         5           6              7                        5            6             7
+10 10
+output =6
+
+case =3
+input =10 0 1
+1 1
+output =2
+
+case =4
+input =010 1010 001 100 0101 101 1100 0011 000 001 010 011 110 111 10101 10110 01110 10011
+20 18
+output =11
+
+case =1
+input =3 1 5 8
+output =167
+
+case =2
+input =49 9 11 4 43
+output =32076
+
+case =3
+input =2 1 3 5 4
+output =102
+
+case =4
+input =7 8 2 4 9 11 13 2 17
+output =7220
+
+
+Pramod is planning to design a program, which helps to create 
+the IP addresses posssible from a given string S, 
+where each IP address should be valid.
+
+It is guaranteed that S contains only digits.
+
+Can you help pramod in designing such program, which returns all possible IP addresses.
+Print the answer in lexicographic order.
+
+NOTE:
+-----
+
+- A valid IP address consists of exactly four integers, 
+each integer is between 0 and 255, separated by single dots 
+and cannot have leading zeros
+- IP Addresses are said to be valid if it falls in the range 
+from 0.0.0.0 to 255.255.255.255
+
+- IP addresses like [123.012.234.255 , 123.234.345.34] are invalid.
+
+Input Format:
+-------------
+A string S, contains only digits [0-9].
+
+Output Format:
+--------------
+Print all possible IP addresses which are valid.
+
+
+Sample Input-1:
+---------------
+23323311123
+
+Sample Output-1:
+----------------
+[233.233.11.123, 233.233.111.23]
+
+
+Sample Input-2:
+---------------
+12345678
+
+Sample Output-2:
+----------------
+[1.234.56.78, 12.34.56.78, 123.4.56.78, 123.45.6.78, 123.45.67.8]
+
+
+Sample Input-3:
+---------------
+02550255
+
+Sample Output-3:
+----------------
+[0.25.50.255, 0.255.0.255]
+
+case =1
+input =255255255255
+output =[255.255.255.255]
+
+case =2
+input =112123234
+output =[1.12.123.234, 1.121.23.234, 1.121.232.34, 11.2.123.234, 11.21.23.234, 11.21.232.34, 11.212.3.234, 11.212.32.34, 112.1.23.234, 112.1.232.34, 112.12.3.234, 112.12.32.34, 112.123.2.34, 112.123.23.4]
+
+case =3
+input =23323311123
+output =[233.233.11.123, 233.233.111.23]
+
+case =4
+input =123456
+output =[1.2.34.56, 1.23.4.56, 1.23.45.6, 1.234.5.6, 12.3.4.56, 12.3.45.6, 12.34.5.6, 123.4.5.6]
