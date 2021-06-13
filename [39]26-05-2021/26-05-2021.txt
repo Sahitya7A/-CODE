@@ -1,0 +1,43 @@
+-- List the emp names whose sal is greater than his managers(mgr) salary
+--display columns Employee_Name,"Employee_Salary", "Manager_Name", "Manager_Salary"
+use fs;
+
+-- write your query here
+
+
+
+
+-- Display jobs of deptno 10 those that are not found in deptno 20.
+-- display jobs in descending order
+use fs;
+-- write your sql query here
+
+
+
+
+-- write an sql query to display the names of employees and their working location's  --
+-- Note:  display ouput in the order of location 
+--        column names Employee_Name, Location
+use fs;
+
+-- write your sql query here
+
+
+
+
+
+-- Display the years in ascending order in which more than one employee got hired.
+
+use fs;
+-- write your query here
+
+
+
+
+
+
+-- Display the employee names who have atleast 3 people reporting them
+--   Note: column name should be Manager_Names
+--         Display names if descending order
+use fs;
+-- write your sql query here

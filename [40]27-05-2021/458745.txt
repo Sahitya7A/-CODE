@@ -1,0 +1,21 @@
+1) In one mysql window do the following:
+
+SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
+
+start transaction;
+update emp set job = 'se';
+
+
+2) In the other mysql window do the following:
+
+SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
+select * from emp where empno = 7369;
+
+3) In the first window rollback;
+
+rollback;
+
+4) What is the value of job you see in 2nd window?
+
+ SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
+

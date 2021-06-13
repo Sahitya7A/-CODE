@@ -1,0 +1,159 @@
+
+Ramu is a given a group of numbers and a number('k) where he was asked to construct the array ans of size n-k+1 
+where ans[i] is the number of distinct numbers in the subarray nums[i:i+k-1] = [nums[i], nums[i+1], ..., nums[i+k-1]] .
+
+Return the array ans .
+
+The first line of input consists of the group size followed by group numbers followed by a number 'k' 
+
+Example 1:
+
+input = 7
+1 2 3 2 2 1 3
+3
+output = 3 2 2 2 3
+
+
+Explanation: The number of distinct elements in each subarray goes as follows:
+- nums[0:2] = [1,2,3] so ans[0] = 3
+- nums[1:3] = [2,3,2] so ans[1] = 2
+- nums[2:4] = [3,2,2] so ans[2] = 2
+- nums[3:5] = [2,2,1] so ans[3] = 2
+- nums[4:6] = [2,1,3] so ans[4] = 3
+
+
+
+Example 2:
+
+input = 7
+1 1 1 1 2 3 4  
+4
+output = 1 2 3 4
+
+Explanation: The number of distinct elements in each subarray goes as follows:
+- nums[0:3] = [1,1,1,1] so ans[0] = 1
+- nums[1:4] = [1,1,1,2] so ans[1] = 2
+- nums[2:5] = [1,1,2,3] so ans[2] = 3
+- nums[3:6] = [1,2,3,4] so ans[3] = 4
+
+
+Ramu is working on strings and he is given a task 
+in which he should transform the given string S into a target string T.
+
+He is allowed to perform the given steps to transform S into T:
+
+Substitute a letter in S with another letter.
+Add a letter to S at any place.
+Remove any letter from S.
+	- 
+
+Help Ramu write the necessarry code to transform S into T in minimum number of steps.
+
+
+
+Sample Input-1:
+---------------
+energy synergy
+
+Sample Output-1:
+----------------
+2
+
+Explanation:
+-----------
+energy -> senergy (add 's')
+senergy -> synergy (substitute 'y' in place of 'e')
+
+
+Sample Input-2:
+---------------
+treatment basement
+
+Sample Output-2:
+----------------
+5
+
+Explanation:
+-----------
+treatment -> tretment (remove 'a')
+tretment -> trement (remove 't')
+trement -> arement (substitute 'a' in place of 't')
+arement -> asement (substitute 's' in place of 'r')
+asement -> basement (add 'b')
+
+
+
+
+==========
+-- display the names of employees in descending order whose sal is more than 'BLAKE'
+-- Table names EMP, DEPT
+use fs;
+-- write your query here
+
+
+
+-- display names of departments in descending order,  which doesn't have employees 
+-- Table names EMP, DEPT
+use fs;
+-- write your  sql query here
+
+
+
+-- display top two jobs by employee count
+-- Note: Display the output descending order of employee count
+-- Note2: columns should be displayed as Job_Name, Number_of_employees
+use fs;
+-- write your sql query here
+
+
+
+
+-- display the salaries of employess in ascending order and ename's where employeenames 
+-- starting with K and ending with N
+-- output columns names should be:  Salary, "Employee_Name"
+use fs;
+-- write your sql here
+
+
+-- display all the enames along with employee number who don't have manager?
+--   output columns should be "Employee_Name","Employee_Number"
+
+use fs;
+
+-- write your sql query here
+
+
+
+-- display all the enames in ascending ordere whose hiring year is 1998?
+use fs;
+-- write your sql query here
+\\
+
+
+-- display names of employees in descending order, whose Comm Is more than their Sal.
+use fs;
+-- write your sql query here
+
+
+
+
+
+-- Display the names of the employees is ascending order who belongs to RESEARCH department
+use fs;
+-- write your sql query here
+
+
+
+
+-- Display employee names who are  all the Clerks of Deptno 20.
+-- note: employee names in ascending order.
+use fs;
+-- write your sql query here
+
+
+
+
+-- Find the no of employees who are working in department number 10
+-- output display "Number_of_Employees" as output column
+use fs;
+-- write your sql query here

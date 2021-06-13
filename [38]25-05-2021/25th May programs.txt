@@ -1,0 +1,202 @@
+Program-1
+
+Ramu is given an group of numbers. 
+He has to check if the group of numbers can be formed to be Dark or Not 
+
+
+The group is called Dark if the sum of the odd-index and sum of the even-index 
+numbers should be equal. 
+
+
+To make the group Dark he has to do the following operations 
+
+
+Now he to choose only one index(0-based) from the group of numbers and remove the number
+we have to observe that after removing the number from the group , the index of the numbers changes
+
+
+For example, if nums = [16,11,27,34,19] 
+
+Choosing to remove index 1 results in nums = [16,27,34,19] .
+Choosing to remove index 2 results in nums = [16,11,34,19] .
+Choosing to remove index 4 results in nums = [16,11,27,34] .
+
+
+Ramu has to print the number of indices he could choose so that after removal, numbers are Dark
+
+
+Example 1:
+Input = 4
+2 1 6 4
+Output = 1
+
+Explanation:
+Remove index 0: [1,6,4] -> Even sum: 1 + 4 = 5. Odd sum: 6. Not dark.
+Remove index 1: [2,6,4] -> Even sum: 2 + 4 = 6. Odd sum: 6. dark.
+Remove index 2: [2,1,4] -> Even sum: 2 + 4 = 6. Odd sum: 1. Not dark.
+Remove index 3: [2,1,6] -> Even sum: 2 + 6 = 8. Odd sum: 1. Not dark.
+
+There is 1 index that you can remove to make nums Dar.
+
+
+Example 2:
+Input = 3
+1 1 1
+Output = 3
+
+Explanation: You can remove any index and the remaining array is dark.
+
+
+Example 3:
+Input = 3
+1 2 3
+Output = 0
+Explanation: You cannot make a dark array after removing any index.
+
+
+
+
+
+import java.util.*;
+
+class FairArray {
+    public int waysToMakeFair(int[] A) {
+        int res = 0, n = A.length, left[] = new int[2], right[] = new int[2];
+        for (int i = 0; i < n; i++)
+            right[i%2] += A[i]; 
+        for (int i = 0; i < n; i++) {
+            right[i%2] -= A[i];
+            if (left[0]+right[1] == left[1]+right[0]) res++;
+            left[i%2] += A[i];
+        }
+        return res;
+    }
+	
+	public static void main(String args[])
+	{
+		Scanner sc= new Scanner(System.in);
+		int n=sc.nextInt();
+		int nums[]=new int[n]; 
+		for(int i=0;i<n;i++)
+			nums[i]=sc.nextInt();
+		System.out.println(new FairArray().waysToMakeFair(nums));
+	}
+}
+
+
+back end test cases
+
+case = 1
+input = 5
+1 2 8 9 2
+output = 1
+
+
+case = 2
+input = 10
+1 2 8 7 6 5 3 9 8 8
+output = 0
+
+
+case = 3
+input = 15
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+output = 15
+
+case = 4
+input = 8
+9 8 12 11 10 15 5 20
+output = 0
+
+
+
+
+Program-2
+
+Shyam is given 3 numbers, where all are > 0. (n,index,Maximum Sum)
+
+He is now supposed to create a group of numbers(nums) by using the following conditions.
+
+nums.length == n
+nums[i] is a positive integer where 0 <= i < n .
+abs(nums[i] - nums[i+1]) <= 1 where 0 <= i < n-1 .
+The sum of all numbers of nums does not exceed maxSum .
+nums[index] is maximized.
+
+Return nums[index] of the newly constructed array.
+
+Note that abs(x) equals x if x >= 0 , and -x otherwise.
+
+The first line of input contains 'n' followed by 'index' followed by 'maximum sum'
+
+Example 1:
+Input: n = 4, index = 2, maxSum = 6
+Output: 2
+Explanation: nums = [1,2,2,1] is one array that satisfies all the conditions.
+There are no arrays that satisfy all the conditions and have nums[2] == 3, so 2 is the maximum nums[2].
+
+
+import java.util.*;
+
+class MaxIndexValue {
+    public int maxValue(int n, int index, int maxSum) {
+        maxSum -= n;
+        int left = 0, right = maxSum, mid;
+        while (left < right) {
+            mid = (left + right + 1) / 2;
+            if (test(n, index, mid) <= maxSum)	
+                left = mid;
+            else
+                right = mid - 1;
+        }
+        return left + 1;
+    }
+    
+    private long test(int n, int index, int a) {
+        int b = Math.max(a - index, 0);
+        long res = (long)(a + b) * (a - b + 1) / 2;
+        b = Math.max(a - ((n - 1) - index), 0);
+        res += (long)(a + b) * (a - b + 1) / 2;
+        return res - a;
+    }
+	
+	public static void main(String args[])
+	{
+		Scanner sc= new Scanner(System.in);
+		int n=sc.nextInt();
+		int index=sc.nextInt();
+		int maxSum=sc.nextInt();
+		System.out.println(new MaxIndexValue().maxValue(n,index,maxSum));
+	}
+}
+
+
+
+back end test cases
+case = 1
+input = 6
+1
+10
+output = 3
+
+
+
+case = 2
+input = 10
+3
+20
+output = 4
+
+
+case = 3
+input = 8
+2
+5
+output = 1
+
+case = 4
+input = 5
+2
+10
+output = 3
+

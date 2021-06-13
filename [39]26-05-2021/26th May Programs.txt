@@ -1,0 +1,223 @@
+Program-1
+
+Gopal is given the size of the group and 
+he has also given some intresting facts about the group.
+
+He has to change the group according to the given facts. 
+
+In each fact[i] he will be given the [Si,Ei,I]
+
+where Si is the Starting Index
+Ei is the Ending Index
+I in the Increment value 
+
+Intially the group of the given size has all 0's 
+
+you have to return the group after all facts are applied 
+
+The first line of input contains the group size followed by k facts . 
+
+
+
+
+Input = 5
+3
+1 3 2
+2 4 3
+0 2 -2
+output = 
+-2 0 3 5 3
+
+
+Explanation :- 
+Intially the group will be like following 
+After applying each fact the group changes like below 
+0 0 0 0 0 
+0 2 2 2 0
+0 2 5 5 3
+-2 0 3 5 3
+
+
+
+import java.util.*;
+
+class RangeAddition {
+    public int[] getModifiedArray(int length, int[][] updates) {
+        int[] res = new int[length];
+         
+	 for(int[] update : updates) {
+            int value = update[2];
+            int start = update[0];
+            int end = update[1];
+
+            res[start] += value;
+
+            if(end < length - 1)
+                res[end + 1] -= value;
+        }
+
+
+        int sum = 0;
+        for(int i = 0; i < length; i++) {
+            sum += res[i];
+            res[i] = sum;
+        }
+        return res;
+    }
+	
+	public static void main(String args[])
+	{
+		Scanner sc= new Scanner(System.in);
+		int n=sc.nextInt();
+		int k=sc.nextInt();
+		int ops[][]=new int[k][3]; 
+		for(int i=0;i<k;i++)
+			for(int j=0;j<3;j++)
+			ops[i][j]=sc.nextInt();
+		System.out.println(new RangeAddition().getModifiedArray(n,ops));
+	}
+}
+
+
+back end test cases
+case = 1
+input = 
+10
+4
+1 3 4
+8 9 11
+1 9 -3
+0 5 20
+output = 20 21 21 21 17 17 -3 -3 8 8
+
+case = 2
+input = 2
+1
+0 1 10
+output = 10 10
+
+case = 3
+input = 20
+5
+1 3 9
+8 19 25
+0 19 100
+2 4 90
+2 8 50
+output = 100 109 249 249 240 150 150 150 175 125 125 125 125 125 125 125 125 125 125 125
+
+
+case = 4
+input = 25
+10
+1 9 2
+2 2 4
+1 3 8
+0 4 -9
+2 8 -7
+1 8 10
+2 9 -20
+3 4 -5
+2 9 100
+8 9 1
+output = -9 11 88 79 71 85 85 85 86 83 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+
+
+
+
+Program-2
+
+Ramu is given group of numbers, Now he has to check if there exists (a,b,c) which follows the below
+
+
+Rule 1 -->  0 < a, a + 1 < b, b + 1 < c < n - 1
+Rule 2 --> The sum of subarrays (0, a - 1), (a + 1, b - 1), (b + 1, c - 1) and (c + 1, n - 1) is equal.
+
+A subarray (l, r) represents a slice of the original array starting from the element indexed l to the element indexed r.
+
+if it follows the above two rules print true else print false 
+
+
+Example 1:
+
+input = 1 2 1 2 1 2 1
+output = true
+
+Explanation: a = 1, b = 3, c = 5. 
+
+sum(0, a - 1) = sum(0, 0) = 1
+sum(a + 1, b - 1) = sum(2, 2) = 1
+sum(b + 1, c - 1) = sum(4, 4) = 1
+sum(c + 1, n - 1) = sum(6, 6) = 1
+
+
+Example 2:
+
+input = 1 2 1 2 1 2 1 2
+output = false
+
+
+
+import java.util.*;
+
+public class SplitArray {
+    public static boolean splitArray(int[] nums) {
+        
+	if (nums.length < 7)
+            return false;
+
+	int[] sum = new int[nums.length];
+        
+	sum[0] = nums[0];
+        
+	for (int i = 1; i < nums.length; i++) {
+            sum[i] = sum[i - 1] + nums[i];
+        }
+        for (int j = 3; j < nums.length - 3; j++) {
+            HashSet < Integer > set = new HashSet < > ();
+            for (int i = 1; i < j - 1; i++) {
+                if (sum[i - 1] == sum[j - 1] - sum[i])
+                    set.add(sum[i - 1]);
+            }
+            for (int k = j + 2; k < nums.length - 1; k++) {
+                if (sum[nums.length - 1] - sum[k] == sum[k - 1] - sum[j] && set.contains(sum[k - 1] - sum[j]))
+                    return true;
+            }
+        }
+        return false;
+    }
+	public static void main(String args[])
+	{
+		Scanner sc=new Scanner(System.in);
+		int n=sc.nextInt();
+		int[] nums=new int[n];
+		for(int i=0;i<n;i++)
+		{
+			nums[i]=sc.nextInt();
+		}
+		System.out.println(splitArray(nums));
+	}
+}
+
+
+back end test cases
+case = 1
+input = 6
+1 2 1 2 1 1
+output = false
+
+case = 2
+input = 10
+1 2 3 2 3 2 1 2 3 1
+output = false
+
+
+case = 3
+input = 7
+11 12 11 12 11 12 11
+output = true
+
+case = 4
+input = 8
+11 12 11 12 11 12 11 8
+output = false
