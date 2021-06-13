@@ -1,0 +1,102 @@
+Enter password: *************
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 11
+Server version: 8.0.16 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2019, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| db                 |
+| dbu                |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
+| todo               |
++--------------------+
+7 rows in set (3.66 sec)
+
+mysql> use db;
+Database changed
+mysql> show tables;
++--------------+
+| Tables_in_db |
++--------------+
+| boats        |
+| d1           |
+| d2           |
+| dept         |
+| e1           |
+| emp          |
+| empsal       |
+| reserves     |
+| sailors      |
+| sailors_type |
++--------------+
+10 rows in set (0.47 sec)
+
+mysql> use dbu;
+Database changed
+mysql> show tables;
++---------------+
+| Tables_in_dbu |
++---------------+
+| bus555        |
+| cancel        |
+| passenger     |
+| reserve       |
+| ticket555     |
++---------------+
+5 rows in set (0.00 sec)
+
+mysql> drop dbu;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'dbu' at line 1
+mysql> drop database dbu;
+Query OK, 5 rows affected (3.35 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| db                 |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
+| todo               |
++--------------------+
+6 rows in set (0.00 sec)
+
+mysql> use text;
+ERROR 1049 (42000): Unknown database 'text'
+mysql> source E:\KMIT\RDBMS\schema.sql
+ERROR:
+Failed to open file 'E:\KMIT\RDBMS\schema.sql', error: 2
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| db                 |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
+| todo               |
++--------------------+
+6 rows in set (0.00 sec)
+
+mysql> create database test;
+Query OK, 1 row affected (0.20 sec)
+
+mysql> address exceptions we use drop if exists and create database;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'address exceptions we use drop if exists and create database' at line 1
+mysql> ^S

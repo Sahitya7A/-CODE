@@ -1,0 +1,349 @@
+Program1
+
+Ramu is given some rows and columns of numbers which contain 
+only '1' and '0'. Now his madam gave him a task to find the square 
+in the given matrix which contains only's 1 and he has to return the area 
+
+
+Input 
+5 5
+1 0 1 0 0
+1 0 1 1 1
+1 1 1 1 1
+1 0 0 1 0
+output = 4
+
+
+Explanation 
+
+The Second row third column froms the square matrix whose area is 4
+
+Input 
+3 4
+1 1 1 0
+1 1 1 0
+1 1 1 0
+output = 9 
+
+
+
+
+import java.util.Scanner;
+
+public class MaximalSquare {
+
+	 public static int maximalSquare(int[][] matrix) {
+	        int rows = matrix.length, cols = rows > 0 ? matrix[0].length : 0;
+	        int[][] dp = new int[rows + 1][cols + 1];
+	        int maxsqlen = 0;
+	        for (int i = 1; i <= rows; i++) {
+	            for (int j = 1; j <= cols; j++) {
+	                if (matrix[i-1][j-1] == 1){
+	                    dp[i][j] = Math.min(Math.min(dp[i][j - 1], dp[i - 1][j]), dp[i - 1][j - 1]) + 1;
+	                    maxsqlen = Math.max(maxsqlen, dp[i][j]);
+	                }
+	            }
+	        }
+	        return maxsqlen * maxsqlen;
+	    }
+	 
+	  public static void main(String args[] ) {
+			 Scanner scan = new Scanner(System.in);
+				int R=scan.nextInt();
+				int C=scan.nextInt();      
+
+				int[][] matrix=new int[R][C];
+			       for(int i=0; i<R; i++)
+			       {
+			           for(int j=0; j<C; j++)
+			           {
+			        	   matrix[i][j] = scan.nextInt();
+			           }
+			       }
+			       System.out.println(maximalSquare(matrix));
+		}
+}
+
+
+
+back end test cases
+case = 1
+input = 3 3
+1 1 1
+1 1 1
+1 1 1
+output = 9
+
+case = 2
+input = 3 3
+1 1 1
+0 0 0
+1 1 1
+output = 1
+
+case = 3
+input = 5 5
+1 1 1 1 1
+1 1 1 1 1
+1 1 1 1 1
+1 1 1 1 1
+1 1 1 1 1
+output = 25
+
+case = 4
+input = 4 4
+1 1 1 1
+1 1 1 1
+1 1 1 1
+1 1 1 0
+output = 9
+
+
+
+
+Program-2
+Krishna is working on strings, He is trying to modify the string 
+which has to be first in lexicographic order.
+You can modify the string using following operations:
+	- Interchnage the characters at the given pair of indices.
+	- You can perform the interchange of the pair any number of times.
+	- You will be given I number of pairs
+
+Example: 
+--------
+If pair is ->[i,j], you can interchange the characters at i-th and j-th indices
+with each other.
+
+Krishna is given a String S, an integer I and I pairs of indices.
+Can you help Krishna to find the string that can be formed 
+after performing interchange operations, which has to be first in the
+lexicographical order.
+
+Note: String contains only lowercase letters.
+
+
+Input Format:
+-------------
+Line-1: A string S
+Line-2: An integer I, number of interchanges.
+Next I lines: Two space separated integers, interchange pair.
+
+Output Format:
+--------------
+A string, lexicographic smallest string after the interchanges
+
+
+Sample Input-1:
+---------------
+cba
+2
+0 1
+1 2
+
+Sample Output-1:
+----------------
+abc
+
+Explaination: 
+-------------
+Interchange s[0] and s[1], s = "bca"
+Interchange s[1] and s[2], s = "bac"
+Interchange s[0] and s[1], s = "abc"
+
+
+Sample Input-2:
+---------------
+dcab
+2
+0 3
+1 2
+
+Sample Output-2:
+----------------
+bacd
+
+Explaination: 
+-------------
+Interchange s[0] and s[3], s = "bcad"
+Interchange s[1] and s[2], s = "bacd"
+
+
+Sample Input-3:
+---------------
+dcab
+3
+0 3
+1 2
+0 2
+
+Sample Output-3:
+----------------
+abcd
+
+Explaination: 
+-------------
+Interchange s[0] and s[3], s = "bcad"
+Interchange s[0] and s[2], s = "acbd"
+Interchange s[1] and s[2], s = "abcd"
+
+
+
+
+back end test cases 
+
+case =1
+input =axbycz
+5
+0 3
+3 2
+1 4
+5 0
+3 1
+output ='abcxyz'
+
+case =2
+input =fexdcbza
+4
+0 3
+3 0
+2 5
+6 1
+output ='debfcxza'
+
+case =3
+input =tkmi
+2
+1 3
+0 2
+output ='mitk'
+
+case =4
+input =keshav
+3
+4 0
+5 3
+2 3
+output ='aehskv'
+
+
+import java.util.*;
+
+class SmallestStringWithSwaps
+{
+    public String smallestStringWithSwaps(String s, ArrayList<ArrayList<Integer>> pairs) {
+        int[] p = new int[s.length()];
+        for (int i = 0; i < p.length; i++) p[i] = i;
+        for (ArrayList<Integer> pair : pairs) {
+            union(p, pair.get(0), pair.get(1));
+        }
+        Map<Integer, ArrayList<Integer>> map = new HashMap<>();
+        for (int i = 0; i < p.length; i++) {
+            int fath = find(p, i);
+            if (!map.containsKey(fath)) map.put(fath, new ArrayList<Integer>());
+            map.get(fath).add(i);
+        }
+        char[] arr = s.toCharArray();
+        for (Map.Entry<Integer, ArrayList<Integer>> entry : map.entrySet()) {
+            ArrayList<Integer> group = entry.getValue();
+            ArrayList<Character> temp = new ArrayList<>();
+            for (int ind : group) temp.add(arr[ind]);
+            Collections.sort(temp);
+            for (int i = 0; i < group.size(); i++) {
+                arr[group.get(i)] = temp.get(i);
+            }
+        }
+        return new String(arr);
+    }
+    public void union (int[] p, int nodeA, int nodeB) {
+        int A = find(p, nodeA);
+        int B = find(p, nodeB);
+        if (A != B) p[A] = B;
+    }
+    
+    public int find(int[] p, int node) {
+        if (p[node] == node) return node;
+        return p[node] = find(p, p[node]);
+    }
+	public static void main(String args[])
+	{
+		Scanner sc=new Scanner(System.in);
+		String s1=sc.next();
+		int n=sc.nextInt();
+		ArrayList<ArrayList<Integer> > pairs =  new ArrayList<ArrayList<Integer> >(n); 
+		for(int i=0;i<n; i++)
+		{
+				ArrayList<Integer> a=new ArrayList<Integer>();
+				a.add(sc.nextInt());
+				a.add(sc.nextInt());
+				pairs.add(a);
+		}
+		System.out.println(new SmallestStringWithSwaps().smallestStringWithSwaps(s1,pairs));
+	}
+}
+
+
+
+
+Program-3
+
+Given a positive integer n, find the least number of perfect square numbers (for example, 1, 4, 9, 16, ...) which sum to n.
+
+Example 1:
+
+Input: n = 12
+Output: 3 
+Explanation: 12 = 4 + 4 + 4.
+
+Example 2:
+
+Input: n = 13
+Output: 2
+Explanation: 13 = 4 + 9.
+
+
+
+back end test cases
+case = 1
+input = 12
+output = 3
+
+case = 2
+input = 1
+output = 1
+
+case = 3
+input = 13
+output = 2
+
+case = 4
+input = 16
+output = 4
+
+
+import java.util.*;
+class test
+{
+  public int numSquares(int n) {
+    int[] dp = new int[n + 1];
+    Arrays.fill(dp,Integer.MAX_VALUE);
+    dp[0] = 0;
+
+    for (int i = 1; i * i <= n; i++) {
+      for (int j = i * i; j < n + 1; j++) {
+        dp[j] = Math.min(dp[j], dp[j - i * i] + 1);
+        System.out.println(i + " " + j + " " + dp[j]);
+      }
+    }
+    System.out.println(Arrays.toString(dp));
+    return dp[n];
+  }    
+  	
+  public static void main(String [] args)
+  {
+    Scanner sc = new Scanner(System.in);
+    int num = sc.nextInt();
+   
+    test obj = new test();
+    System.out.println(obj.numSquares(num));
+  }
+}
