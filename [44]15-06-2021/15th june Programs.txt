@@ -1,0 +1,196 @@
+
+Program-1
+
+Ramu is given a string s, Now he has to remove duplicate letters so that every letter appears once and only once.
+
+He must make sure that the result produces should occur in the order given in string 
+
+Example 1:
+
+Input = bcabc
+Output = bca
+
+
+import java.util.*;
+class  RemoveDup
+{
+	static void removeduplicate(String word)
+	{
+	LinkedHashMap<Character,Integer> charCount = new LinkedHashMap<Character,Integer>();
+ 	
+	for(int i=0;i<word.length();i++)
+		{
+		   if(charCount.get(word.charAt(i))==null)
+			   charCount.put(word.charAt(i),1);
+		   else
+			   charCount.put(word.charAt(i),charCount.get(word.charAt(i))+1);
+		
+		}
+	Set<Character> keys = charCount.keySet();
+	for(char c : keys)
+		System.out.print(c);
+
+
+	}
+	public static void main(String[] args) 
+	{
+		Scanner sc = new Scanner(System.in);
+		String word = sc.next();
+        new RemoveDup().removeduplicate(word);
+	}
+}
+
+
+
+
+
+back end test cases
+
+case = 1
+input = ddccbbaa
+output = dcba
+
+case = 2
+input = ddabbaac
+output = dabc
+
+case = 3
+input = aaaabbbbccc
+output = abc
+
+case = 4
+input = aaaccccbbbbdddaaaa
+output = acbd
+
+case = 5
+input = abbccaaazzzeeekkkk
+output = abczek
+
+
+
+
+Program-2
+
+Ramu is given an array of numbers now he has to check for a super square matrix in the given array.
+
+A super square matrix is a matrix such that every row sum, every column sum, and both
+diagonal sums are all equal. 
+
+The integers in the magic square do not have to be distinct. 
+Every 1 x 1 grid is trivially a super square matrix 
+
+Given an m x n integer grid , return the size (i.e., the side length k ) of the largest super square matrix that can be found
+within this grid.
+
+
+
+Example 1:
+
+Input = 
+4 5
+7 1 4 5 6
+2 5 1 6 4
+1 5 4 3 2
+1 2 7 3 4
+Output: 3
+
+Explanation: 
+
+From the above array we have the following super square matrix of size 3 
+5 1 6 
+5 4 3
+2 7 3 
+
+
+
+The largest super square matrix has a size of 3.
+Every row sum, column sum, and diagonal sum of this magic square is equal to 12.
+- Row sums: 5+1+6 = 5+4+3 = 2+7+3 = 12
+- Column sums: 5+5+2 = 1+4+7 = 6+3+3 = 12
+- Diagonal sums: 5+4+3 = 6+4+2 = 12
+
+
+
+
+
+
+
+import java.util.*;
+
+class LargestMagicSquare {
+     public int largestMagicSquare(int[][] g) {
+        int R = g.length, C = g[0].length, rows[][] = new int[R][C + 1], cols[][] = new int[R + 1][C];
+        for (int i = 0; i < R; i++)
+            for (int j = 0; j < C; j++) {
+                rows[i][j + 1] = rows[i][j] + g[i][j];//cumulative sum for each row
+                cols[i + 1][j] = cols[i][j] + g[i][j];//cumulative sum for each column 
+            }
+        for (int side = Math.min(R, C); side > 1; side--)//start with the biggest side possible
+            for (int i = 0; i <= R - side; i++)//check every square
+                for (int j = 0; j <= C - side; j++)
+                    if (magic(g, rows, cols, i, j, side))//checks if a square with top left [i, j] and side length is magic
+                        return side;
+        return 1;
+    }
+
+    boolean magic(int[][] g, int[][] rows, int[][] cols, int r, int c, int side) {
+        int sum = rows[r][c + side] - rows[r][c], d1 = 0, d2 = 0;
+        for (int k = 0; k < side; k++) {
+            d1 += g[r + k][c + k];
+            d2 += g[r + side - 1 - k][c + k];
+            if (rows[r + k][c + side] - rows[r + k][c] != sum || cols[r + side][c + k] - cols[r][c + k] != sum)//check each row and column
+                return false;
+        }
+        return d1 == sum && d2 == sum;//checks both diagonals
+    }
+	
+	public static void main(String args[])
+	{
+		Scanner sc=new Scanner(System.in);
+		int m=sc.nextInt();
+		int n=sc.nextInt();
+		int grid[][]=new int[m][n];
+		for(int i=0;i<m;i++)
+			for(int j=0;j<n;j++)
+				grid[i][j]=sc.nextInt();
+		System.out.println(new LargestMagicSquare().largestMagicSquare(grid));
+	}	
+}
+
+
+
+back end test cases
+case = 1
+input = 4 4
+2 2 2 2
+1 1 1 1
+2 2 2 2
+1 1 1 1
+output = 1
+
+case = 2
+input = 5 4
+1 2 3 4
+2 1 3 4
+4 4 4 4
+4 4 4 4
+4 4 4 4
+output = 3
+
+
+case = 3
+input = 5 5
+1 2 3 4 5
+8 0 0 0 0
+2 0 5 1 6
+2 0 5 4 3
+2 0 2 7 3 
+output = 3
+
+case = 4
+input =
+3 3
+1 2 4
+8 5 5
+8 5 5
+output = 2
