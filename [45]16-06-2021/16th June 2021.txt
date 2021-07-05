@@ -1,0 +1,222 @@
+Program-1
+
+Ramu is given a magical string which consits of only (1/2). 
+
+A magical string S consists of only '1' and '2' and obeys the following rules:
+
+The string S is magical because concatenating the number of contiguous occurrences of characters '1' and '2' generates the string S itself.
+The first few elements of string S is the following: S = "1221121221221121122......"
+
+If we group the consecutive '1's and '2's in S, it will be:
+1 22 11 2 1 22 1 22 11 2 11 22 ......
+
+and the occurrences of '1's or '2's in each group are:
+1 2 2 1 1 2 1 2 2 1 2 2 ......
+
+You can see that the occurrence sequence above is the S itself.
+
+Ramu is given an integer N as input and he has to return the number of '1's in the first N number in the magical string S.
+
+Example 1:
+
+Input = 6
+Output = 3
+
+Explanation: The first 6 elements of magical string S is "12211" and it contains three 1's, so return 3.
+
+
+
+import java.util.Scanner;
+class MagicalString {
+    public static int magicalString(int n) {
+        if (n <= 0) return 0;
+        if (n <= 3) return 1;
+        
+        int[] a = new int[n + 1];
+        a[0] = 1; a[1] = 2; a[2] = 2;
+        int head = 2, tail = 3, num = 1, result = 1;
+        
+        while (tail < n) {
+            for (int i = 0; i < a[head]; i++) {
+                a[tail] = num;
+                if (num == 1 && tail < n) result++;
+                tail++;
+            }
+            num = num ^ 3;
+            head++;
+        }
+        
+        return result;
+    }
+	public static void main(String args[])
+	{
+		Scanner sc=new Scanner(System.in);
+		int N=sc.nextInt();
+		System.out.println(magicalString(N));
+	}
+}
+
+
+
+
+back end test cases 
+case = 1
+input = 100
+output = 49
+
+case = 2
+input = 50
+output = 25
+
+case = 3
+input = 20
+output = 10
+
+case = 4
+input = 1
+output = 1
+
+
+
+Program-2
+
+
+Shan is given a Group of Numbers which contains only '0' and '1' 
+
+Where 0 represent the dull state and 1 represents the acitve status
+
+Now he has to change the group of numbers based on the following rules 
+
+Each cell interacts with its eight neighbors (horizontal, vertical, diagonal) using the following four rules 
+
+1. Any active cell with fewer than two active neighbors changes to  dull state
+2. Any active cell with two or three active neighbors changes to active state
+3. Any active cell with more than three active neighbors changes to dull state
+4. Any dead cell with exactly three active neighbors becomes a active state
+
+Shan is given the current state of the m x n group of numbers , return the next state.
+
+Example 1:
+
+input = 4 3
+0 1 0
+0 0 1
+1 1 1
+0 0 0
+output =
+0 0 0 
+1 0 1 
+0 1 1 
+0 1 0
+
+
+
+back end test cases
+case = 1
+input = 
+2 2
+1 0
+0 1
+output = 
+0 0
+0 0
+
+
+case = 2
+input = 3 4
+1 0 1 0
+1 1 1 1
+1 1 1 1
+output = 
+1 0 1 1
+0 0 0 0
+1 0 0 1
+
+
+case = 3
+input = 4 4
+1 1 1 1
+1 1 1 1
+1 1 1 1
+1 1 1 1
+output = 
+1 0 0 1
+0 0 0 0
+0 0 0 0
+1 0 0 1
+
+
+case = 4
+input = 4 3
+1 0 1
+0 0 0
+0 1 1
+1 1 1
+output = 
+0 0 0
+0 0 1
+1 0 1
+1 0 1
+
+
+
+import java.util.Scanner;
+
+public class GameofLife
+{
+	public static void gameOfLife(int[][] board) {
+		if (board == null || board.length == 0) return;
+		int m = board.length, n = board[0].length;
+
+		for (int i = 0; i < m; i++) {
+			for (int j = 0; j < n; j++) {
+				int lives = liveNeighbors(board, m, n, i, j);
+
+				// In the beginning, every 2nd bit is 0;
+				// So we only need to care about when will the 2nd bit become 1.
+				if (board[i][j] == 1 && lives >= 2 && lives <= 3) {  
+					board[i][j] = 3; // Make the 2nd bit 1: 01 ---> 11
+				}
+				if (board[i][j] == 0 && lives == 3) {
+					board[i][j] = 2; // Make the 2nd bit 1: 00 ---> 10
+				}
+			}
+		}
+
+		for (int i = 0; i < m; i++) {
+			for (int j = 0; j < n; j++) {
+				board[i][j] >>= 1;  // Get the 2nd state.
+			}
+		}
+	}
+
+	public static int liveNeighbors(int[][] board, int m, int n, int i, int j) {
+		int lives = 0;
+		for (int x = Math.max(i - 1, 0); x <= Math.min(i + 1, m - 1); x++) {
+			for (int y = Math.max(j - 1, 0); y <= Math.min(j + 1, n - 1); y++) {
+				lives += board[x][y] & 1;
+			}
+		}
+		lives -= board[i][j] & 1;
+		return lives;
+	}
+
+	public static void main(String args[])
+	{
+		Scanner sc=new Scanner(System.in);
+		int r=sc.nextInt();
+		int c=sc.nextInt();
+		int board[][]=new int[r][c];
+		for(int i=0;i<r;i++)
+			for(int j=0;j<c;j++)
+				board[i][j]=sc.nextInt();
+		gameOfLife(board);
+		for(int i=0;i<r;i++){
+			for(int j=0;j<c;j++){
+				System.out.print(board[i][j]+" ");
+			}
+			System.out.println();
+		}
+				
+	}
+}
