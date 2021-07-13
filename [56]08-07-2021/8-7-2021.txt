@@ -1,0 +1,560 @@
+
+Program1
+
+Ramu is working with strings, which contain digits from [0-9] only.
+he has to find if given string is a downgraded string or not.
+
+A string is said to be a downgraded string, if the string follows the below rules:
+	- Divide the string S into two or more substrings, like sub[0],sub[1], sub[2],..,sub[n-1]. 
+	  If you append all the substrings should result in S,sub[0]+sub[1]+ sub[2]+..+sub[n-1] = S
+	  
+	- The numeric values of the substrings should be in decreasing order.
+	  i.e., sub[0] > sub[1] > .. > sub[n-1].
+	- The difference between each consecutive pair should be 1 only.
+	  i.e., sub[0]-sub[1] = sub[1]-sub[2] = .. = sub[n-2]-sub[n-1] = 1.
+
+Your task is to help Ramu to check the given numeric string is downgraded string or not. 
+If yes, print "true", Otherwise print "false".
+
+Input Format:
+-------------
+A String, numeric word.
+
+Output Format:
+--------------
+Print a boolean result.
+
+
+Sample Input-1:
+---------------
+004567
+
+Sample Output-1:
+----------------
+false
+
+Explanation:
+------------
+Numeric Word can be divided as follows: "004","5","6","7"
+Given word is not a downgraded string. 
+
+
+Sample Input-2:
+---------------
+1201100010
+
+Sample Output-2:
+----------------
+true
+
+Explanation:
+------------
+Numeric Word can be divided as follows: "12","011","00010"
+The numeric value of substrings are: 12, 11, 10
+
+
+Sample Input-3:
+---------------
+5040301
+
+Sample Output-3:
+----------------
+false
+
+Explanation:
+------------
+Numeric Word can be divided as follows: "5","04","03","01"
+The numeric value of substrings are: 5,4,3,1
+Rule-1 and Rule-2 are followed but Rule-3 is not followed.
+
+
+
+Sample Input-4:
+---------------
+99999998
+
+Sample Output-4:
+----------------
+true
+
+Explanation:
+------------
+Numeric Word can be divided as follows: "9999","9998".
+
+
+case =1
+input =9080701
+output =false
+
+case =2
+input =10009998
+output =true
+
+case =3
+input =11121111200011119111180011117000111161111511114011113000111120101111
+output =false
+
+case =4
+input =999998000997099060995994
+output =false
+
+
+
+
+import java.util.*;
+
+class SplitString {
+    public boolean splitString(String s) {
+        return isRemainingValid(s, null);
+    }
+    private boolean isRemainingValid(String s, Long previous) {
+        long current =0;
+        for(int i=0;i<s.length();i++) {
+            current = current * 10 + s.charAt(i)-'0';
+            if(current >= 10000000000L) return false;   // Avoid overflow
+            if(previous == null) {
+                if (isRemainingValid(s.substring(i+1), current)) 
+                    return true;
+            } else if(current == previous - 1 && (i==s.length()-1 || isRemainingValid(s.substring(i+1), current)))
+                return true;
+        }
+        return false;
+    }
+	
+	public static void main(String args[])
+	{
+		Scanner sc=new Scanner(System.in);
+		String s=sc.next();
+		System.out.println(new SplitString().splitString(s));
+	}
+}
+
+
+
+Program2
+
+Ramu is given an group of numbers and another number 'k', 
+he has to divide the group into k subsets(non-empty) whose sums should be same.
+
+If he is able to do so print true else print false
+
+Example 1:
+Input = 7
+4 3 2 3 5 2 1
+4
+Output = true
+
+Explanation: It's possible to divide it into 4 subsets (5), (1, 4), (2,3), (2,3) with equal sums.
+
+Example 2:
+Input = 4
+1 2 3 4 
+3
+output = false
+
+
+back end test cases
+case = 1
+input = 7
+40 30 20 30 50 20 10
+4
+output = false
+
+
+case = 2
+input = 8
+1 2 3 4 5 6 7 8
+1
+output = true
+
+
+case = 3
+input = 10
+9 8 7 3 4 3 2 1 8 7
+20
+output = false
+
+
+case = 4
+input =  7
+4 3 2 3 5 2 1
+4
+Output = true
+
+
+
+
+
+import java.util.*;
+
+class EqualSets {
+    public boolean canPartitionKSubsets(int[] nums, int k) {
+        int sum = 0, maxNum = 0;
+        for (int num : nums) {
+            sum += num;
+            maxNum = Math.max(maxNum, num);
+        }
+        if (sum % k != 0 || maxNum > sum / k) {
+            return false;
+        }
+        return canPartitionKSubsetsFrom(nums, k, new boolean[nums.length], sum / k, 0, 0);
+    }
+    
+    private boolean canPartitionKSubsetsFrom(int[] nums,  int k, boolean[] visited, int targetSubsetSum, int curSubsetSum, int nextIndexToCheck) {
+        if (k == 0) {
+            return true;
+        }
+        
+        if (curSubsetSum == targetSubsetSum) {
+            return canPartitionKSubsetsFrom(nums, k - 1, visited, targetSubsetSum, 0, 0);
+        }
+        
+        for (int i = nextIndexToCheck; i < nums.length; i++) {
+            if (!visited[i] && curSubsetSum + nums[i] <= targetSubsetSum) {
+                visited[i] = true;
+                if (canPartitionKSubsetsFrom(nums, k, visited, targetSubsetSum, curSubsetSum + nums[i], i + 1)) {
+                    return true;
+                }
+                visited[i] = false;
+            }
+        }      
+        return false;
+    }
+	
+	public static void main(String args[] ) {
+		Scanner sc = new Scanner(System.in);
+		int n=sc.nextInt();
+		int k=sc.nextInt();
+		int arr[]=new int[n];
+		for(int i=0;i<n;i++)
+			arr[i]=sc.nextInt();
+
+		System.out.println(new EqualSets().canPartitionKSubsets(arr,k));
+	}
+}
+
+
+
+
+
+
+
+1)
+
+Suppose a circular queue of capacity (n-1) elements is implemented with an array of n elements. 
+Assume that the insertion and deletion operation are carried out using 
+REAR and FRONT as array index variables, respectively. Initially, REAR=FRONT=0.
+
+The conditions to detect queue full and queue empty are 
+
+
+A) Full:(REAR+1)mod n == FRONT,empty:REAR==FRONT
+B) Full: (REAR+1) mod n == FRONT,empty :(FRONT+1)mod n == REAR
+C) Full: REAR==FRONT,empty:(REAR+1) mod n == FRONT
+D) Full : (FRONT+1) mod n == REAR,empty:REAR==FRONT
+
+
+
+Ans-A
+
+
+
+
+
+2) Consider a linked list of n elements, What is the time taken to
+insert an element at a position that is pointed to by some pointer ?
+
+
+A) O(1)
+B) O(log2n)
+C) O(n)
+D) O(nlog2n)
+
+
+Ans-A
+
+
+
+
+
+3) 
+
+
+Which one of the following is not the application of the stack data structure
+
+A)String reversal
+B)Recursion
+C)Backtracking
+D)Asynchronous data transfer
+
+
+Ans-D
+
+
+
+
+4)
+
+1) Input two integers:a,b
+2) Initialize the value of x to a and the value of y to b 
+3) If x>y then set x to x-y
+4) If x<y then set y to y-x
+5) Repear steps 3 and 4 until x=y
+6) Output x(or y) and halt.
+
+
+What will this algorithm output in step 6 if we begin with a=2437,b=875
+
+
+A) 0
+B) 1
+C) 2
+D) 3
+E) 875
+F) 2437
+
+
+
+Ans-B
+
+
+
+
+
+5)
+Which of the following operations is performed more efficiently by doubly 
+linked list than by linear linked list ?
+
+
+A) Deleting a node whose location is given
+B) Searching an unsorted list
+C) Inserting a node after the node with a given location
+D) Traversing the list to process each node
+
+
+Ans-A
+
+
+
+6) An adjacency matrix representation of a graph cannot contain information of :
+
+A) nodes
+B) edges
+C) direction of edge
+D) parallel edges
+
+
+Ans-D
+
+
+7) Correct syntax to drop a column from a table is 
+
+A) ALTER TABLE table_name DROP COLUMN column_name
+B) DELETE COLUMN column_name;
+C) DROP COLUMN column_name;
+D) None of these
+
+
+Ans-A
+
+
+
+
+
+8) Which is not DDL (data definition language) operation
+
+A) Renaming a table
+B) SQL create table
+C) Add a column to an existing table
+D) Update data into a table in SQL database
+
+
+
+Ans-D
+
+
+
+
+
+9) Which operator is used to compare a value to a specified list of values ?
+
+A) BETWEEN
+B) Any
+C) IN
+D) ALL
+
+
+
+Ans-C
+
+
+
+10) If you want to allow age of a person > 18 in the column Age of table Person,
+then which constraint will be applied to AGE column. 
+
+
+A) Default
+B) Check
+C) NOT NULL
+D) None of these
+
+
+
+Ans-B
+
+
+
+
+
+11)
+
+Class MWC107 {
+
+public static void main(String [] s) {
+
+String s1="A",s2=" B ",s3="C";
+
+s2.trim();
+s3.concat("D");
+
+System.out.print(s1+s2+s3);
+}
+}
+
+What is the result of attempting to compile and run the program ?
+
+A)Prints : ABC
+B)Prints : A B C
+C)Prints : A B C D
+D)Prints : ABDC
+E)Prints : A B CD
+F)Prints : A B DC
+G)Compile time error
+H)Run time error
+I)None of these
+
+
+
+
+Ans-B
+
+
+
+12)
+
+what gets printed on the standard output when the class below is compiled
+and executed by entering "java test let's see what happens" ?
+
+public class test {
+public static void main(String [] args) {
+System.out.println(args[0]+" "+args[args.length]);
+}
+}
+
+A)The program will throw an ArrayIndexOutOfBounds exception
+B)The program will print "java test"
+C)The program will print "java happens"
+D)The program will print "test happens"
+E)The program will print "lets happens"
+
+
+Ans-A
+
+
+
+
+
+13)
+class A
+{
+public static void main(String [] args) {
+
+byte primitiveByte =1 ;
+char primitiveChar = 'b'-'a';
+int primitiveInt = 1;
+short primitiveShort = 1;
+String s="1";
+ Integer i1 = new Integer(primitiveByte);
+ Integer i2 = new Integer(primitiveChar);
+ Integer i3 = new Integer(primitiveShort);
+ Integer i4= new Integer(primitiveInt);
+ Integer i5= new Integer(s);
+ int p1=i1.intValue() + i2.intValue()+i3.intValue()+i4.intValue()+i5.intValue();
+ System.out.print(p1);
+ }
+ }
+
+
+ A)Prints : 5
+ B)Prints : 5.0
+ C)Compile time error
+ D)Run time error
+ E) None of these
+
+
+Ans-A
+
+
+
+14)
+ class GFC403 
+ {
+ private static int x =1;
+ static void main(int i) {
+ x++;i++;
+ }
+
+ public static void main(String [] args) 
+ {
+ int y=3;
+ m1(y);
+ System.out.print(x+","+y);
+ 
+ }
+ }
+
+ What is the result of attempting to compile and runt he program?
+
+
+ A) Prints : 1,3
+ B) Prints : 2,3
+ C) Prints : 1,4
+ D) Prints : 2,4
+ E) Run time error
+ F) Compile time error
+ G) None of these
+
+
+
+Ans-B
+
+
+
+15)
+
+ class Base {
+ public final void show() {
+ System.out.println("Base::show() called");
+}
+}
+
+class Derived extends Base {
+public void show() {
+System.out.println("Derived ::show() called");
+}
+}
+
+public class Main {
+public static void main(String[] args) {
+
+Base b = new Derived();;
+b.show();
+}
+}
+
+A)Derived::show() called
+B)Base::show() called
+C)Compiler Error
+D)Exception
+
+Ans-C
