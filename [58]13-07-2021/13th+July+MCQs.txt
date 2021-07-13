@@ -1,0 +1,409 @@
+1)
+class MyThread extends Thread
+{
+MyThread() {
+  System.out.print("My Thread");
+  }
+  public void run() {
+  System.out.print(" bar");
+  }
+ 
+ public void run(String s) {
+   System.out.print("baz");
+   }
+   }
+
+   public class TestThreads {
+   public static void main(String [] args) {
+
+   Thread t=new MyThread(){
+   public void run() {
+   System.out.print("foo");
+   }
+   };
+   t.start();
+   }
+   }
+
+   A) foo
+   B) MyThreadfoo
+   C) MyThreadbar
+   D) foo bar
+   E) foo bar baz
+   F) bar foo
+   G) Compilation fails
+   H An exception is thrown at runtime 
+
+
+
+
+
+
+Ans-B
+
+2)
+import java.io.*;
+ class Test {
+   int err() throws Exception {
+	try {
+		throw new IOException("..");
+	}
+	catch(RuntimeException e) 
+	{
+	   throw new RuntimeException(e);
+	}
+	finally {
+		return -1;
+	}
+}
+
+   public static void main(String [] args) throws Exception {
+           System.out.print(new Test().err());
+   }
+   }
+
+
+A) Always throws IOExceptionn
+B) Always throws RuntimeException
+C) Always returns -1
+D) It Depends
+
+
+
+
+
+Ans-C
+
+3) Output of the below Code
+
+class A { }
+class B extends A { }
+class C extends B { }
+
+class Test
+{
+	public static void main(String [] args)
+	{
+      B b = new B();
+	   if(b instanceof B)
+		    System.out.print("A ");
+	   if( b instanceof B && (!(b instanceof A)))
+		   System.out.print("B ");
+		if(b instanceof B && (!(b instanceof C)))
+		   System.out.print("C ");
+	}
+}
+
+
+A) A C
+B) B C
+C) C
+D) Compilation fails
+E) A
+
+
+
+
+
+Ans - A
+
+4) 
+
+void abc(int x=0,int y=0)
+{ cout<<x<<y; }
+
+Which of the following functions calls are valid ? (Assume h,g are declared as integers)
+
+A)abc();
+B)abc(h);
+C)abc(h,g);
+D)All of these
+
+
+
+
+Ans-D
+
+5)Which of the following handles function calls ?
+
+A)The data heap
+B)The stack
+C)The processors registers
+D)The main memory
+E)The System calls
+
+
+
+
+Ans-B
+
+6) Expression C=i++ causes
+
+A) Value of i assigned to C and then i incremented by 1
+B) i to be incremented by 1, and then value of i assigned to C
+C) value of i assigned to C only
+D) i to be incremented by 1 only
+
+
+
+
+
+
+Ans-A
+
+7)
+#include<stdio.h>
+int i;
+int main()
+{
+  if(++i <5)
+     main();
+  printf(" %d ", i);
+ }
+
+A) 5 4 3 2 1
+B) 1 2 3 4 5
+C) 5 5 5 5 5 
+D) Compile time error
+
+
+
+
+
+
+
+Ans-C
+
+8)
+
+#include<stdio.h>
+int foo(unsigned int n) 
+{
+  return (n<<3-n);
+}
+
+void main()
+{
+   int k=3;
+   int p;
+   p=k>2?foo(2):foo(3);
+   printf("%d",p);
+}
+
+A) 14
+B) 4
+C) Compilation fails
+D) Segmentation fault
+
+
+
+
+
+Ans-B
+
+https://www.tutorialspoint.com/cprogramming/c_operators_precedence.htm
+
+9)
+
+#include<iostream>
+using namespace std;
+
+class Base
+{
+public:
+      virtual void method() { std::cout<<"Base"; }
+      virtual ~Base() { }
+
+ };
+
+ class Derived : public Base
+ {
+   public:
+       virtual void method() { std::cout<<"Derived "; }
+
+ };
+
+ int main()
+ {
+   Base *pBase = new Derived;
+   pBase->method();
+   delete pBase;
+   return 0;
+ }
+
+
+A) Base
+B) Derived
+C) Compilation fails
+D) Segmentation fault
+
+
+
+
+Ans-B
+
+10)  #include<stdio.h>
+
+ void main() {
+   int i =16;
+   for( ; i; i>>=1)
+   {
+        if(i=5)
+	printf("hello");
+	break;
+   }
+   printf(" %d",i);
+
+ }
+ 
+A) hello
+B) 5
+C) prints hello 16 times
+D) Compilation fails
+E) hello 5
+
+
+
+
+
+Ans- E
+
+11)
+
+#include<stdio.h>
+ #include<string.h>
+ int main()
+ {
+    char char_arr[6]="ORACL";
+    char c='E'; 
+    printf("%s\n",strcat(char_arr,c));
+    return 0;
+  
+ }
+
+ A) ORACL
+ B) ORACLE
+ C) Segmentation fault
+ D) Compile error
+
+
+
+
+
+ Ans-C
+
+12) #include<stdio.h>
+ void main()
+ {
+    char letter='A';
+    printf(" %c ", letter); 
+ }
+
+ A) A
+ B) 65
+ C) Compilation fails
+ D) None of these
+
+
+
+
+
+
+
+
+
+
+
+Ans-A
+
+13)
+
+#include<iostream>
+using namespace std;
+int main()
+{
+   try {
+	   throw '5';
+   }
+   catch(...) {  cout<<"an exception ";}
+   catch(int param) { cout<<"int exception " ;}
+   catch(char param) { cout<<"char exception"; }
+
+   return 0;
+}
+
+
+A) an exception
+B) int exception
+C) compilation fails
+D) None of these
+
+
+
+
+
+
+
+Ans-C
+
+14)
+
+class Exc0 extends Exception { }
+class Exc1 extends Exc0 { }
+public class Main
+{
+public static void main(String [] args) 
+{
+   try {
+      throw new Exc1();
+   }catch(Exc0 e0)
+   {
+      System.out.println("Ex0 caught");
+   }
+   catch(Exception e) 
+   {
+      System.out.println("exception caught");
+   }
+}
+}
+
+A) compilation fails
+B) Ex0 caught
+C) exception caught
+D) Ex0 caught exception caught
+
+
+
+
+
+Ans-B
+
+15)
+
+#include<iostream>
+using namespace std;
+class A1{
+public : 
+	int upper;
+	int lower;
+	A1(int i): lower(i),upper(lower+1) { };
+};
+
+int main()
+{
+   A1 a(5);
+   cout<<a.lower<<" "<<a.upper<<endl;
+   return 0;
+}
+
+A) 5 1
+B) 6 5
+C) Compile error
+D) 5 Garbage-value
+
+
+
+
+
+
+Ans-A
