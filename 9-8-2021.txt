@@ -1,0 +1,571 @@
+1)
+
+import java.util.*;
+class Test {
+public static void main(String[] args) 	{
+	int[][] arr=new int[0][4];
+	Scanner sc=new Scanner(System.in);
+	for(int i=0;i<arr.length;i++)
+		for (int j=0;j<arr[i].length ;j++ )
+		{
+		arr[i][j]=sc.nextInt();
+		}
+
+	for(int i=0;i<arr.length;i++)
+		for (int j=0;j<arr[i].length ;j++ )
+		{
+	       System.out.println(arr[i][j]);
+		}
+	
+}
+}
+
+a) read 4 elements and print those 4 elements
+b) read 4 elements but  print all elements as 0.
+c) compilation fails
+d) no output
+
+
+
+
+
+
+
+
+
+
+Ans: d
+
+
+2) 
+import java.util.*;
+class Test {
+public static void main(String[] args) 	{
+	int[][] arr={{2,3,4},{1 ,0},{5,6,7,8}};
+	System.out.println(arr[1][1]);
+}
+}
+
+
+a) 2
+b) 3
+c) 1
+d) 0
+e) compilation fails
+f) null pointer exception
+
+
+
+
+
+
+
+
+
+Ans: d
+
+
+
+3) 
+import java.util.*;
+class Test {
+public static void main(String[] args) 	{
+	int[][] arr=new int[5][];
+System.out.println(arr[1][1]);
+}
+}
+
+a) 0
+b) null
+c) compilation fails
+d) null pointer exception
+
+
+
+
+
+
+
+
+
+Ans: d
+
+
+
+
+4)
+public class Main
+{
+static int a=23;
+static class I 
+{
+void print()
+{
+	System.out.println(a); // Line A
+    
+}
+}
+public static void main(String args[])
+{
+	Main.I obj=new Main.I(); //Line B
+	obj.print();
+}
+
+}
+
+
+A) Compilation fails at Line A only
+B) Compilation fails at Line B only
+C) Compilation fails at Both Line A and Line B
+D) Prints Nothing
+E) Prints 23
+
+
+Ans-E
+
+
+
+
+5) What type of array is suitable for reading a  Command-line argument in java
+a) Two Dimensional Array
+b) Jagged Array
+c) Three Dimensional Array
+d) One Dimensional Array
+
+
+Ans-d 
+
+
+
+
+
+
+6)#include <stdio.h>
+int var;
+void main()
+{
+if (var)
+    printf("TCS");
+else
+    printf("Tcs Next");
+}
+
+
+
+A) TCS
+B) Tcs Next
+C) Compilation fails
+D) Segementation fault
+
+
+
+ANs-B
+
+
+7) The following code ‘for(;;)’ represents an infinite loop. It can be terminated by.
+
+a) break
+b) exit(0)
+c) return
+d) all of these
+
+
+Ans- d
+
+
+
+
+8) #include <stdio.h>
+void main()
+{
+double x = 0.0f;
+for (x = 0; x < 3; x++)
+    printf(" TCS ");
+}
+
+a) Run time error
+b) TCS TCS 
+c) TCs
+d) TCS TCS TCS
+e) compilation fails
+
+
+
+Ans-d
+
+
+
+
+9)#include <stdio.h>
+void main()
+{
+int x = -0;
+
+do
+    printf(" TCS ");
+while(x);
+}
+
+
+A) Prints TCS infinte times
+B) Compilation fails
+C) TCS
+D) None of these
+
+Ans-C
+
+
+
+10)#include <stdio.h>
+void main()
+{
+int i = 0.0;
+if (i == 0)
+{
+    printf("If loop ");
+    break;
+}
+}
+
+a) If loop is printed infinite times
+b) If loop
+c) Segmentation fault
+d) Compile time error 
+
+
+Ans-d
+
+
+
+
+
+
+
+
+program-1
+
+SureshVimal is working with strings.
+He selected two strings S1 and S2, may differ in length,
+which are of lowercase alphabets only.
+
+Mr SureshVimal has to update the strings S1, S2 to meet any one of the following conditions
+- All the alphabets in S1 should be less than all the alphabets in S2.
+- All the alphabets in S2 should be less than all the alphabets in S1.
+- S1 and S2 should have only one distinct alphabet in it.
+
+To Achieve, one of the condition, you are allowed to replace any one aphabet in 
+the string to any other lowercase alphabet at once.
+
+Your task is to help Mr SureshVimal, to find the minimum replacements to be done to 
+update the strings S1 and S2 to meet one of the criteria mentioned above.
+
+
+Input Format:
+-------------
+Two space separated strings S1 and S2.
+
+Output Format:
+--------------
+Print an integer, minimum number of replacements.
+
+
+Sample Input-1:
+---------------
+apple ball
+
+Sample Output-1:
+----------------
+3
+
+Explanation:
+------------
+Consider the best way to make the criteria true:
+	Update S2 to "baaa" in 2 replacements, and Update S1 to "cpple" in 1 replacement
+	then every alphabet in S2 is less than every alphabet in S1.
+	
+	Or
+	
+    Update S1 to "ppppp" in 3 replacements, then every alphabet in S2 is less 
+    than every alphabet in S1.
+
+
+Sample Input-2:
+---------------
+kmit kmec
+
+Sample Output-2:
+----------------
+2
+
+
+case =1
+input =abababbsdbababbabbbdfbsbsbfb ndbfbbababababdbbbaba
+output =21
+
+case =2
+input =pneumonoultramicroscopicsilicovolcanoconiosis pseudopseudohypoparathyroidism
+output =28
+
+case =3
+input =floccinaucinihilipilification pseudopseudohypoparathyroidism
+output =17
+
+case =4
+input =pneumonoultramicroscopicsilicovolcanoconiosis floccinreducinihilipilification
+output =27
+
+
+
+
+import java.util.*;
+
+class MinCharacters {
+        public int minCharacters(String a, String b) {
+        int m = a.length(), n = b.length(), res = m + n;
+        int[] c1 = new int[26], c2 = new int[26];
+        for (int i = 0; i < m; ++i)
+            c1[a.charAt(i) - 'a']++;
+        for (int i = 0; i < n; ++i)
+            c2[b.charAt(i) - 'a']++;
+
+        for (int i = 0; i < 26; ++i) {
+            res = Math.min(res, m + n - c1[i] - c2[i]); // condition 3
+            if (i > 0) {
+                c1[i] += c1[i - 1];
+                c2[i] += c2[i - 1];
+            }
+            if (i < 25) {
+                res = Math.min(res, m - c1[i] + c2[i]); // condition 1
+                res = Math.min(res, n - c2[i] + c1[i]); // condition 2
+            }
+        }
+        return res;
+    }
+	
+	public static void main(String args[])
+	{
+		Scanner sc=new Scanner(System.in);
+		String A=sc.next();
+		String B=sc.next();
+		
+		System.out.println(new MinCharacters().minCharacters(A,B));
+	}
+}
+
+
+
+
+Program-2
+
+Tcs is planning to conduct Technical interviews for students who cleared online test in two 
+locations. One is at Kondapur and one at Gachibowli Campus.
+
+
+There are N students to participate in the interview,where N is an even number. 
+You will be given an array of tariffs as fare[], 
+where fare[a]=[fareToReachKondapur-a, fareToReachGachibowli-a],
+ - fareToReachKondapur-a indicates cab fare for Student-a to reach Kondapur campus.
+ - fareToReachGachibowli-a indicates cab fare for Student-a to reach Gachibowli campus.
+
+Tcs has decided to refund the cab fare to every student. 
+
+Your task is to help the TCS HR to find the minimum total fare to be paid 
+by all the students to attend the interviews in Kondapur and Gachibowli, such that both 
+the locations should conduct interviews for equal number of students.
+
+Input Format:
+-------------
+Line-1: An integer N, number of students.
+Next N lines: Two space separated integers, fares to reach kondapur and gachibowli. 
+
+Output Format:
+--------------
+Print an integer, minimum fare paid by N students(to be refunded).
+
+
+Sample Input-1:
+---------------
+6
+10 75
+35 120
+105 45
+80 110
+125 85
+65 100
+
+Sample Output-1:
+----------------
+350
+
+Explanation:
+------------
+Student-1 attended interview in Kondapur with fare - 10.
+Student-2 attended interview in Kondapur with fare - 35.
+Student-3 attended interview in Gachibowli with fare - 45.
+Student-4 attended interview in Gachibowli with fare - 110.
+Student-5 attended interview in Gachibowli with fare - 85.
+Student-6 attended interview in kondapur with fare - 65.
+3 students attended in Kondapur and 3 students attended in Gachibowli.
+So, the total minimum fare is to be refunded 350.
+
+
+Sample Input-2:
+---------------
+6
+159 635
+495 67
+784 571
+221 243
+783 134
+524 476
+
+Sample Output-2:
+----------------
+1676
+
+
+
+import java.util.*;
+
+class ReachableScore {
+    public int maximumReachableScore(int n, int[][] routes) {        
+        //number of route connected to place
+        int[] numroutesConnectedplace = new int[100 + 1];
+        //route exist between two routes
+        boolean[][] routeExist = new boolean[n][n];
+        for(int[] route : routes){
+            //increment the count of numbers of connected place
+            numroutesConnectedplace[route[0]]++;
+            numroutesConnectedplace[route[1]]++;
+            //mark route exist, between two routes
+            routeExist[route[0]][route[1]] = true;
+            routeExist[route[1]][route[0]] = true;
+        }
+
+        int maxScore = 0;
+        for(int place1 = 0; place1 < n - 1; place1++){
+            for(int place2 = place1 + 1; place2 < n; place2++){
+                
+                //count total number of route connected to both place
+                int score = numroutesConnectedplace[place1] + numroutesConnectedplace[place2];
+                
+                //just decrement the score, if both place connected
+                if(routeExist[place1][place2]) score--;
+                
+                maxScore = Math.max(maxScore, score);
+            }
+        }
+        return maxScore;
+    }
+	
+	
+	public static void main(String args[])
+	{
+		Scanner sc=new Scanner(System.in);
+		int n=sc.nextInt();
+		int edges[][]=new int[n][2];
+		for(int i=0;i<n;i++)
+			for(int j=0;j<2;j++)
+				edges[i][j]=sc.nextInt();
+		System.out.println(new ReachableScore().maximumReachableScore(n,edges));
+	}	
+
+}
+
+
+
+case =1
+input =20
+685 807
+224 951
+117 919
+277 710
+467 631
+700 977
+720 618
+439 946
+788 678
+901 883
+496 116
+428 619
+125 933
+128 630
+995 393
+912 628
+913 710
+750 588
+324 178
+840 652
+output =9034
+
+case =2
+input =20
+838 843
+970 371
+564 252
+229 207
+391 430
+566 145
+832 879
+243 605
+487 439
+900 625
+208 369
+290 285
+684 544
+159 135
+142 496
+381 242
+558 639
+797 278
+535 267
+977 900
+output =7953
+
+case =3
+input =10
+965 230
+151 201
+675 270
+646 179
+894 434
+792 863
+784 653
+769 698
+586 109
+748 477
+output =4466
+
+case =4
+input =30
+286 583
+539 370
+874 435
+987 388
+662 435
+180 252
+862 419
+928 527
+707 488
+325 526
+718 647
+119 359
+818 696
+905 578
+798 654
+374 316
+367 457
+430 133
+464 884
+162 366
+419 964
+391 802
+956 241
+975 261
+267 849
+597 786
+446 182
+844 473
+497 333
+850 717
+output =12254

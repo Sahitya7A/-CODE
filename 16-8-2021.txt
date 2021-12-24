@@ -1,0 +1,533 @@
+1) output of the below c code 
+
+#include <stdio.h>
+int main() 
+{ 
+    const char *s = ""; 
+    char str[] = "welcome"; 
+    s = str; 
+    while(*s) 
+        printf("%c", *s++); 
+  
+    return 0; 
+} 
+
+
+
+A) prints nothing
+B) prints "welcome"
+C) Compilation fails
+D) Segmentation fault
+E) Junk Value
+
+
+Ans-B
+
+
+
+2)output of the below c code
+
+#include <stdio.h>
+int main() 
+{ 
+    int i, j, var = 'A'; 
+  
+    for (i = 5; i > 1; i--) { 
+        for (j = 0; j <= i; j++) 
+            printf("%c ", (var + j)); 
+        printf("\n"); 
+    } 
+    return 0; 
+} 
+
+
+A) 
+A B C D E F                                                                                                                          
+A B C D E                                                                                                                            
+A B C D                                                                                                                              
+A B C  
+
+
+B) 
+A B C D E                                                                                                                        
+A B C D                                                                                                                             
+A B C                                                                                                                               
+A B 
+
+
+C) Compilation fails
+
+D) 
+A B C D E
+A B C D E
+A B C D E
+A B C D E
+A B C D E
+
+E)
+A B C D
+A B C D
+A B C D
+A B C D
+
+F)
+A B C D
+A B C
+A B
+A
+
+G)
+A B C D E F
+A B C D E
+A B C D
+A B C
+A B
+
+
+Ans- A
+
+
+
+3) output of the below c code
+#include <stdio.h> 
+int main() 
+{ 
+    extern int j; 
+    j = 10; 
+    printf("%d", sizeof(j)); 
+return 0;
+} 
+
+
+What would be the output of the above code?
+A) 2
+B) 4
+C) Cant Predict (Changes Compiler to Compiler)
+D) Compilation fails
+
+Ans - D
+
+
+
+4) output of the below c code
+#include <stdio.h> 
+#include <string.h>
+#include <stdlib.h>
+
+void change(char *s)
+{
+    s=(char *)malloc(sizeof(20));
+    strcpy(s,"jntu");
+    printf("%s ", s); 
+}
+
+int main() 
+{ 
+    char *s="kmit";
+    change(s);
+    printf("%s ", s); 
+return 0;
+    
+} 
+
+
+A) jntu jntu
+B) jntu kmit
+C) kmit kmit
+D) kmit jntu
+E) Compilation fails
+G) Segmentation fault
+
+
+Ans-B
+
+
+
+5) output of the below c code
+
+
+#include <stdio.h> 
+
+int main() 
+{ 
+ char *str = "Welcome"; 
+ printf("%c %c ", *&*&*str,*&*&*&*str ); 
+ return 0; 
+} 
+
+
+A) Segmentation fault
+B) Compilation fails
+C) Prints W followed by Segementation fault
+D) Junk Value Junk Value
+E) W e
+F) W W
+
+
+Ans-F
+
+
+6) output of the below c code
+
+#include <stdio.h> 
+void main() 
+{ 
+    struct sum { 
+        int a;
+        int b; 
+        int c;
+        int total;
+    }  ;
+    struct sum res = { 2,3 }; 
+    printf("%d ", res.a+res.b+res.c); 
+} 
+
+A) Compilation fails
+B) Segementatin fault
+C) Junk Value/Garbage Value
+D) 5
+E) None of these
+
+
+Ans-D
+
+
+
+7) output of the below C Code
+
+
+#include <stdio.h> 
+
+void main() 
+{ 
+    int x = 10, y = 1, z = 5, i; 
+    i = x < (y=y << z); 
+    printf("%d %d", i,y); 
+} 
+
+
+A) Compilation fails
+B) Segmentation fault
+C) 1 32
+D) 32 32
+E) 1 1
+
+Ans-C
+
+
+
+8) Assuming that the trees height starts from 0. Then number of nodes in a tree height h will be ?
+
+
+A) 2^h
+B) (2^h)-1
+C) 2^(h+1) - 1
+D) 2^(h-1) - 1
+
+
+Ans-C
+
+
+
+9)  We cannot overload ______ operator.
+
+A) ::
+B) []
+C) ()
+D) +
+
+
+Answer: Option A
+
+
+
+10)  Which of the following Data Structures is used to convert an Arithmetic expression from one form to another form?
+
+
+A. Graph
+B. Stack
+C. LinkedList
+D. Queue
+
+
+Answer: Option B
+
+
+
+
+11)In a Singly Circular Linked List, how many address fields are there?
+
+
+A. 0
+B. Depends
+C. 1
+D. 2
+
+
+Answer: Option C
+
+
+
+12)_______ is a process to identify the key aspects of an entity and hiding the rest.
+
+A. Encapsulation
+B. Inheritance
+C. Abstraction
+D. Polymorphism
+
+
+Answer: Option C
+
+
+
+
+
+13) Priority Queues are also used in which of the following algorithms 
+
+a) Dijikstras algorithm only
+b) Prims Graph Algorithm only
+c) None of these
+d) Both Dijikstras and Prims Graph Algorithm  
+
+
+Ans-d
+
+
+
+
+14) Graph is a data structure that consists of following two components:
+
+A)A finite set of vertices also called as nodes.
+B) A finite set of ordered pair of the form (u, v) called as edge. 
+The pair is ordered because (u, v) is not same as (v, u) in case of directed graph(di-graph). 
+The pair of form (u, v) indicates that there is an edge from vertex u to vertex v. 
+The edges may contain weight/value/cost.
+
+
+A) Statement A only is true
+B) Statement B only is true
+C) Statement A and B both are true
+D) Both Statements are false
+
+Ans-C
+
+
+15) 
+
+class Test 
+{
+    final int MAXIMUM = m1();
+  
+private int m1()
+    {
+        System.out.println(MAXIMUM);
+        return 1500;
+    }
+  
+public static void main(String[] args)
+    {
+        Test t = new Test();
+  
+        System.out.println(t.MAXIMUM);
+    }
+}
+a) Compilation error
+b) Runtime error
+c) 0
+   1500
+d) 1500
+   1500
+
+Ans. c) 
+
+
+
+Program-1
+
+There are N balloons placed in a line, numbered like 1,2,3,...,N.
+
+A shooter is given a gun loaded with N-1 bullets.
+
+The Shooter has to shoot the balloons following the below conditions 
+
+a) Start the shooting from left to right, starting from left-most balloon, and shoot every alternate balloon till the end.
+b) Next shoot from right to left, starting from the right-most balloon and shoot every alternate balloon.
+c) Repeat step-1 and step-2 until all the bullets completed.
+
+Finally, you will be left with only one balloon.
+
+Your task is to find the ballon number which is left after all the bullets fired.
+
+Assume the shooter never waste a bullet.
+
+Input Format:
+-------------
+An integer N, number of balloons
+
+Output Format:
+--------------
+Print an integer, left over balloon's number 
+
+
+input = 15
+output = 8
+
+Explanation:
+------------
+Balloons are numbered from 1 to N.
+Initial	-> 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
+After Round-1 =  2 4 6 8 10 12 14
+After Round-2 = 4 8 12
+After Round-3 = 8
+So, the left over balloon with number 8. 
+
+input = 7
+output = 4
+
+
+Explanation:
+------------
+Balloons are numbered from 1 to N.
+Initial	->  1 2 3 4 5 6 7
+After Round-1 -> 2 4 6
+After Round-2 -> 4
+So, the left over balloon with number 4. 
+
+
+back end test cases
+
+case =1
+input =100
+output =54
+
+case =2
+input =12345
+output =5502
+
+case =3
+input =67527
+output =22488
+
+case =4
+input =29837434
+output =14114176
+
+
+
+import java.util.*;
+
+class Remaining {
+    public int lastRemaining(int n) {
+        // return n == 1 ? 1 : 2 * (1 + n / 2 - lastRemaining(n / 2));
+        boolean left = true;
+        int remaining = n;
+        int step = 1;
+        int head = 1;
+        while (remaining > 1) {
+            if (left || remaining % 2 ==1) {
+                head = head + step;
+            }
+            remaining = remaining / 2;
+            step = step * 2;
+            left = !left;
+        }
+        return head;
+    }
+	
+	public static void main(String args[])
+	{
+		Scanner sc =new Scanner(System.in);
+		int n=sc.nextInt();
+		System.out.println(new Remaining().lastRemaining(n));
+	}
+}
+
+
+
+
+
+Program-2
+
+
+Ramu is given a String S. He has to find the palindromes in S, 
+A palindrome can be a substrings of S (Strictly substrings only, not subsequences).
+
+Your task is to find the count the number of palindromes can be formed from S.
+
+
+Input Format:
+-------------
+A string S
+
+Output Format:
+--------------
+Print an integer, number of palindromes.
+
+
+
+input = divider
+output = 9
+
+Explanation:
+-------------
+Palindromes are d, i, v, i, d, e, r, ivi, divid
+
+
+
+input = abcdef
+output = 6
+
+Explanation:
+-------------
+Palindromes are a, b, c, d, e, f.
+
+
+NOTE: Count each occurence of palindromes if duplicate substrings found. 
+
+
+case =1
+input =radarracecar
+output =19
+
+case =2
+input =tattarrattat
+output =24
+
+case =3
+input =nolemonnomelon
+output =21
+
+case =4
+input =wasitcatisawinmygymmadam
+output =29
+
+
+
+import java.util.*;
+
+public class PalindromeCount{
+int count =1;
+public int countSubstrings(String s) {
+	if(s.length()==0) 
+		return 0;
+	for(int i=0; i<s.length()-1; i++){
+		checkPalindrome(s,i,i);     //To check the palindrome of odd length palindromic sub-string
+		checkPalindrome(s,i,i+1);   //To check the palindrome of even length palindromic sub-string
+	}
+	return count;
+}    
+
+private void checkPalindrome(String s, int i, int j) {
+	while(i>=0 && j<s.length() && s.charAt(i)==s.charAt(j)){    //Check for the palindrome string 
+		count++;    //Increment the count if palindromin substring found
+		i--;    //To trace string in left direction
+		j++;    //To trace string in right direction
+	}
+}
+
+public static void main(String args[])
+{
+	String S=new Scanner(System.in).next();
+	System.out.println(new PalindromeCount().countSubstrings(S));
+}
+}

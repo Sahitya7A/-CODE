@@ -1,0 +1,181 @@
+program-1 
+
+
+Mr Suresh is working with the plain text P, a list of words W[], 
+He is converting P into C [the cipher text], C is valid cipher of P, 
+if the following rules are followed:
+	- The cipher-text C is a string ends with '$' character.
+	- Every word, W[i] in W[], should be a substring of C, and 
+	the substring should have $ at the end of it.
+
+Your task is to help Mr Suresh to find the shortest Cipher C,  
+and return its length.
+
+Input Format:
+-------------
+Single line of space separated words, W[].
+
+Output Format:
+--------------
+Print an integer result, the length of the shortest cipher.
+
+
+Sample Input-1:
+---------------
+kmit it ngit
+
+Sample Output-1:
+----------------
+10
+
+Explanation:
+------------
+A valid cipher C is "kmit$ngit$".
+W[0] = "kmit", the substring of C, and the '$' is the end character after "kmit"
+W[1] = "it", the substring of C, and the '$' is the end character after "it"
+W[2] = "ngit", the substring of C, and the '$' is the end character after "ngit"
+
+
+Sample Input-2:
+---------------
+ace
+
+Sample Output-2:
+----------------
+4
+
+Explanation:
+------------
+A valid cipher C is "ace$".
+W[0] = "ace", the substring of C, and the '$' is the end character after "ace"
+
+
+
+back end test cases
+
+case =1
+input =kmit it ngit
+output =10
+
+case =2
+input =ace
+output =4
+
+case =3
+input =a aa aaa aaaa aaaaa aaaaaa
+output =7
+
+case =4
+input =a ab abc abcd abcde abcdef abcdefg
+output =35
+
+
+
+import java.util.*;
+class Encoding {
+    public int minimumLengthEncoding(String[] words) {
+        Set<String> s = new HashSet<>(Arrays.asList(words));
+        for (String w : words)
+            for (int i = 1; i < w.length(); ++i)
+                s.remove(w.substring(i));
+        int res = 0;
+        for (String w : s) res += w.length() + 1;
+        return res;
+    }
+	
+	public static void main(String args[])
+	{
+		Scanner sc=new Scanner(System.in);
+		String[] sarr=sc.nextLine().split(" ");
+		System.out.println(new Encoding().minimumLengthEncoding(sarr));
+	}
+}
+
+
+
+
+program2
+
+
+Alia is given the binary representation of an integer as a string s , 
+
+She has to return the number of steps to reduce it to 1 under the following rules:
+	If the current number is even, you have to divide it by 2 .
+	If the current number is odd, you have to add 1 to it.
+	It is guaranteed that you can always reach one for all test cases.
+
+Example 1:
+Input: s = "1101"
+Output: 6
+
+Explanation: "1101" corressponds to number 13 in their decimal representation.
+
+Step 1) 13 is odd, add 1 and obtain 14.
+Step 2) 14 is even, divide by 2 and obtain 7.
+Step 3) 7 is odd, add 1 and obtain 8.
+Step 4) 8 is even, divide by 2 and obtain 4.
+Step 5) 4 is even, divide by 2 and obtain 2.
+Step 6) 2 is even, divide by 2 and obtain 1.
+
+
+Example 2:
+
+Input ="10"
+Output = 1
+
+Explanation: "10" corressponds to number 2 in their decimal representation.
+
+Step 1) 2 is even, divide by 2 and obtain 1.
+
+
+
+back end test cases
+
+case = 1
+input =1
+output = 0
+
+
+case = 2
+input =1111
+output = 5
+
+
+case = 3
+input =110111
+output = 8
+
+
+case = 4
+input =1110001
+output = 11
+
+
+
+
+
+
+import java.util.*;
+class NumberofSteps{
+	public int numSteps(String s) {
+		int res = 0, carry = 0;
+		for (int i = s.length() - 1; i > 0; --i) {
+			++res;
+			if (s.charAt(i) - '0' + carry == 1) {
+				carry = 1;
+				++res;
+			}
+		}
+		return res + carry;
+	}
+	
+	public static void main(String args[])
+	{
+		Scanner sc=new Scanner(System.in);
+		String s=sc.next();
+		System.out.println(new NumberofSteps().numSteps(s));
+	}
+}
+
+
+

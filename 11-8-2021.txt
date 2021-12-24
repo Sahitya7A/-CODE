@@ -1,0 +1,590 @@
+1)
+
+#include<stdio.h>
+int main()
+{
+ char str[]="TCS Hyd";
+ str[0]='K';
+ printf("%s",str);
+ str="TCS Pune";
+ printf("%s",str+1);
+ return 0;
+ }
+
+ A) TCS Hyd,TCS Pune
+ B) TCS Pune,TCS Hyd
+ C) TCS Hyd Pune
+ D) Compilation fails
+
+
+Ans-D
+
+
+ 2) what will be the output of the program?
+
+ #include<stdio.h>
+ int main() {
+   struct value 
+   {
+      int bit1 : 1;
+      int bit3 : 4;
+      int bit4 : 4;
+
+   }bit ={1,2,13};
+ printf(" %d, %d, %d ", bit.bit1,bit.bit3,bit.bit4);
+ return 0;
+ }
+
+ A) 1,2,13
+ B) 1,4,4
+ C) -1,2,-3
+ D) 1,-2,-13
+
+
+Ans-C
+
+
+ 3) what will be the output of the program?
+
+ #include<stdio.h>
+ int main() {
+ static char mess[6][30] ={"Don't walk in front of me ...","I may not follow,",
+                            "Don't walk behind me... ",
+                             "Just walk beside me... ",
+                             "And be my friend."  };
+printf("%c,%c\n",*(mess[2]+9),*(*(mess+2)+9));
+return 0;
+}
+
+A) t,t
+B) k,k
+C) n,k
+D) m,f
+
+
+Ans-B
+
+
+
+4)
+cout is an object of __________class
+
+A) istream
+B) ostream
+C) fstream
+D) iostream
+E) None of these
+
+
+Ans-B
+
+
+5) output of the below cpp code
+
+#include <iostream>
+#include <typeinfo>
+using namespace std;
+
+class Just
+{
+int x;
+};
+
+int main()
+{
+   cout<<typeid(Just).name()<<endl;
+   return 0;
+}
+
+A) Just
+B) class Just
+C) struct Just
+D) enum Just
+E) None of these
+
+
+Ans- E
+
+
+
+6) which of the following apply to static member variable of a class ?
+
+A) It is initialized to garbage value when the first object of its class is created
+B) A separate copy of the variable is created for each object of that class
+C) It is shared by all objects of that class
+D) It is visible to all classes in the program
+
+Ans-C
+
+
+
+
+7) what is the output of the following program?
+
+#include<iostream>
+using namespace std;
+
+class MyString {
+char string[100];
+public:
+	explicit MyString(const char *str) //L1
+	{
+	// .......
+	}
+};
+int main() {
+MyString Obj1 = "First String Object"; //L2
+}
+
+A) Compilation error at L1 only
+B) Compilation error at L2 only
+C) Obj1 created with member variable 'string' initialized with "First String Object "
+D) Run time error
+
+
+Ans-B
+
+
+
+
+
+
+
+8)
+output of the below Java code
+
+import java.util.*; 
+  
+public class Main 
+{ 
+    public static void main(String[] args) 
+    { 
+        PriorityQueue<Integer> queue = new PriorityQueue<>(); 
+        queue.add(11); 
+        queue.add(10); 
+        queue.add(10); 
+        queue.add(5); 
+        queue.add(12); 
+        queue.add(2); 
+  
+        while (queue.isEmpty() == false) 
+            System.out.print(queue.remove()+ " "); 
+  
+        System.out.println("\n"); 
+    } 
+} 
+
+A) Compilation fails
+B) Run Time Exception
+C) 2 5 10 10 11 12
+D) 2 5 10 11 12
+E) 11 10 10 5 12 2
+F) 11 10 5 12 2
+G) 12 11 10 10 5 2
+H) 2 5 10 followed by Run time Exception
+
+
+
+Ans- C
+
+
+
+9)output of the below java code
+
+
+public class Test implements Runnable 
+{ 
+    public void run() 
+    { 
+        System.out.print("B"); 
+    } 
+    public static void main(String[] args) throws InterruptedException 
+    { 
+        Thread thread = new Thread(new Test()); 
+        thread.start(); 
+        System.out.print("A"); 
+        thread.join(); 
+        System.out.print("C"); 
+    } 
+  
+} 
+
+
+A) BAC
+B) BCA
+C) either ABC or BAC
+D) ABC
+E) None of these
+
+Ans-C
+
+
+10) output of the below java code 
+
+
+ class Base 
+{ 
+    private int data; 
+  
+    public Base() 
+    { 
+        data = 8; 
+    } 
+  
+    public int getData() 
+    { 
+        return this.data; 
+    } 
+} 
+  
+class Derived extends Base 
+{ 
+    private int data; 
+    public Derived() 
+    { 
+        data = 7; 
+    } 
+    public int getData() 
+    { 
+        return data; 
+    } 
+  
+    public static void main(String[] args) 
+    { 
+        Derived myData = new Derived(); 
+        System.out.println(myData.getData()); 
+    } 
+} 
+
+A) 7
+B) 8
+C) Compile time error
+D) Run time error
+
+Ans - A
+
+
+
+
+11) output of the below java code
+
+
+public class Test implements Runnable 
+{ 
+    public void run() 
+    { 
+        System.out.printf(" Thread's running "); 
+    } 
+  
+    public Test() 
+        { 
+       try
+       { 
+		    run();
+            Thread.sleep(100); 
+        }    
+     catch (InterruptedException e)  
+    { 
+        e.printStackTrace(); 
+    }
+		}
+      
+    public static void main(String[] args) 
+    { 
+        Test obj = new Test(); 
+        Thread thread = new Thread(obj); 
+        thread.start(); 
+        System.out.printf(" end of main "); 
+    } 
+} 
+
+
+A) Compilation fails
+B) Run time error
+C) output contains "end of main" once and "Thread's running" once 
+D) output contains  "end of main" once and "Thread's running" twice
+E) None of these
+F) output contains  "end of main" twice and "Thread's running" once
+G) output contains  "end of main" twice and "Thread's running" once
+
+Ans-D
+
+
+
+12) Output of the below Java code 
+
+public class Outer  
+{ 
+    public static int temp1 = 1; 
+    private static int temp2 = 2; 
+    public int temp3 = 3; 
+    private int temp4 = 4; 
+      
+    public static class Inner 
+    { 
+        private static int temp5 = 5; 
+          
+        private static int getSum() 
+        { 
+            return (temp1 + temp2 + temp3 + temp4 + temp5); 
+        } 
+    } 
+      
+    public static void main(String[] args) 
+    { 
+        Outer.Inner obj = new Outer.Inner(); 
+        System.out.println(obj.getSum()); 
+    } 
+      
+} 
+
+a) 15
+b) 9
+c) 5
+d) Compilation Error
+
+Ans. (d)
+
+Explanation: static inner classes cannot access non-static fields of the outer class.
+
+
+
+13) How many tables may be included with a join?
+A) One
+B) Two
+C) Three
+D) All of the mentioned
+
+
+Ans-D
+
+
+
+14)
+Consider the two relations instructor and department
+Instructor:
+ID 	Name 	Dept_name 	Salary
+1001 	 Ted 		Finance 		10000
+1002  Bob		Music 		20000
+1003  Ron 		Physics 		50000
+
+Department:
+Dept_name 	Building 	Budget
+Biology 		Watson 	40000
+Chemistry 		Painter 	30000
+Music 		Taylor 	50000
+
+Which of the following is used to create view for these relations together?
+
+A)
+
+CREATE VIEW instructor_info AS
+SELECT ID, name, building
+FROM instructor, department
+WHERE instructor.dept name= department.dept name;
+
+B)
+
+CREATE VIEW instructor_info 
+SELECT ID, name, building
+FROM instructor, department;
+
+C)
+
+CREATE VIEW instructor_info AS
+SELECT ID, name, building
+FROM instructor;
+
+D)
+
+CREATE VIEW instructor_info AS
+SELECT ID, name, building
+FROM department;
+
+
+Answer: A
+
+
+15) 'AS' clause is used in SQL for
+
+A) Selection operation
+B) Rename Operation
+C) Join Operation
+D) Projection Operation
+
+
+Ans-B
+
+
+
+
+
+Program-1
+
+Tillu a Maths Student is given group of numbers and asked him to 
+check if it follows the following rule 
+
+1) find a subsequence of 3 integers a[i],a[j],a[k] such that i<j<k and a[i]<a[k]<a[j]
+
+print true if it follows else print false
+
+input = 4
+1 2 3 4
+output = false
+
+Explanation - Doesnt satisfy the above rule 
+
+input = 4
+3 1 4 2
+true
+
+Explanation- Follows the rule for the sequence [1 4 2]
+
+
+input = 4
+-1 3 2 0
+output = true 
+
+Explanation - There are 3 sequences that follow the rule 
+
+[-1 3 2] [-1 3 0] [ -1 2 0]
+
+
+
+import java.util.*;
+public class Solution {
+    public boolean find132pattern(int[] nums) {
+        if (nums.length < 3)
+            return false;
+        Stack < Integer > stack = new Stack < > ();
+        int[] min = new int[nums.length];
+        min[0] = nums[0];
+        for (int i = 1; i < nums.length; i++)
+            min[i] = Math.min(min[i - 1], nums[i]);
+        for (int j = nums.length - 1; j >= 0; j--) {
+            if (nums[j] > min[j]) {
+                while (!stack.isEmpty() && stack.peek() <= min[j])
+                    stack.pop();
+                if (!stack.isEmpty() && stack.peek() < nums[j])
+                    return true;
+                stack.push(nums[j]);
+            }
+        }
+        return false;
+    }
+public static void main(String [] args)
+{
+    Scanner sc = new Scanner(System.in);
+    
+    int n = sc.nextInt();
+    
+    int a[]=new int[n];
+    
+    for(int i=0;i<n;i++)
+      a[i]=sc.nextInt();
+    
+    System.out.println(new Solution().find132pattern(a));
+}    
+}
+
+
+
+
+case = 1
+input = 5
+1 8 9 3 4
+output = true
+
+case = 2
+input = 9
+1 8 9 2 3 8 7 3 4
+output = true
+
+case = 3
+input = 5
+1 1 1 1 1
+output = false
+
+case = 4
+input = 6
+1 9 8 3 2 3
+output = true
+
+
+
+
+Program-2
+
+Given a binary string s and an integer k .
+Return true if every binary code of length k is a substring of s . Otherwise, return false .
+
+
+input = 00110110
+2
+output = true
+
+Explanation: The binary codes of length 2 are "00", "01", "10" and "11". 
+They can be all found as substrings at indicies 0, 1, 3 and 2 respectively.
+
+
+Input = 00110
+2
+output = true
+
+
+import java.util.*;
+
+class BinaryCodes {
+    public static boolean hasAllCodes(String s, int k) {
+        int need = 1 << k;
+        boolean[] got = new boolean[need];
+        int allOne = need - 1;
+        int hashVal = 0;
+
+        for (int i = 0; i < s.length(); i++) {
+            // calculate hash for s.substr(i-k+1,i+1)
+            hashVal = ((hashVal << 1) & allOne) | (s.charAt(i) - '0');
+            // hash only available when i-k+1 > 0
+            if (i >= k - 1 && !got[hashVal]) {
+                got[hashVal] = true;
+                need--;
+                if (need == 0) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+	
+	public static void main(String args[])
+	{
+		Scanner sc=new Scanner(System.in);
+		String s=sc.nextLine();
+		int k=sc.nextInt();
+		System.out.println(new BinaryCodes().hasAllCodes(s,k));
+	}
+}
+
+
+back end test cases
+
+case = 1
+input = 0110
+1
+output = true
+
+case = 2
+input = 0110
+2
+output = false
+
+
+case = 3
+input = 0000000001011100
+4
+output = false
+
+case = 4
+input = 1
+1
+output = false

@@ -1,0 +1,610 @@
+1)
+
+What is the value printed by the following C program?
+
+#include<stdio.h>
+int f(int * a, int n)
+{
+if (n<=0)return 0;
+else if(*a%2==0) 
+return *a+f(a+1,n-1);
+else return * a-f(a+1, n-1);
+}
+
+int main ()
+{
+int a[]={12, 7, 13, 4, 11, 6};
+printf("%d",f(a,6));
+return 0;
+}
+
+(A) -9 	
+(B) 5
+(C) 15	
+(D) 19
+
+
+
+
+Ans:- C
+
+
+
+
+2) void f(char *s)
+{
+char *s1;
+char c;
+s1=s+(strlen(s)-1);
+while(s<s1)
+	{
+	 c=*s;
+	 *s=*s1;
+	 *s1=c;
+	 s++;
+	 s1--;
+	}
+printf("%s %s",s,s1);
+}
+ 
+ main()
+{
+f("hello");
+}
+
+A)	hello hello
+B)	hell hell
+C)	leh leh
+D)	olleh olleh
+E)	None of these
+
+
+
+
+Ans:- C
+
+
+
+
+3)void main()
+{
+ int a=0xff;
+ if(a<<4>>12)
+	 printf("welcome");
+ else
+	 printf("computers");
+}
+
+a)	welcome
+b)	computers
+c)	Compilation error
+d)	None of these
+
+
+
+
+
+Ans:- B 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4) 
+
+
+3. public class Redwood extends Tree {
+4. public static void main(String[] args) {
+5. new Redwood().go();
+6. }
+7. void go() {
+8. go2(new Tree(), new Redwood());
+9. go2((Redwood) new Tree(), new Redwood());
+10. }
+11. void go2(Tree t1, Redwood r1) {
+12. Redwood r2 = (Redwood)t1;
+13. Tree t2 = (Tree)r1;
+14. }
+15. }
+16. class Tree { }
+What is the result? (Choose all that apply.)
+
+A. An exception is thrown at runtime
+B. The code compiles and runs with no output
+C. Compilation fails with an error at line 8
+D. Compilation fails with an error at line 9
+E. Compilation fails with an error at line 12
+F. Compilation fails with an error at line 13
+
+Answer:
+ A is correct,
+ 
+
+ 
+
+
+
+
+
+5)Given:
+
+3. class Alpha {
+4. static String s = " ";
+5. protected Alpha() { s += "alpha "; }
+6. }
+7. class SubAlpha extends Alpha {
+8. private SubAlpha() { s += "sub "; }
+9. }
+10. public class SubSubAlpha extends Alpha {
+11. private SubSubAlpha() { s += "subsub "; }
+12. public static void main(String[] args) {
+13. new SubSubAlpha();
+14. System.out.println(s);
+15. }
+16. }
+
+What is the result?
+A. subsub
+B. sub subsub
+C. alpha subsub
+D. alpha sub subsub
+E. Compilation fails
+F. An exception is thrown at runtime
+
+Answer:
+ C is correct. 
+
+
+
+
+
+6)
+Consider the following C program that attempts to locate an element x in an array Y[] using binary search. 
+
+The program is erroneous. 
+
+1.   f(int Y[10], int x) { 
+2.     int i, j, k; 
+3.     i = 0; j = 9; 
+4.     do { 
+5.             k =  (i + j) /2; 
+6.             if( Y[k] < x)  i = k; else j = k; 
+7.         } while(Y[k] != x && i < j); 
+8.     if(Y[k] == x) printf ("x is in the array ") ; 
+9.     else printf (" x is not in the array ") ; 
+10. } 
+
+On which of the following contents of Y and x does the program fail?
+
+(A) Y is [1 2 3 4 5 6 7 8 9 10] and x < 10
+(B) Y is [1 3 5 7 9 11 13 15 17 19] and x < 1
+(C) Y is [2 2 2 2 2 2 2 2 2 2] and x > 2
+(D) Y is [2 4 6 8 10 12 14 16 18 20] and 2 < x < 20 and x is even
+
+
+Answer: (C)
+
+Explanation: 
+
+The above program doesn’t work for the cases where element to be searched is the last element of Y[] or greater than the last element (or maximum element) in Y[]. 
+For such cases, program goes in an infinite loop because i is assigned value as k in all iterations, and i never becomes equal to or greater than j. 
+So while condition never becomes false.
+
+
+
+7)
+
+Which of the following standard algorithms is not a Greedy algorithm?
+
+(A) Dijkstra’s shortest path algorithm
+(B) Prim’s algorithm
+(C) Kruskal algorithm
+(D) Huffman Coding
+(E) Bellmen Ford Shortest path algorithm
+
+
+Answer: (E)
+
+
+
+
+
+8)
+
+Which of the following sorting algorithms in its typical implementation gives best performance when applied on an array which is sorted or almost sorted 
+(maximum 1 or two elements are misplaced).
+
+(A) Quick Sort
+(B) Heap Sort
+(C) Merge Sort
+(D) Insertion Sort
+
+
+Answer: (D)
+
+Explanation: Insertion sort takes linear time when input array is sorted or almost sorted (maximum 1 or 2 elements are misplaced).
+
+
+
+
+
+9)
+Convert into the postfix expression 
+
+     a+b*c+(d*e)                       
+
+A) abc+*de*+
+B) abc*+(de)*+
+C) a+bc*de+*
+D) abc*+de*+
+
+
+
+Ans-D
+
+
+
+
+
+10) Which of the following statement is incorrect with respect to infix to postfix conversion algorithm?
+
+A) operand is always placed in the output
+B) operator is placed in the stack when the stack operator has lower precedence
+C) parenthesis are included in the output
+D) higher and equal priority operators follow the same condition
+
+
+Ans-C
+
+Explanation: 
+Parentheses are not included in the output. 
+They are placed in the operator stack and then discarded.
+
+
+
+
+
+11) Print the output of the below Java Code 
+
+class Test 
+{ 
+    public  void disp(String s) 
+    {     
+        System.out.println("A"); 
+    } 
+    public void disp(Object o) 
+    { 
+        System.out.println("B"); 
+    } 
+  
+    public static void main(String args[]) 
+    { 
+        new Test().disp(null); 
+    } 
+} 
+
+A) Compilation fails
+B) Run Time error
+C) B
+D) A
+
+
+Ans-D
+
+
+
+12) Print the output of the below Java Code 
+
+class Test { 
+    public static void main(String[] args) { 
+        for(int i = 1; true; ++i) { 
+            System.out.println("Welcome"); 
+            break; 
+        } 
+    } 
+} 
+
+
+A) Prints Welcome Infinite times
+B) Prints Welcome only once
+C) Compilation fails
+D) Run time error
+
+
+Ans -B
+
+
+
+13) what will the output of the following code contain 
+
+class Test extends Thread implements Runnable 
+{ 
+    public void run() 
+    { 
+        System.out.printf("public run "); 
+    } 
+    protected void run(int i)
+    {
+        System.out.printf("protected run "); 
+    }
+    public static void main(String[] args)
+    { 
+        Test obj = new Test(); 
+        obj.run(5); 
+        obj.start(); 
+    } 
+} 
+
+
+A) public run
+B) protected run
+C) compilation fails
+D) None of these
+
+
+Ans-A,B
+
+
+
+
+
+
+14) Print the output of the below Java Code 
+
+class Test { 
+ public static void main(String args[]){ 
+   final int i; 
+   i = 20; 
+   System.out.println(i); 
+ } 
+} 
+
+A) 20
+B) Compiler Error
+C) 0
+D) Garbage value
+
+
+Ans-A
+
+
+
+
+15) Print the output of the below Java Code 
+
+abstract class demo
+{
+    public int a;
+    demo()
+    {
+        a = 10;
+    }
+ 
+    abstract public void set();
+    abstract final public void get();
+ 
+}
+ 
+class Test extends demo
+{
+   public void set(int a)
+    {
+        this.a = a;
+    }
+     final public void get()
+    {
+        System.out.println("a = " + a);
+    }
+     public static void main(String[] args)
+    {
+        Test obj = new Test();
+        obj.set(20);
+        obj.get();
+    }
+}
+
+A) a = 10
+B) a = 20
+C) Compilation error
+D) None of these
+
+
+Ans- C
+
+
+
+program-1
+
+
+A stepping number is an integer such that all of its adjacent digits have an absolute difference of exactly 1 .
+For example, 321 is a stepping number while 421 is not.
+
+
+Given two integers low and high , return a sorted list of all the stepping numbers in the inclusive range
+[low, high] .
+
+input =0
+21
+output = 0 1 2 3 4 5 6 7 8 9 10 12 21
+
+
+input =10 
+15
+output = 10 12
+
+
+
+import java.util.*;
+
+class SteppingNumbers {
+    public List<Integer> countSteppingNumbers(int low, int high) {
+        List<Integer> list = new ArrayList();
+        
+        for (long i = 0; i <= 9; i++) {
+            dfs(low, high, i, list);
+        }
+        Collections.sort(list);
+        
+        return list;
+    }
+    
+    private void dfs(int low, int high, long cur, List<Integer> list) {
+        if (cur >= low && cur <= high) list.add((int)cur);
+        if (cur == 0 || cur > high) return;
+        
+        long last = cur%10, inc = cur*10 + last + 1, dec = cur*10 + last - 1;
+        
+        if (last == 0) dfs(low, high, inc, list);
+        else if (last == 9) dfs(low, high, dec, list);
+        else {
+            dfs(low, high, inc, list);
+            dfs(low, high, dec, list);
+        }
+    }
+	
+	public static void main(String args[])
+	{
+		Scanner sc=new Scanner(System.in);
+		int low=sc.nextInt();
+		int high=sc.nextInt();
+		System.out.println(new SteppingNumbers().countSteppingNumbers(low,high));
+	}
+}
+
+
+
+back end test cases
+
+case = 1
+input = 10
+200
+output = 10 12 21 23 32 34 43 45 54 56 65 67 76 78 87 89 98 101 121 123
+
+
+case = 2
+input = 40
+120
+output = 43 45 54 56 65 67 76 78 87 89 98 101
+
+case = 3
+input = 1000
+1500
+output = 1010 1012 1210 1212 1232 1234
+
+
+case = 4
+input = 100001
+200002
+output = 101010 101012 101210 101212 101232 101234 121010 121012 121210 121212 121232 121234 123210 123212 123232 123234 123432 123434 123454 123456
+
+
+
+
+Program-2
+
+In Turkey, an ice cream parlour given an offer to a lucky kid.
+The parlour keep N icecream cups in a row, and there are different flavours 
+of icecreams, where i-th cup filled with the flavour[i] type of ice cream.
+
+The kid can pick the continuous set of ice cream cups, where the cups filled
+with the icecreams of atmost two different flavours. The kid wants to 
+pick maximum number of icecream cups from the row.
+
+You will be given the integer array, flavours[] of size N.
+Your task is to help the kid to pick the maximum number of icecream cups 
+with atmost two different flavours.
+
+
+Input Format:
+-------------
+Line-1: An integer, number of icecreams.
+Line-2: N space separated integers, flavours[] 
+
+Output Format:
+--------------
+Print an integer result, maximum number of icecream cups can be picked.
+
+
+Sample Input-1:
+---------------
+10
+1 2 3 1 1 3 3 2 3 2
+
+Sample Output-1:
+----------------
+5
+
+Explanation:
+------------
+The kid can pick the continuous set of icecream cups as follows: 3 1 1 3 3
+Where the cups are filled with two different flavours, 1 and 3.
+
+
+
+Sample Input-2:
+---------------
+10
+2 1 1 3 2 1 3 0 0 3
+
+Sample Output-2:
+----------------
+4
+
+
+
+case =1
+input =20
+3 2 1 3 2 3 1 1 2 1 2 3 1 2 1 2 1 3 3 3
+output =5
+
+case =2
+input =20
+1 1 3 2 2 3 3 1 1 3 3 3 3 2 3 3 1 1 2 1
+output =8
+
+case =3
+input =50
+2 1 1 1 5 2 2 5 5 5 5 3 4 3 1 4 4 2 1 1 2 5 5 3 2 3 2 1 4 1 5 5 5 4 5 2 3 1 4 5 1 2 4 1 4 4 4 2 3 4
+output =7
+
+case =4
+input =50
+4 1 3 3 1 4 1 4 3 2 1 2 4 4 2 2 3 1 4 3 4 3 3 2 4 1 1 1 2 3 3 1 4 3 2 4 3 3 4 2 2 1 1 2 1 3 4 4 3 2
+output =6
+
+
+
+import java.util.*;
+
+class TotalFruit {
+    public int totalFruit(int[] tree) {
+        int res = 0, cur = 0, count_b = 0, a = 0, b = 0;
+        for (int c :  tree) {
+            cur = c == a || c == b ? cur + 1 : count_b + 1;
+            count_b = c == b ? count_b + 1 : 1;
+            if (b != c) {a = b; b = c;}
+            res = Math.max(res, cur);
+        }
+        return res;
+    }
+	
+	public static void main(String args[])
+	{
+		Scanner sc=new Scanner(System.in);
+		int n=sc.nextInt();
+		int tree[]=new int[n];
+		for(int i=0;i<n;i++)
+			tree[i]=sc.nextInt();
+		System.out.println(new TotalFruit().totalFruit(tree));
+	}
+}
